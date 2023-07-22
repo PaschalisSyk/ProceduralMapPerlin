@@ -6,17 +6,21 @@ public class PlayerController : MonoBehaviour
     Vector3 _input;
     Rigidbody rb;
     Map map;
+    bool isSwimming = false;
+    CapsuleCollider capsuleCollider;
+    [SerializeField] GameObject swimParticles;
 
 
     private void Awake()
     {
-        map = FindObjectOfType<Map>();
-        transform.position = new Vector3((map.size * map.tileSize) / 2, 2, (map.size * map.tileSize) / 3);
+        //map = FindObjectOfType<Map>();
+        //transform.position = new Vector3((map.size * map.tileSize) / 2, 2, (map.size * map.tileSize) / 3);
     }
 
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
+        capsuleCollider = GetComponent<CapsuleCollider>();
     }
 
     private void Update()
@@ -50,6 +54,32 @@ public class PlayerController : MonoBehaviour
             // Rotate the player to look in the movement direction
             Quaternion targetRotation = Quaternion.LookRotation(_input, Vector3.up);
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 10f);
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+
+        if(collision.gameObject.CompareTag("Water"))
+        {
+            isSwimming = true;
+            capsuleCollider.height = 1;
+            capsuleCollider.center = new Vector3(0, 0.5f, 0);
+            swimParticles.SetActive(true);
+            swimParticles.GetComponentInChildren<ParticleSystem>().Play();
+        }
+        // Check if the player has collided with a ground tile (you can use a tag or any other identifier for ground tiles)
+        if (collision.gameObject.CompareTag("Ground") && isSwimming)
+        {
+            isSwimming = false;
+            capsuleCollider.height = 2;
+            capsuleCollider.center = new Vector3(0, 0, 0);
+            swimParticles.SetActive(false);
+            swimParticles.GetComponentInChildren<ParticleSystem>().Stop();
+
+            // Adjust the player's position to move on top of the ground tile
+            Vector3 newPosition = new Vector3(transform.position.x, collision.transform.position.y + 1f, transform.position.z);
+            transform.position = newPosition;
         }
     }
 }

@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 //[ExecuteInEditMode]
 public class Map : MonoBehaviour
@@ -13,13 +14,18 @@ public class Map : MonoBehaviour
     public int size = 100;
     public float tileSize = 1;
 
+    [SerializeField] GameObject player;
+
     public GameObject[] prefabs;
+
+    List<Vector3> walkableTiles = new List<Vector3>();
 
     Tile[,] tiles;
 
     private void Start()
     {
         MapGen(size);
+        SpawnPlayerOnTile();
     }
 
     public void MapGen(int size)
@@ -59,8 +65,12 @@ public class Map : MonoBehaviour
                 float yPos = y * tileSize * 0.75f;
                 float height = noiseValue * 0.1f;
 
-                GameObject tileObject = Instantiate(prefabs[index], new Vector3(xPos, height, yPos), Quaternion.identity);
+                GameObject tileObject = Instantiate(prefabs[index], new Vector3(xPos, height, yPos), Quaternion.identity) as GameObject;
                 tileObject.transform.SetParent(GameObject.FindWithTag("Map").transform);
+                if(tileObject.tag == "Ground")
+                {
+                    walkableTiles.Add(tileObject.transform.position);
+                }
 
             }
         }
@@ -92,5 +102,19 @@ public class Map : MonoBehaviour
         }
 
         return index;
+    }
+
+    void SpawnPlayerOnTile()
+    {
+        if (walkableTiles.Count == 0)
+        {
+            Debug.LogError("No availiable tiles to spawn player");
+            return;
+        }
+
+        int index = Random.Range(0, walkableTiles.Count);
+        Vector3 spawnPos = walkableTiles[index];
+        GameObject Player = Instantiate(player, new Vector3(spawnPos.x , spawnPos.y + 0.5f , spawnPos.z) , Quaternion.identity) as GameObject;
+
     }
 }

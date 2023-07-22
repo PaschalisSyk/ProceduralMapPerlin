@@ -2,11 +2,13 @@ using UnityEngine;
 
 public class CameraFollow : MonoBehaviour
 {
-    public Transform player;
+    Transform player;
     public float followSpeed = 5f;
 
     private void Start()
     {
+        player = GameObject.FindGameObjectWithTag("Player").transform;
+
         if (player == null)
         {
             Debug.LogError("Player transform reference is missing! Please assign the player's transform to the 'Player' variable in the inspector.");

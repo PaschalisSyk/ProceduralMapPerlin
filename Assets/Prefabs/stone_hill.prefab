@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 5131191740221461592}
   m_Layer: 0
   m_Name: stone_hill
-  m_TagString: Untagged
+  m_TagString: Enviroment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

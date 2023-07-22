@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Ground
   - Map
+  - Water
+  - Enviroment
   layers:
   - Default
   - TransparentFX
