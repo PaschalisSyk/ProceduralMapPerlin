@@ -26,6 +26,7 @@ public class Map : MonoBehaviour
     {
         MapGen(size);
         SpawnPlayerOnTile();
+        //Field(size);
     }
 
     public void MapGen(int size)
@@ -67,11 +68,10 @@ public class Map : MonoBehaviour
 
                 GameObject tileObject = Instantiate(prefabs[index], new Vector3(xPos, height, yPos), Quaternion.identity) as GameObject;
                 tileObject.transform.SetParent(GameObject.FindWithTag("Map").transform);
-                if(tileObject.tag == "Ground")
+                if (tileObject.tag == "Ground")
                 {
                     walkableTiles.Add(tileObject.transform.position);
                 }
-
             }
         }
     }
@@ -116,5 +116,20 @@ public class Map : MonoBehaviour
         Vector3 spawnPos = walkableTiles[index];
         GameObject Player = Instantiate(player, new Vector3(spawnPos.x , spawnPos.y + 0.5f , spawnPos.z) , Quaternion.identity) as GameObject;
 
+    }
+
+    void Field(int size)
+    {
+        for (int x = 0; x < size *1.5f; x++)
+        {
+            for (int y = 0; y < size*1.75f; y++)
+            {
+                float xPos = x * tileSize + (y % 2 == 0 ? tileSize / 2 : 0);
+                float yPos = y * tileSize * 0.75f;
+
+                GameObject tileObject = Instantiate(prefabs[0], new Vector3(xPos - size, 0, yPos - size * 0.75f), Quaternion.identity) as GameObject;
+                tileObject.transform.SetParent(GameObject.FindWithTag("Base").transform);
+            }
+        }
     }
 }

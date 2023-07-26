@@ -8,6 +8,7 @@ TagManager:
   - Map
   - Water
   - Enviroment
+  - Base
   layers:
   - Default
   - TransparentFX
