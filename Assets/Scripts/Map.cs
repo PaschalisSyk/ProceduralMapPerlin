@@ -66,12 +66,15 @@ public class Map : MonoBehaviour
                 float yPos = y * tileSize * 0.75f;
                 float height = noiseValue * 0.1f;
 
-                GameObject tileObject = Instantiate(prefabs[index], new Vector3(xPos, height, yPos), Quaternion.identity) as GameObject;
-                tileObject.transform.SetParent(GameObject.FindWithTag("Map").transform);
-                if (tileObject.tag == "Ground")
-                {
-                    walkableTiles.Add(tileObject.transform.position);
-                }
+                //if(index != 0)
+                //{
+                    GameObject tileObject = Instantiate(prefabs[index], new Vector3(xPos, height, yPos), Quaternion.identity) as GameObject;
+                    tileObject.transform.SetParent(GameObject.FindWithTag("Map").transform);
+                    if (tileObject.tag == "Ground")
+                    {
+                        walkableTiles.Add(tileObject.transform.position);
+                    }
+                //}
             }
         }
     }
@@ -114,7 +117,7 @@ public class Map : MonoBehaviour
 
         int index = Random.Range(0, walkableTiles.Count);
         Vector3 spawnPos = walkableTiles[index];
-        GameObject Player = Instantiate(player, new Vector3(spawnPos.x , spawnPos.y + 0.5f , spawnPos.z) , Quaternion.identity) as GameObject;
+        GameObject Player = Instantiate(player, new Vector3(spawnPos.x , spawnPos.y + 1f , spawnPos.z) , Quaternion.identity) as GameObject;
 
     }
 
@@ -129,6 +132,8 @@ public class Map : MonoBehaviour
 
                 GameObject tileObject = Instantiate(prefabs[0], new Vector3(xPos - size, 0, yPos - size * 0.75f), Quaternion.identity) as GameObject;
                 tileObject.transform.SetParent(GameObject.FindWithTag("Base").transform);
+                //tileObject.isStatic = true;
+                //StaticBatchingUtility.Combine(tileObject);
             }
         }
     }

@@ -9,16 +9,19 @@ public class PlayerController : MonoBehaviour
     bool isSwimming = false;
     CapsuleCollider capsuleCollider;
     [SerializeField] GameObject swimParticles;
+    Animator anim;
 
 
     private void Awake()
     {
+        anim = GetComponent<Animator>();
         //map = FindObjectOfType<Map>();
         //transform.position = new Vector3((map.size * map.tileSize) / 2, 2, (map.size * map.tileSize) / 3);
     }
 
     private void Start()
     {
+        //anim.speed = _input.magnitude;
         rb = GetComponent<Rigidbody>();
         capsuleCollider = GetComponent<CapsuleCollider>();
     }
@@ -42,7 +45,7 @@ public class PlayerController : MonoBehaviour
         Vector3 rotatedInput = Quaternion.Euler(0, 45, 0) * new Vector3(horizontalInput, 0, verticalInput);
 
         // Normalize the resulting vector to avoid faster diagonal movement
-        _input = rotatedInput.normalized;
+        _input = rotatedInput.normalized;        
     }
 
     void Move()
@@ -54,6 +57,11 @@ public class PlayerController : MonoBehaviour
             // Rotate the player to look in the movement direction
             Quaternion targetRotation = Quaternion.LookRotation(_input, Vector3.up);
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 10f);
+            anim.SetFloat("speed", _input.magnitude, 0.1f, Time.deltaTime);
+        }
+        else
+        {
+            anim.SetFloat("speed", 0);
         }
     }
 
@@ -78,7 +86,7 @@ public class PlayerController : MonoBehaviour
             swimParticles.GetComponentInChildren<ParticleSystem>().Stop();
 
             // Adjust the player's position to move on top of the ground tile
-            Vector3 newPosition = new Vector3(transform.position.x, collision.transform.position.y + 1f, transform.position.z);
+            Vector3 newPosition = new Vector3(transform.position.x, collision.transform.position.y + 0.8f, transform.position.z);
             transform.position = newPosition;
         }
     }

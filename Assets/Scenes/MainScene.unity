@@ -205,7 +205,7 @@ MonoBehaviour:
   fallOffScale: 0.5
   size: 25
   tileSize: 3.8
-  player: {fileID: 3487089917011580075, guid: 3e20d5811b3354c4cbce286bf31cdf12, type: 3}
+  player: {fileID: 960358025553151402, guid: 4f2e058a94bca0742939d136d2b88baf, type: 3}
   prefabs:
   - {fileID: 3842063846486868246, guid: 1addcf8bfebe70f47a61ec340825b629, type: 3}
   - {fileID: 4392539617703824235, guid: 1127d0ebf0fe1c84baa6d3a67ffe78af, type: 3}
@@ -440,11 +440,11 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: -2
+  near clip plane: -5
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 3
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -556,7 +556,7 @@ GameObject:
   m_TagString: Base
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 2147483647
+  m_StaticEditorFlags: 0
   m_IsActive: 0
 --- !u!4 &1918218842
 Transform:
