@@ -345,6 +345,7 @@ GameObject:
   - component: {fileID: 2879370205467683518}
   - component: {fileID: -8447650756927777431}
   - component: {fileID: 7971405272248438368}
+  - component: {fileID: -9210372770024810368}
   m_Layer: 0
   m_Name: water_rocks
   m_TagString: Enviroment
@@ -456,6 +457,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &-9210372770024810368
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4392539617703824235}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45f6405ea3a7f18438a4a7baeacae5fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  xIndex: 0
+  yIndex: 0
+  tileValue: 1
 --- !u!1 &5192284249145060763
 GameObject:
   m_ObjectHideFlags: 0

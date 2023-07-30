@@ -1,6 +1,25 @@
 using UnityEngine;
 
-public class Tile
+public class Tile : MonoBehaviour
 {
-    public int ID;
+    public int xIndex;
+    public int yIndex;
+
+    public TileValue tileValue;
+
+    public enum TileValue
+    {
+        Water,
+        WaterRocks,
+        Sand,
+        Grass,
+        Forest,
+        Mountain
+    }
+
+    public void Init(int x , int y)
+    {
+        xIndex = x;
+        yIndex = y;
+    }
 }

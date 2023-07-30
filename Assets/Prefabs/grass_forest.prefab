@@ -588,6 +588,7 @@ GameObject:
   - component: {fileID: 5380299967391099482}
   - component: {fileID: 7273279553388916727}
   - component: {fileID: -3507736137819640751}
+  - component: {fileID: 7861741944253992940}
   m_Layer: 0
   m_Name: grass_forest
   m_TagString: Enviroment
@@ -699,6 +700,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &7861741944253992940
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5884610559689345935}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45f6405ea3a7f18438a4a7baeacae5fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  xIndex: 0
+  yIndex: 0
+  tileValue: 4
 --- !u!1 &6718445013788084965
 GameObject:
   m_ObjectHideFlags: 0
