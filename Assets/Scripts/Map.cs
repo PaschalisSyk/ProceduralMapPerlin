@@ -142,7 +142,7 @@ public class Map : MonoBehaviour
         int index = SetIndex(noiseValue);
         float xPos = x * tileSize + (y % 2 == 0 ? tileSize / 2 : 0);
         float yPos = y * tileSize * 0.75f;
-        float height = noiseValue * 0.1f;
+        float height = noiseValue * 0.01f;
 
         if(index == 0)
         {

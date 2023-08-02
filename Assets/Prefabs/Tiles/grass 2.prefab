@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 271580551453818664}
   - component: {fileID: -7088912972034223638}
   - component: {fileID: 8669040122011539635}
+  - component: {fileID: -3482619929049489756}
   m_Layer: 0
   m_Name: grass 2
   m_TagString: Ground
@@ -64,8 +65,8 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 686456abac88a134b9e492118c012e0c, type: 2}
-  - {fileID: 2100000, guid: 686456abac88a134b9e492118c012e0c, type: 2}
+  - {fileID: 0}
+  - {fileID: 2100000, guid: 58ac9de5acb44214492c92fd4019b82b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -132,3 +133,32 @@ MonoBehaviour:
   xIndex: 0
   yIndex: 0
   tileValue: 3
+--- !u!114 &-3482619929049489756
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 921189880267396335}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5091fd55b23e9b5469b2650317afe2e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  grassPref:
+  - {fileID: 1087120402720156, guid: 2535f726e7be4c44cbf8998490f36b8a, type: 3}
+  - {fileID: 1937847600842644, guid: 47d0da1ba5336ef4bb50355db2307fe0, type: 3}
+  - {fileID: 1923026048575658, guid: f6a0cd899fb3b8c449a40e5fb69e258d, type: 3}
+  - {fileID: 1037344459507410, guid: 9c8446fabd2f61c4a823aebd526a359d, type: 3}
+  - {fileID: 1188032362689352, guid: 4ac1d639b5994b345bdc22dd8e415a06, type: 3}
+  obstructionLayer:
+    serializedVersion: 2
+    m_Bits: 256
+  placementRadius: 1
+  maxPlantsToSpawn: 10
+  prefabProbabilities:
+  - 20
+  - 10
+  - 15
+  - 20
+  - 35

@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 271580551453818664}
   - component: {fileID: -7088912972034223638}
   - component: {fileID: 8669040122011539635}
+  - component: {fileID: 6678206788539846180}
   m_Layer: 0
   m_Name: grassForest1
   m_TagString: Ground
@@ -66,8 +67,8 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 686456abac88a134b9e492118c012e0c, type: 2}
-  - {fileID: 2100000, guid: 686456abac88a134b9e492118c012e0c, type: 2}
+  - {fileID: 0}
+  - {fileID: 2100000, guid: 58ac9de5acb44214492c92fd4019b82b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -134,6 +135,36 @@ MonoBehaviour:
   xIndex: 0
   yIndex: 0
   tileValue: 3
+--- !u!114 &6678206788539846180
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 921189880267396335}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5091fd55b23e9b5469b2650317afe2e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  grassPref:
+  - {fileID: 1308358589415666, guid: 43bbe6106d9602b418076e5e6955f800, type: 3}
+  - {fileID: 1121632204772480, guid: bad3ddcb570876641a79193c07d20684, type: 3}
+  - {fileID: 1566788591921752, guid: 5d7318dc4214e88458f42323d9cc4706, type: 3}
+  - {fileID: 1610073067313290, guid: 6475aabacc1a9cb41aaca282d6ea7fc2, type: 3}
+  - {fileID: 1444406132134774, guid: cee0719eaa611da43905af2904d1904c, type: 3}
+  - {fileID: 1983199012346778, guid: e94c8232017a8bd4ba1c0f5115f3481d, type: 3}
+  obstructionLayer:
+    serializedVersion: 2
+    m_Bits: 384
+  placementRadius: 1
+  maxPlantsToSpawn: 5
+  prefabProbabilities:
+  - 20
+  - 20
+  - 20
+  - 20
+  - 20
 --- !u!1001 &5782387543831536446
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -144,6 +175,10 @@ PrefabInstance:
     - target: {fileID: 1308358589415666, guid: 43bbe6106d9602b418076e5e6955f800, type: 3}
       propertyPath: m_Name
       value: SM_Tree_03
+      objectReference: {fileID: 0}
+    - target: {fileID: 1308358589415666, guid: 43bbe6106d9602b418076e5e6955f800, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4059114952832066, guid: 43bbe6106d9602b418076e5e6955f800, type: 3}
       propertyPath: m_RootOrder
@@ -219,6 +254,10 @@ PrefabInstance:
     - target: {fileID: 1467454332595294, guid: fe8147825b813cf46b4ef685a3ea56a8, type: 3}
       propertyPath: m_Name
       value: SM_Tree_02
+      objectReference: {fileID: 0}
+    - target: {fileID: 1467454332595294, guid: fe8147825b813cf46b4ef685a3ea56a8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4428525224070040, guid: fe8147825b813cf46b4ef685a3ea56a8, type: 3}
       propertyPath: m_RootOrder

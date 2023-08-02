@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 2212262122398114826}
   - component: {fileID: -8348281591000613332}
   - component: {fileID: 37413389210452768}
+  - component: {fileID: -8183376793518433082}
   m_Layer: 0
   m_Name: sand 1
   m_TagString: Ground
@@ -30,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 498021837453684717}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0, y: 0, z: 0}
-  m_LocalScale: {x: 4, y: 3.75, z: 4}
+  m_LocalScale: {x: 4, y: 4, z: 4}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -64,7 +65,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 1fde7d2e33afdf34696ff155672a6afa, type: 2}
+  - {fileID: 0}
   - {fileID: 2100000, guid: 1fde7d2e33afdf34696ff155672a6afa, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -132,3 +133,36 @@ MonoBehaviour:
   xIndex: 0
   yIndex: 0
   tileValue: 2
+--- !u!114 &-8183376793518433082
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 498021837453684717}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5091fd55b23e9b5469b2650317afe2e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  grassPref:
+  - {fileID: 1588324658806122, guid: 9d05e0cabe0f8c641b0a87ecc3a9017e, type: 3}
+  - {fileID: 1616784548102220, guid: 9d911d3db44ad56488c3c28cb9e9e5ab, type: 3}
+  - {fileID: 1111534484382968, guid: 58460dec29312364795e00549bdfc146, type: 3}
+  - {fileID: 1732272334065596, guid: cdcb19fde9e8cba40b7bff849baf2c1b, type: 3}
+  - {fileID: 1677856023650210, guid: 0d6c136baa84fec40bbcbb09a069feda, type: 3}
+  - {fileID: 1003684783062222, guid: e3cd882847f3b274485b6d2e747fea8a, type: 3}
+  - {fileID: 1976401696516608, guid: 7aec7d7b6b4e5f24f832c33028ee90d9, type: 3}
+  obstructionLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  placementRadius: 3
+  maxPlantsToSpawn: 10
+  prefabProbabilities:
+  - 20
+  - 20
+  - 20
+  - 5
+  - 15
+  - 5
+  - 5
