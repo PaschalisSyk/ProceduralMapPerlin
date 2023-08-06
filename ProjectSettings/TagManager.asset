@@ -9,6 +9,7 @@ TagManager:
   - Water
   - Enviroment
   - Base
+  - Batch
   layers:
   - Default
   - TransparentFX

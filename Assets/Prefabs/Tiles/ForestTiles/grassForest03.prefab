@@ -16,11 +16,11 @@ GameObject:
   - component: {fileID: 8669040122011539635}
   - component: {fileID: 6678206788539846180}
   m_Layer: 0
-  m_Name: grassForest1
+  m_Name: grassForest03
   m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &541392912789114453
 Transform:
@@ -148,23 +148,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grassPref:
-  - {fileID: 1308358589415666, guid: 43bbe6106d9602b418076e5e6955f800, type: 3}
-  - {fileID: 1121632204772480, guid: bad3ddcb570876641a79193c07d20684, type: 3}
+  - {fileID: 1325612589990884, guid: e377b882a13405d4b9d5c3e8e747595e, type: 3}
+  - {fileID: 1247767785291130, guid: 0734397d1a4fd924f98424ecb4ca43b9, type: 3}
   - {fileID: 1566788591921752, guid: 5d7318dc4214e88458f42323d9cc4706, type: 3}
-  - {fileID: 1610073067313290, guid: 6475aabacc1a9cb41aaca282d6ea7fc2, type: 3}
-  - {fileID: 1444406132134774, guid: cee0719eaa611da43905af2904d1904c, type: 3}
-  - {fileID: 1983199012346778, guid: e94c8232017a8bd4ba1c0f5115f3481d, type: 3}
   obstructionLayer:
     serializedVersion: 2
     m_Bits: 384
   placementRadius: 1
   maxPlantsToSpawn: 5
   prefabProbabilities:
-  - 20
-  - 20
-  - 20
-  - 20
-  - 20
+  - 30
+  - 30
+  - 30
 --- !u!1001 &5782387543831536446
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -179,6 +174,10 @@ PrefabInstance:
     - target: {fileID: 1308358589415666, guid: 43bbe6106d9602b418076e5e6955f800, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1308358589415666, guid: 43bbe6106d9602b418076e5e6955f800, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 4059114952832066, guid: 43bbe6106d9602b418076e5e6955f800, type: 3}
       propertyPath: m_RootOrder
@@ -258,6 +257,10 @@ PrefabInstance:
     - target: {fileID: 1467454332595294, guid: fe8147825b813cf46b4ef685a3ea56a8, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1467454332595294, guid: fe8147825b813cf46b4ef685a3ea56a8, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 4428525224070040, guid: fe8147825b813cf46b4ef685a3ea56a8, type: 3}
       propertyPath: m_RootOrder

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[ExecuteInEditMode]
+//[ExecuteInEditMode]
 public class TileOcean : MonoBehaviour
 {
     public int size = 40;
@@ -25,7 +25,7 @@ public class TileOcean : MonoBehaviour
             for (int y = 0; y < size; y++)
             {
                 float xPos = x * tileSize + (y % 2 == 0 ? tileSize / 2 : 0);
-                float yPos = y * tileSize * 0.75f;
+                float yPos = y * tileSize * 0.75f + (y * 0.45f);
                 float height = Random.Range(0, 0.03f);
 
                 if (oceanTiles[x , y] == null)

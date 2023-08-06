@@ -9,7 +9,6 @@ public class LightManager : MonoBehaviour
     [SerializeField] Gradient ambientColor;
     [SerializeField] Gradient directionalColor;
 
-
     void Update()
     {
         timeOfDay += Time.deltaTime * 0.05f;

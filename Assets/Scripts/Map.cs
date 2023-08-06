@@ -4,25 +4,26 @@ using System.Collections.Generic;
 //[ExecuteInEditMode]
 public class Map : MonoBehaviour
 {
-    float waterLevel = 0.3f;
-    float sandLevel = 0.55f;
-    float forestLevel = 0.7f;
-    float mountainLevel = 0.8f;
+    [Header("Tiles Distribution")]
+    [SerializeField] [Range(0, 1)] float waterLevel = 0.2f;
+    [SerializeField] [Range(0 , 1)] float sandLevel = 0.55f;
+    [SerializeField] [Range(0, 1)] float forestLevel = 0.7f;
+    [SerializeField] [Range(0, 1)] float mountainLevel = 0.8f;
 
+    [Header("Noise Values")]
     public float scale = 0.2f;
     public float fallOffScale = 0.5f;
     public int size = 100;
-    public float tileSize = 1;
+    public float tileSize = 4;
 
     Vector3 offset;
-
-    [SerializeField] GameObject player;
+    [SerializeField] bool isMonocromatic = false;
 
     public GameObject[] prefabs;
 
     List<Vector3> walkableTiles = new List<Vector3>();
 
-    Tile[,] tiles;
+    public Tile[,] tiles;
 
     public StartingTile[] startingTiles;
 
@@ -37,9 +38,12 @@ public class Map : MonoBehaviour
     private void Start()
     {
         offset = transform.position;
-        MapGen(size);
-        SpawnPlayerOnTile();
-        //Field(size);
+        MapGen(size);       
+    }
+
+    public bool IsMonocromatic()
+    {
+        return isMonocromatic;
     }
 
     public void MapGen(int size)
@@ -119,42 +123,27 @@ public class Map : MonoBehaviour
         return index;
     }
 
-    void SpawnPlayerOnTile()
-    {
-        if(FindObjectOfType<PlayerController>() != null)
-        {
-            return;
-        }
-        if (walkableTiles.Count == 0)
-        {
-            Debug.LogError("No availiable tiles to spawn player");
-            return;
-        }
-
-        int index = Random.Range(0, walkableTiles.Count);
-        Vector3 spawnPos = walkableTiles[index];
-        GameObject Player = Instantiate(player, new Vector3(spawnPos.x , spawnPos.y + 1f , spawnPos.z) , Quaternion.identity) as GameObject;
-
-    }
-
     void MakeTile( int x, int y , float noiseValue)
     {
         int index = SetIndex(noiseValue);
         float xPos = x * tileSize + (y % 2 == 0 ? tileSize / 2 : 0);
-        float yPos = y * tileSize * 0.75f;
+        float yPos = y * tileSize * 0.75f + (y * 0.45f);
         float height = noiseValue * 0.01f;
 
-        if(index == 0)
+        if (index == 0)
         {
             return;
         }
-        GameObject tileObject = Instantiate(prefabs[index], new Vector3(xPos + offset.x,height,yPos + offset.z), Quaternion.identity) as GameObject;
-        tiles[x, y] = tileObject.GetComponent<Tile>();
-        tileObject.transform.parent = transform;
-        tiles[x,y].Init(x, y);
-        if (tileObject.tag == "Ground")
+        if(prefabs[index] != null)
         {
-            walkableTiles.Add(tileObject.transform.position);
+            GameObject tileObject = Instantiate(prefabs[index], new Vector3(xPos + offset.x, height, yPos + offset.z), Quaternion.identity) as GameObject;
+            tiles[x, y] = tileObject.GetComponent<Tile>();
+            tileObject.transform.parent = transform;
+            tiles[x, y].Init(x, y);
+            if (tileObject.tag == "Ground")
+            {
+                walkableTiles.Add(tileObject.transform.position);
+            }
         }
     }
 }
