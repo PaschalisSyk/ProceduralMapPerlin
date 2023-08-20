@@ -32,6 +32,14 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if(isSwimming)
+        {
+            gameObject.layer = LayerMask.NameToLayer("BlockingObject");
+        }
+        else
+        {
+            gameObject.layer = LayerMask.NameToLayer("Player");
+        }
         Move();
     }
 

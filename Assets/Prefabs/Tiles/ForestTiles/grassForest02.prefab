@@ -65,8 +65,8 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
-  - {fileID: 2100000, guid: 58ac9de5acb44214492c92fd4019b82b, type: 2}
+  - {fileID: 2100000, guid: 24293b9e568a6f140a634bdc4826d14c, type: 2}
+  - {fileID: 2100000, guid: 24293b9e568a6f140a634bdc4826d14c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -146,20 +146,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grassPref:
-  - {fileID: 1308358589415666, guid: 43bbe6106d9602b418076e5e6955f800, type: 3}
-  - {fileID: 1121632204772480, guid: bad3ddcb570876641a79193c07d20684, type: 3}
-  - {fileID: 1566788591921752, guid: 5d7318dc4214e88458f42323d9cc4706, type: 3}
-  - {fileID: 1610073067313290, guid: 6475aabacc1a9cb41aaca282d6ea7fc2, type: 3}
-  - {fileID: 1444406132134774, guid: cee0719eaa611da43905af2904d1904c, type: 3}
-  - {fileID: 1983199012346778, guid: e94c8232017a8bd4ba1c0f5115f3481d, type: 3}
+  - {fileID: 1777461590549580, guid: 47ac04e5b24338c44ba15b946641236c, type: 3}
+  - {fileID: 1325612589990884, guid: e377b882a13405d4b9d5c3e8e747595e, type: 3}
+  - {fileID: 1137204502678828, guid: fa1fbed80c6345a4da5ccfbda3b22ac4, type: 3}
+  - {fileID: 1809296932901464, guid: bce0c9523691df448b83c8c972060b2c, type: 3}
   obstructionLayer:
     serializedVersion: 2
     m_Bits: 384
   placementRadius: 1
   maxPlantsToSpawn: 5
   prefabProbabilities:
-  - 20
-  - 20
-  - 20
-  - 20
-  - 20
+  - 25
+  - 25
+  - 25
+  - 25

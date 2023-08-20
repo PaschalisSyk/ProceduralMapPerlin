@@ -35,10 +35,10 @@ public class Map : MonoBehaviour
         public float height;
     }
 
-    private void Start()
+    private void Awake()
     {
         offset = transform.position;
-        MapGen(size);       
+        MapGen(size);
     }
 
     public bool IsMonocromatic()
@@ -98,7 +98,7 @@ public class Map : MonoBehaviour
     private int SetIndex(float noiseValue)
     {
         int index = 0;
-
+        
         if (Random.Range(0f, 1f) <= 0.02f)
         {
             index = 1;
@@ -134,7 +134,7 @@ public class Map : MonoBehaviour
         {
             return;
         }
-        if(prefabs[index] != null)
+        if (prefabs[index] != null)
         {
             GameObject tileObject = Instantiate(prefabs[index], new Vector3(xPos + offset.x, height, yPos + offset.z), Quaternion.identity) as GameObject;
             tiles[x, y] = tileObject.GetComponent<Tile>();
@@ -144,6 +144,7 @@ public class Map : MonoBehaviour
             {
                 walkableTiles.Add(tileObject.transform.position);
             }
+            tileObject.transform.localScale = new Vector3(tileObject.transform.localScale.x, tileObject.transform.localScale.y + noiseValue, tileObject.transform.localScale.z);
         }
     }
 }

@@ -48,14 +48,27 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _EdgeFoamAmount: 5
+    - _EdgeFoamCutoff: 4.8
+    - _EdgeFoamScale: 200
+    - _Opacity: 0.8
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _RippleDensity: 0.3
-    - _RippleSlimness: 15
-    - _RippleSpeed: 1
+    - _RippleDensity: 200
+    - _RippleSlimness: 18
+    - _RippleSpeed: 1.5
+    - _WaterDepth: 10
     - _WaveSpeed: 0.1
+    - _foamamount: 10
+    - _foamcutoff: 0.1
+    - _foamscale: 1
+    - _foamspeed: 1
     m_Colors:
-    - _BaseColor: {r: 0, g: 0.75333333, b: 1, a: 1}
-    - _RippleColor: {r: 0, g: 10.415687, b: 6.6509805, a: 0}
+    - _BaseColor: {r: 0.18398002, g: 0.6168979, b: 0.6415094, a: 1}
+    - _DeepWaterColor: {r: 0, g: 0.050714925, b: 0.26415086, a: 1}
+    - _EdgeFoamColor: {r: 0, g: 0, b: 0, a: 0}
+    - _RippleColor: {r: 0.32941177, g: 2, b: 1.8666667, a: 1}
     - _SecondRippleColor: {r: 0.047058824, g: 0.32941177, b: 1.0666667, a: 0}
+    - _SwallowWaterColor: {r: 0, g: 0.8264837, b: 0.8584906, a: 1}
+    - _foamcolor_1: {r: 1, g: 1, b: 1, a: 0.5882353}
   m_BuildTextureStacks: []

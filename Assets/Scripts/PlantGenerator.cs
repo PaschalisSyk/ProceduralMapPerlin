@@ -102,6 +102,9 @@ public class PlantGenerator : MonoBehaviour
                 {
                     child.gameObject.SetActive(true);
                     child.rotation = Quaternion.Euler(0, Random.Range(-40, 40), 0);
+
+                    float value = Random.Range(child.localScale.x * 0.65f, child.localScale.x * 1.1f);
+                    child.localScale = new Vector3(value, value, value);
                 }
             }
 
