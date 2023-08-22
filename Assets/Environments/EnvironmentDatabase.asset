@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58a9c24d3b84c6f458b91188fce4aa6b, type: 3}
+  m_Name: EnvironmentDatabase
+  m_EditorClassIdentifier: 
+  profiles:
+  - enviromentType: 0
+    tilePrefabs:
+    - {fileID: 3842063846486868246, guid: 1addcf8bfebe70f47a61ec340825b629, type: 3}
+    - {fileID: 4392539617703824235, guid: 1127d0ebf0fe1c84baa6d3a67ffe78af, type: 3}
+    - {fileID: 498021837453684717, guid: 1c0d3ec82ba1c0b4f8e24fe30f21538d, type: 3}
+    - {fileID: 921189880267396335, guid: ae76ce0d24db44648aba21d2ddb4123f, type: 3}
+    - {fileID: 921189880267396335, guid: 75f161ad8621abf44b87d8fcb7a33d61, type: 3}
+    - {fileID: 455005269828449962, guid: cdf56ad78c255b447b321a0285329181, type: 3}
+  - enviromentType: 1
+    tilePrefabs:
+    - {fileID: 3842063846486868246, guid: 1addcf8bfebe70f47a61ec340825b629, type: 3}
+    - {fileID: 4392539617703824235, guid: 1127d0ebf0fe1c84baa6d3a67ffe78af, type: 3}
+    - {fileID: 498021837453684717, guid: 5e9b094ea710d7245bb55f96fd1a6166, type: 3}
+    - {fileID: 921189880267396335, guid: 86362168399fff1468fc299d7c10d2ad, type: 3}
+    - {fileID: 921189880267396335, guid: de5326f1a4eb9604a93a3fde5c0be8e5, type: 3}
+    - {fileID: 455005269828449962, guid: cdf56ad78c255b447b321a0285329181, type: 3}
+  - enviromentType: 2
+    tilePrefabs:
+    - {fileID: 3842063846486868246, guid: 1addcf8bfebe70f47a61ec340825b629, type: 3}
+    - {fileID: 4392539617703824235, guid: 1127d0ebf0fe1c84baa6d3a67ffe78af, type: 3}
+    - {fileID: 498021837453684717, guid: c8257d93fdb68ce4a88cf6ff320c523e, type: 3}
+    - {fileID: 921189880267396335, guid: ff5a10113c486ec4f871000cf7b9704f, type: 3}
+    - {fileID: 921189880267396335, guid: 75f161ad8621abf44b87d8fcb7a33d61, type: 3}
+    - {fileID: 455005269828449962, guid: cdf56ad78c255b447b321a0285329181, type: 3}
+  - enviromentType: 3
+    tilePrefabs:
+    - {fileID: 3842063846486868246, guid: 1addcf8bfebe70f47a61ec340825b629, type: 3}
+    - {fileID: 4392539617703824235, guid: 1127d0ebf0fe1c84baa6d3a67ffe78af, type: 3}
+    - {fileID: 498021837453684717, guid: c8257d93fdb68ce4a88cf6ff320c523e, type: 3}
+    - {fileID: 921189880267396335, guid: de17ddd2ccfdad441b7d92534c064ff3, type: 3}
+    - {fileID: 5884610559689345935, guid: e3338066e18ca634b9e8d2c3c3024731, type: 3}
+    - {fileID: 455005269828449962, guid: cdf56ad78c255b447b321a0285329181, type: 3}

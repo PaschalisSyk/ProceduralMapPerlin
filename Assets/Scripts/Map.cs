@@ -16,16 +16,18 @@ public class Map : MonoBehaviour
     public int size = 100;
     public float tileSize = 4;
 
-    Vector3 offset;
     [SerializeField] bool isMonocromatic = false;
-
-    public GameObject[] prefabs;
 
     List<Vector3> walkableTiles = new List<Vector3>();
 
     public Tile[,] tiles;
-
     public StartingTile[] startingTiles;
+    public GameObject[] prefabs;
+
+    Vector3 offset;
+
+    public EnvironmentDatabase environmentDatabase;
+    [SerializeField] string currentEnvironment;
 
     [System.Serializable]
     public class StartingTile
@@ -37,8 +39,41 @@ public class Map : MonoBehaviour
 
     private void Awake()
     {
+        GenerateEnvironment(GetRandomEnvironmentType());
         offset = transform.position;
         MapGen(size);
+    }
+
+    void GenerateEnvironment(EnvironmentType environmentType)
+    {
+        EnvironmentProfile environmentProfile = GetEnvironmentProfile(environmentType);
+    }
+
+    EnvironmentProfile GetEnvironmentProfile(EnvironmentType type)
+    {
+        foreach (EnvironmentProfile profile in environmentDatabase.profiles)
+        {
+            if(profile.enviromentType == type)
+            {
+                prefabs = profile.tilePrefabs;
+                return profile;
+            }
+        }
+
+        return null;
+    }
+
+    EnvironmentType GetRandomEnvironmentType()
+    {
+        // Convert the EnvironmentType enum to an array of its values
+        EnvironmentType[] environmentTypes = (EnvironmentType[])System.Enum.GetValues(typeof(EnvironmentType));
+
+        // Pick a random index from the array
+        int randomIndex = Random.Range(0, environmentTypes.Length);
+        currentEnvironment = environmentTypes[randomIndex].ToString();
+
+        // Return the random environment type
+        return environmentTypes[randomIndex];
     }
 
     public bool IsMonocromatic()

@@ -78,7 +78,7 @@ public class PlantGenerator : MonoBehaviour
             cumulativeProbability += prefabProbabilities[prefabIndexToSpawn];
         }
 
-        Quaternion rotation = Quaternion.identity;
+        Quaternion rotation = Quaternion.Euler(0, Random.Range(-40, 40), 0);
 
         if(grassPref[prefabIndexToSpawn].tag == "Batch")
         {
@@ -109,7 +109,7 @@ public class PlantGenerator : MonoBehaviour
             }
 
             // Instantiate the selected prefab
-            GameObject updatedGrass = Instantiate(_grass, point, rotation) as GameObject;
+            GameObject updatedGrass = Instantiate(_grass, point, Quaternion.identity) as GameObject;
             Destroy(_grass);
             updatedGrass.transform.parent = transform;
             StaticBatchingUtility.Combine(updatedGrass);
@@ -119,6 +119,8 @@ public class PlantGenerator : MonoBehaviour
             // Instantiate the selected prefab
             GameObject grass = Instantiate(grassPref[prefabIndexToSpawn], point, rotation) as GameObject;
             grass.transform.parent = transform;
+            float value = Random.Range(grass.transform.localScale.x * 0.65f, grass.transform.localScale.x * 1.1f);
+            grass.transform.localScale = new Vector3(value, value, value);
             if (map.IsMonocromatic())
             {
                 AssignMaterial(grass);

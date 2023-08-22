@@ -146,14 +146,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grassPref:
-  - {fileID: 1597375411515710, guid: c2cdea0710f55cb4b8be00312c82e839, type: 3}
-  - {fileID: 1896228811670048, guid: a77401c30ad8d4a4cbf36d16e8126678, type: 3}
-  - {fileID: 1937847600842644, guid: 47d0da1ba5336ef4bb50355db2307fe0, type: 3}
+  - {fileID: 1188032362689352, guid: 4ac1d639b5994b345bdc22dd8e415a06, type: 3}
+  - {fileID: 1718344637300176, guid: a8be9f01144e2af499b282b2e273a5eb, type: 3}
+  - {fileID: 1087120402720156, guid: 2535f726e7be4c44cbf8998490f36b8a, type: 3}
   obstructionLayer:
     serializedVersion: 2
     m_Bits: 256
   placementRadius: 1
-  maxPlantsToSpawn: 20
+  maxPlantsToSpawn: 10
   prefabProbabilities:
   - 40
   - 30

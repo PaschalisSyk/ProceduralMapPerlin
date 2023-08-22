@@ -152,7 +152,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 320
   placementRadius: 0.5
-  maxPlantsToSpawn: 40
+  maxPlantsToSpawn: 10
   prefabProbabilities:
   - 70
   - 30
