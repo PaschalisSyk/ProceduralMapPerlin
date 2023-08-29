@@ -27,7 +27,18 @@ public class Map : MonoBehaviour
     Vector3 offset;
 
     public EnvironmentDatabase environmentDatabase;
+    public Enviroment enviroment;
     [SerializeField] string currentEnvironment;
+
+    [System.Serializable]
+    public enum Enviroment
+    {
+        Random,
+        Grassland,
+        Forest,
+        Desert,
+        Iceland
+    }
 
     [System.Serializable]
     public class StartingTile
@@ -65,15 +76,36 @@ public class Map : MonoBehaviour
 
     EnvironmentType GetRandomEnvironmentType()
     {
-        // Convert the EnvironmentType enum to an array of its values
-        EnvironmentType[] environmentTypes = (EnvironmentType[])System.Enum.GetValues(typeof(EnvironmentType));
+        if(enviroment == Enviroment.Random)
+        {
+            // Convert the EnvironmentType enum to an array of its values
+            EnvironmentType[] environmentTypes = (EnvironmentType[])System.Enum.GetValues(typeof(EnvironmentType));
 
-        // Pick a random index from the array
-        int randomIndex = Random.Range(0, environmentTypes.Length);
-        currentEnvironment = environmentTypes[randomIndex].ToString();
+            // Pick a random index from the array
+            int randomIndex = Random.Range(0, environmentTypes.Length);
+            currentEnvironment = environmentTypes[randomIndex].ToString();
 
-        // Return the random environment type
-        return environmentTypes[randomIndex];
+            // Return the random environment type
+            return environmentTypes[randomIndex];
+        }
+        else if(enviroment == Enviroment.Grassland)
+        {
+            return EnvironmentType.Grassland;
+        }
+        else if(enviroment == Enviroment.Forest)
+        {
+            return EnvironmentType.Forest;
+        }
+        else if(enviroment == Enviroment.Desert)
+        {
+            return EnvironmentType.Desert;
+        }
+        else if(enviroment == Enviroment.Iceland)
+        {
+            return EnvironmentType.Iceland;
+        }
+        return EnvironmentType.Grassland;
+        
     }
 
     public bool IsMonocromatic()

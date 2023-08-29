@@ -34,9 +34,9 @@ MonoBehaviour:
     - {fileID: 3842063846486868246, guid: 1addcf8bfebe70f47a61ec340825b629, type: 3}
     - {fileID: 4392539617703824235, guid: 1127d0ebf0fe1c84baa6d3a67ffe78af, type: 3}
     - {fileID: 498021837453684717, guid: c8257d93fdb68ce4a88cf6ff320c523e, type: 3}
-    - {fileID: 921189880267396335, guid: ff5a10113c486ec4f871000cf7b9704f, type: 3}
-    - {fileID: 921189880267396335, guid: 75f161ad8621abf44b87d8fcb7a33d61, type: 3}
-    - {fileID: 455005269828449962, guid: cdf56ad78c255b447b321a0285329181, type: 3}
+    - {fileID: 498021837453684717, guid: 92ee0c6107edc4544997a43d2753ffb1, type: 3}
+    - {fileID: 498021837453684717, guid: 1c0d3ec82ba1c0b4f8e24fe30f21538d, type: 3}
+    - {fileID: 498021837453684717, guid: 5e9b094ea710d7245bb55f96fd1a6166, type: 3}
   - enviromentType: 3
     tilePrefabs:
     - {fileID: 3842063846486868246, guid: 1addcf8bfebe70f47a61ec340825b629, type: 3}
