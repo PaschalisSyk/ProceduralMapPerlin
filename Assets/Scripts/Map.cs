@@ -18,6 +18,12 @@ public class Map : MonoBehaviour
 
     [SerializeField] bool isMonocromatic = false;
 
+    [Header("River")]
+    [SerializeField] bool hasRiver = false;
+    [SerializeField] int riverWidth = 5;       // Width of the river
+    [SerializeField] int riverLength = 50;     // Length of the river
+
+
     List<Vector3> walkableTiles = new List<Vector3>();
 
     public Tile[,] tiles;
@@ -29,6 +35,8 @@ public class Map : MonoBehaviour
     public EnvironmentDatabase environmentDatabase;
     public Enviroment enviroment;
     [SerializeField] string currentEnvironment;
+
+    AnimalSpawner animalSpawner;
 
     [System.Serializable]
     public enum Enviroment
@@ -50,10 +58,12 @@ public class Map : MonoBehaviour
 
     private void Awake()
     {
+        animalSpawner = FindObjectOfType<AnimalSpawner>();
         GenerateEnvironment(GetRandomEnvironmentType());
         offset = transform.position;
         MapGen(size);
     }
+
 
     void GenerateEnvironment(EnvironmentType environmentType)
     {
@@ -67,6 +77,8 @@ public class Map : MonoBehaviour
             if(profile.enviromentType == type)
             {
                 prefabs = profile.tilePrefabs;
+                hasRiver = profile.hasRiver;
+                animalSpawner.animalPrefs = profile.animals;
                 return profile;
             }
         }
@@ -153,8 +165,17 @@ public class Map : MonoBehaviour
             {
                 float noiseValue = noiseMap[x, y];
                 noiseValue -= falloffMap[x, y] * fallOffScale;
-                
-                if(tiles[x,y] == null)
+
+                if(hasRiver)
+                {
+                    if (IsInsideRiver(x, y))
+                    {
+                        // Set river tiles
+                        MakeTile(x, y, -1);
+                    }
+                }
+
+                if (tiles[x,y] == null)
                 {
                     MakeTile(x, y, noiseValue);
                 }
@@ -165,7 +186,12 @@ public class Map : MonoBehaviour
     private int SetIndex(float noiseValue)
     {
         int index = 0;
-        
+
+        if (noiseValue == -1)
+        {
+            index = prefabs.Length -1;
+        }
+
         if (Random.Range(0f, 1f) <= 0.02f)
         {
             index = 1;
@@ -197,12 +223,15 @@ public class Map : MonoBehaviour
         float yPos = y * tileSize * 0.75f + (y * 0.45f);
         float height = noiseValue * 0.01f;
 
-        if (index == 0)
-        {
-            return;
-        }
+        
         if (prefabs[index] != null)
         {
+
+            if (index == 0)
+            {
+                return;
+            }
+
             GameObject tileObject = Instantiate(prefabs[index], new Vector3(xPos + offset.x, height, yPos + offset.z), Quaternion.identity) as GameObject;
             tiles[x, y] = tileObject.GetComponent<Tile>();
             tileObject.transform.parent = transform;
@@ -214,4 +243,27 @@ public class Map : MonoBehaviour
             tileObject.transform.localScale = new Vector3(tileObject.transform.localScale.x, tileObject.transform.localScale.y + noiseValue, tileObject.transform.localScale.z);
         }
     }
+
+    bool IsInsideRiver(int x, int y)
+    {
+
+        // Define the river's position, width, and length
+        int riverX = size / 3; // X-coordinate of the river's center
+
+        // Calculate the boundaries of the river
+        int leftBank = riverX - riverWidth / 2;
+        int rightBank = riverX + riverWidth / 2;
+        int riverStart = 0; // Y-coordinate where the river begins
+
+        // Check if the current coordinates are inside the river area
+        if (x >= leftBank && x <= rightBank && y >= riverStart && y <= riverStart + riverLength)
+        {
+            return true; // Inside the river
+        }
+        else
+        {
+            return false; // Outside the river
+        }
+    }
+
 }

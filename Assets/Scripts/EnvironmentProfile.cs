@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public enum EnvironmentType
 {
@@ -13,4 +14,6 @@ public class EnvironmentProfile
 {
     public EnvironmentType enviromentType;
     public GameObject[] tilePrefabs;
+    public bool hasRiver;
+    public List<GameObject> animals;
 }

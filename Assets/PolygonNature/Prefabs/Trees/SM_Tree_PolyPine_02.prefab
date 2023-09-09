@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 33621637194248260}
   - component: {fileID: 23333725126358800}
   - component: {fileID: 136824608990828782}
+  - component: {fileID: 8931080465787439157}
   m_Layer: 7
   m_Name: SM_Tree_PolyPine_02
   m_TagString: Untagged
@@ -98,3 +99,19 @@ CapsuleCollider:
   m_Height: 3.907669
   m_Direction: 1
   m_Center: {x: -0.0130877495, y: 1.6459765, z: 0}
+--- !u!208 &8931080465787439157
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1233735431766336}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.739, y: 2.256, z: 0.76100004}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0.020000001, y: 2.158, z: -0.019000001}
+  m_TimeToStationary: 0.5

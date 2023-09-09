@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 23898416433374494}
   - component: {fileID: 95025883475011296}
   - component: {fileID: 64322295075702232}
+  - component: {fileID: -5710535238534261526}
   m_Layer: 6
   m_Name: SM_Rock_Wall_01
   m_TagString: Untagged
@@ -119,3 +120,19 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: 0426df7c18a77a045921f3397416efa8, type: 3}
+--- !u!208 &-5710535238534261526
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1269826234957420}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.66200006, y: 1.304, z: 2.3200002}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: -0.032, y: 0.79300004, z: -0.030000001}
+  m_TimeToStationary: 0.5

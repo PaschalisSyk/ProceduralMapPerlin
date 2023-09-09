@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 33107186031524112}
   - component: {fileID: 23251049325102206}
   - component: {fileID: 64453767308617616}
+  - component: {fileID: 1456126930439230814}
   m_Layer: 7
   m_Name: SM_Tree_Pine_Base_01
   m_TagString: Untagged
@@ -98,3 +99,19 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: 8ff5226f8dc25464aaf8ed808328e7f1, type: 3}
+--- !u!208 &1456126930439230814
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1726980548154970}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.615, y: 0.66700006, z: 0.582}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0.017, y: -0.013, z: 0.008}
+  m_TimeToStationary: 0.5

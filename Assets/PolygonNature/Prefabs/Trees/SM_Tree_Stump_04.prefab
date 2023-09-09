@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 33418780945138292}
   - component: {fileID: 23282270498095788}
   - component: {fileID: 64657255138967170}
+  - component: {fileID: -5122867275564184930}
   m_Layer: 7
   m_Name: SM_Tree_Stump_04
   m_TagString: Untagged
@@ -98,3 +99,19 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: 9453616870333a247ada21c9b7c35684, type: 3}
+--- !u!208 &-5122867275564184930
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1449376034317114}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.19800001, y: 0.6, z: 0.19800001}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0.6, z: 0}
+  m_TimeToStationary: 0.5

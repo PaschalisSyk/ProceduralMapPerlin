@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 33995454284387648}
   - component: {fileID: 23000023206223780}
   - component: {fileID: 64646573042132138}
+  - component: {fileID: 283237678025975910}
   m_Layer: 6
   m_Name: SM_Rock_Pile_04
   m_TagString: Untagged
@@ -98,3 +99,19 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: 07b8536c9f3e64f418b781181a1595ff, type: 3}
+--- !u!208 &283237678025975910
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1955666037651256}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 2.028, y: 1.258, z: 3.1220002}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: -0.008, y: 0.96800005, z: -0.39200002}
+  m_TimeToStationary: 0.5

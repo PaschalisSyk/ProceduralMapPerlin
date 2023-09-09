@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4812864903316742}
   - component: {fileID: 33836986278860856}
   - component: {fileID: 23344278320500040}
+  - component: {fileID: 337570282238857961}
   m_Layer: 7
   m_Name: SM_Tree_Swamp_Root_01
   m_TagString: Untagged
@@ -83,3 +84,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!208 &337570282238857961
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1131201197097770}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.094000004, y: 0.24200001, z: 0.50600004}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0.001, y: 0, z: 0.008}
+  m_TimeToStationary: 0.5

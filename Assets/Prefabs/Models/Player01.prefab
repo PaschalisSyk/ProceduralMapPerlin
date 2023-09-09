@@ -208,6 +208,7 @@ GameObject:
   - component: {fileID: 6464613064763196087}
   - component: {fileID: 5730521400373004883}
   - component: {fileID: 8552301632460497556}
+  - component: {fileID: 4219057841003240015}
   m_Layer: 3
   m_Name: Player01
   m_TagString: Player
@@ -298,6 +299,22 @@ CapsuleCollider:
   m_Height: 3.5
   m_Direction: 1
   m_Center: {x: 0, y: 1.75, z: 0}
+--- !u!114 &4219057841003240015
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 960358025553151402}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 0
+  m_Area: 0
+  m_IgnoreFromBuild: 1
+  m_AffectedAgents: ffffffff
 --- !u!1 &1009261153792245722
 GameObject:
   m_ObjectHideFlags: 0
@@ -6337,7 +6354,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: cd44e89765e04ac48a46427763aa1ccc, type: 2}
+  - {fileID: 2100000, guid: 37f6354679f3e1748b76a9221f51f4ac, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

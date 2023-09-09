@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 33174980875754304}
   - component: {fileID: 23111977818002736}
   - component: {fileID: 136997429437860750}
+  - component: {fileID: 4158600725247899262}
   m_Layer: 7
   m_Name: SM_Tree_Pine_Dead_01
   m_TagString: Untagged
@@ -98,3 +99,19 @@ CapsuleCollider:
   m_Height: 3.907669
   m_Direction: 1
   m_Center: {x: 0, y: 1.6459765, z: 0}
+--- !u!208 &4158600725247899262
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1560461424881576}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 3.3650002, z: 0.565}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0.037, y: 3.0570002, z: 0.015000001}
+  m_TimeToStationary: 0.5

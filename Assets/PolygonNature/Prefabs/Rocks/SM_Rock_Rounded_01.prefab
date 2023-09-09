@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 33407229780599524}
   - component: {fileID: 23863956322591038}
   - component: {fileID: 64644046807496982}
+  - component: {fileID: -7951151044951518457}
   m_Layer: 6
   m_Name: SM_Rock_Rounded_01
   m_TagString: Untagged
@@ -98,3 +99,19 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: fe518ac5d5cfa0d45b8ad961535da30f, type: 3}
+--- !u!208 &-7951151044951518457
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1677856023650210}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.683, y: 0.252, z: 0.78400004}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0.18300001, z: 0}
+  m_TimeToStationary: 0.5

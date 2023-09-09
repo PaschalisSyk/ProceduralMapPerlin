@@ -95,6 +95,7 @@ GameObject:
   - component: {fileID: 4724346807332270}
   - component: {fileID: 205885470944183202}
   - component: {fileID: 136300516578213046}
+  - component: {fileID: -3214927283356135274}
   m_Layer: 7
   m_Name: SM_Tree_Pine_01
   m_TagString: Untagged
@@ -156,6 +157,22 @@ CapsuleCollider:
   m_Height: 3.907669
   m_Direction: 1
   m_Center: {x: 0, y: 1.6459765, z: 0}
+--- !u!208 &-3214927283356135274
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1182756067964316}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &1926926283551868
 GameObject:
   m_ObjectHideFlags: 0

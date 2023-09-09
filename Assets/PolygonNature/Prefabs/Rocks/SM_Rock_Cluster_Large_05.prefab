@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 33430421013209772}
   - component: {fileID: 23600640122748854}
   - component: {fileID: 64126925544920136}
+  - component: {fileID: -1948651169434937517}
   m_Layer: 6
   m_Name: SM_Rock_Cluster_Large_05
   m_TagString: Untagged
@@ -98,3 +99,19 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: f2ad3ca5eab9f924a9f8ff4f947b51c4, type: 3}
+--- !u!208 &-1948651169434937517
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1192901760715742}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 8.268001, y: 7.5290003, z: 8.941}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 4.86, z: 0}
+  m_TimeToStationary: 0.5

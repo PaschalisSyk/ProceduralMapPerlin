@@ -10,6 +10,10 @@ TagManager:
   - Enviroment
   - Base
   - Batch
+  - TurtleFood
+  - GeckoFood
+  - SnakeFood
+  - MuskratFood
   layers:
   - Default
   - TransparentFX

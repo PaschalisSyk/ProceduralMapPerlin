@@ -2,13 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
-    Map map;
+    public Map map;
     [SerializeField] CameraFollow cameraFollow;
     [SerializeField] GameObject player;
+    public List<Tile> tilesToSpawn = new List<Tile>();
 
     private void Awake()
     {
@@ -30,7 +32,6 @@ public class GameManager : MonoBehaviour
 
     void SpawnPlayer()
     {
-        List<Tile> tilesToSpawn = new List<Tile>();
         foreach (Tile tile in map.tiles)
         {
             if(tile != null)
@@ -52,6 +53,7 @@ public class GameManager : MonoBehaviour
         GameObject Player = Instantiate(player, new Vector3(spawnPos.x, spawnPos.y + 1f, spawnPos.z), Quaternion.identity) as GameObject;
 
         StartCoroutine(StartCameraFollow());
+        
     }
 
     IEnumerator StartCameraFollow()

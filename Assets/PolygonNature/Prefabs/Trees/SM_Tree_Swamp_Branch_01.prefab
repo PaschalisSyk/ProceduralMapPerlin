@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4808321774632996}
   - component: {fileID: 33020605788716656}
   - component: {fileID: 23755223639442744}
+  - component: {fileID: -835532340264465954}
   m_Layer: 7
   m_Name: SM_Tree_Swamp_Branch_01
   m_TagString: Untagged
@@ -83,3 +84,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!208 &-835532340264465954
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1966522617160436}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.261, y: 0.38000003, z: 0.89800006}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: -0.026, y: 0.002, z: -0.71900004}
+  m_TimeToStationary: 0.5

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 23060172624914524}
   - component: {fileID: 95090385140511094}
   - component: {fileID: 64491381955689454}
+  - component: {fileID: 6713096024317051834}
   m_Layer: 6
   m_Name: SM_Rock_Tile_02
   m_TagString: Untagged
@@ -119,3 +120,19 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: 9e603b22215e1374eb7ce95c1e24c1ff, type: 3}
+--- !u!208 &6713096024317051834
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1086035016369964}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 13.404, y: 1.6650001, z: 13.566001}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0.17300001, y: -0.37500003, z: 0.266}
+  m_TimeToStationary: 0.5

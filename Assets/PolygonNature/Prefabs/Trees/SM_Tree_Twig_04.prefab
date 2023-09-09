@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4491352525262994}
   - component: {fileID: 33943824388753754}
   - component: {fileID: 23205513134319834}
+  - component: {fileID: -4772259310767300316}
   m_Layer: 7
   m_Name: SM_Tree_Twig_04
   m_TagString: Untagged
@@ -83,3 +84,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!208 &-4772259310767300316
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1154308530469040}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.05, y: 0.027, z: 0.27100003}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0.009000001, y: -0.013, z: -0.003}
+  m_TimeToStationary: 0.5

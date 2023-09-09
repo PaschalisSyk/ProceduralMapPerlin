@@ -52,13 +52,13 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Depth: 0.4
+    - _Depth: 0.6
     - _EdgeFoamAmount: 5
     - _EdgeFoamCutoff: 4.8
     - _EdgeFoamScale: 200
-    - _FernelPower: 2
+    - _FernelPower: 1.5
     - _Offset: 4
-    - _Opacity: 0.4
+    - _Opacity: 1
     - _QueueControl: 0
     - _QueueOffset: 0
     - _RippleDensity: 200
@@ -72,12 +72,12 @@ Material:
     - _foamscale: 1
     - _foamspeed: 1
     m_Colors:
-    - _BaseColor: {r: 0, g: 0.9492388, b: 1, a: 1}
+    - _BaseColor: {r: 0, g: 0.823599, b: 0.8679245, a: 1}
     - _DeepWaterColor: {r: 0, g: 0.050714925, b: 0.26415086, a: 1}
     - _EdgeFoamColor: {r: 0, g: 0, b: 0, a: 0}
     - _Emission: {r: 0, g: 0, b: 0, a: 0}
-    - _FoamColor: {r: 0, g: 0.1347911, b: 0.39607847, a: 0}
-    - _RippleColor: {r: 0.36078432, g: 2.8078432, b: 1.427451, a: 1}
+    - _FoamColor: {r: 0, g: 0.08235294, b: 0.24117647, a: 0}
+    - _RippleColor: {r: 0.20392157, g: 1.4980392, b: 0.7764706, a: 1}
     - _SecondRippleColor: {r: 0.047058824, g: 0.32941177, b: 1.0666667, a: 0}
     - _SwallowWaterColor: {r: 0, g: 0.8264837, b: 0.8584906, a: 1}
     - _foamcolor_1: {r: 1, g: 1, b: 1, a: 0.5882353}

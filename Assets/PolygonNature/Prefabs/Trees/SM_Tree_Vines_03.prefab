@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4058236746101220}
   - component: {fileID: 33744861848984264}
   - component: {fileID: 23363187572900306}
+  - component: {fileID: 3677950821210442123}
   m_Layer: 7
   m_Name: SM_Tree_Vines_03
   m_TagString: Untagged
@@ -83,3 +84,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!208 &3677950821210442123
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1812121636561110}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.094000004, y: 2.5440001, z: 0.171}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: -0.001, y: -2.5440001, z: -0.015000001}
+  m_TimeToStationary: 0.5

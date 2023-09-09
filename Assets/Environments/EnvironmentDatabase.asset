@@ -15,33 +15,49 @@ MonoBehaviour:
   profiles:
   - enviromentType: 0
     tilePrefabs:
-    - {fileID: 3842063846486868246, guid: 1addcf8bfebe70f47a61ec340825b629, type: 3}
+    - {fileID: 498021837453684717, guid: 5a419d4b36474d14a836ccd82e41c30a, type: 3}
     - {fileID: 4392539617703824235, guid: 1127d0ebf0fe1c84baa6d3a67ffe78af, type: 3}
     - {fileID: 498021837453684717, guid: 1c0d3ec82ba1c0b4f8e24fe30f21538d, type: 3}
     - {fileID: 921189880267396335, guid: ae76ce0d24db44648aba21d2ddb4123f, type: 3}
     - {fileID: 921189880267396335, guid: 75f161ad8621abf44b87d8fcb7a33d61, type: 3}
     - {fileID: 455005269828449962, guid: cdf56ad78c255b447b321a0285329181, type: 3}
+    - {fileID: 3842063846486868246, guid: 7690ff20258984942861c88d704da322, type: 3}
+    hasRiver: 0
+    animals: []
   - enviromentType: 1
     tilePrefabs:
-    - {fileID: 3842063846486868246, guid: 1addcf8bfebe70f47a61ec340825b629, type: 3}
+    - {fileID: 498021837453684717, guid: 72f07d2e4fa32d347aa76420db203302, type: 3}
     - {fileID: 4392539617703824235, guid: 1127d0ebf0fe1c84baa6d3a67ffe78af, type: 3}
     - {fileID: 498021837453684717, guid: 5e9b094ea710d7245bb55f96fd1a6166, type: 3}
     - {fileID: 921189880267396335, guid: 86362168399fff1468fc299d7c10d2ad, type: 3}
     - {fileID: 921189880267396335, guid: de5326f1a4eb9604a93a3fde5c0be8e5, type: 3}
     - {fileID: 455005269828449962, guid: cdf56ad78c255b447b321a0285329181, type: 3}
+    - {fileID: 3842063846486868246, guid: 7690ff20258984942861c88d704da322, type: 3}
+    hasRiver: 1
+    animals:
+    - {fileID: 7837983530703912852, guid: 98b9777d235152d4fa926df83df2604f, type: 3}
+    - {fileID: 69035716934895119, guid: 69eb55e53d9dbd24a85ca7534e902790, type: 3}
   - enviromentType: 2
     tilePrefabs:
-    - {fileID: 3842063846486868246, guid: 1addcf8bfebe70f47a61ec340825b629, type: 3}
+    - {fileID: 498021837453684717, guid: 5a419d4b36474d14a836ccd82e41c30a, type: 3}
     - {fileID: 4392539617703824235, guid: 1127d0ebf0fe1c84baa6d3a67ffe78af, type: 3}
     - {fileID: 498021837453684717, guid: c8257d93fdb68ce4a88cf6ff320c523e, type: 3}
     - {fileID: 498021837453684717, guid: 92ee0c6107edc4544997a43d2753ffb1, type: 3}
     - {fileID: 498021837453684717, guid: 1c0d3ec82ba1c0b4f8e24fe30f21538d, type: 3}
     - {fileID: 498021837453684717, guid: 5e9b094ea710d7245bb55f96fd1a6166, type: 3}
+    - {fileID: 3842063846486868246, guid: 7690ff20258984942861c88d704da322, type: 3}
+    hasRiver: 0
+    animals:
+    - {fileID: 2852144449094324064, guid: 764e986d0e26c8a4eb7aa451a1e9e459, type: 3}
+    - {fileID: 7426109905284484173, guid: 0f4cf2c34a5999c458a926da21672322, type: 3}
   - enviromentType: 3
     tilePrefabs:
-    - {fileID: 3842063846486868246, guid: 1addcf8bfebe70f47a61ec340825b629, type: 3}
+    - {fileID: 498021837453684717, guid: 5a419d4b36474d14a836ccd82e41c30a, type: 3}
     - {fileID: 4392539617703824235, guid: 1127d0ebf0fe1c84baa6d3a67ffe78af, type: 3}
     - {fileID: 498021837453684717, guid: c8257d93fdb68ce4a88cf6ff320c523e, type: 3}
     - {fileID: 921189880267396335, guid: de17ddd2ccfdad441b7d92534c064ff3, type: 3}
     - {fileID: 5884610559689345935, guid: e3338066e18ca634b9e8d2c3c3024731, type: 3}
     - {fileID: 455005269828449962, guid: cdf56ad78c255b447b321a0285329181, type: 3}
+    - {fileID: 3842063846486868246, guid: 7690ff20258984942861c88d704da322, type: 3}
+    hasRiver: 1
+    animals: []

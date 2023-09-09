@@ -121,6 +121,7 @@ public class PlantGenerator : MonoBehaviour
             grass.transform.parent = transform;
             float value = Random.Range(grass.transform.localScale.x * 0.65f, grass.transform.localScale.x * 1.1f);
             grass.transform.localScale = new Vector3(value, value, value);
+            grass.transform.position = point;
             if (map.IsMonocromatic())
             {
                 AssignMaterial(grass);

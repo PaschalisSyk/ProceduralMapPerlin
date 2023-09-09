@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 33815882503923394}
   - component: {fileID: 23940244950800696}
   - component: {fileID: 64694801370973824}
+  - component: {fileID: 6467786117902052853}
   m_Layer: 6
   m_Name: SM_Rock_CaveInterior_01
   m_TagString: Untagged
@@ -98,3 +99,19 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: be29c05fe22794a498aaaca44bd506d6, type: 3}
+--- !u!208 &6467786117902052853
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1442022014647454}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 4.866, y: 3.0640001, z: 4.5220003}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: -0.24800001, y: 1.6660001, z: 0.257}
+  m_TimeToStationary: 0.5
