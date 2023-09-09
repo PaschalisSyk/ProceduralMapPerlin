@@ -15,9 +15,9 @@ public class AnimalController : MonoBehaviour
 
     [SerializeField] float speed;
     [SerializeField] string food;
+    [SerializeField] float baseHunger = 100f;
 
-
-    [SerializeField] private float hungerLevel = 100f; // Starting hunger level
+    [SerializeField] private float hungerLevel; // Starting hunger level
     private float hungerDecreaseRate = 2f; // Rate at which hunger decreases over time
     private float eatTimer = 0f;
     private float eatingDuration = 2.5f;
@@ -25,12 +25,14 @@ public class AnimalController : MonoBehaviour
     private float maxTimeAtFoodSource = 10f;
 
     [SerializeField] private bool isHungry = false;
-    private bool isEating = false;
+    [HideInInspector]
+    public bool isEating = false;
 
     protected virtual void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         anim = this.GetComponent<Animator>();
+        hungerLevel = baseHunger;
         SetRandomDestination();
     }
 
@@ -44,10 +46,6 @@ public class AnimalController : MonoBehaviour
         {
             Wander();
         }
-        //if (agent.velocity.sqrMagnitude > Mathf.Epsilon)
-        //{
-        //    transform.rotation = Quaternion.LookRotation(agent.velocity.normalized);
-        //}
     }
 
     private void Wander()
@@ -115,6 +113,7 @@ public class AnimalController : MonoBehaviour
                 // Interact with the food source (e.g., consume it)
                 isEating = true;
                 EatFood();
+                timeSpentAtCurrentFoodSource = 0;
             }
         }
     }
@@ -159,7 +158,7 @@ public class AnimalController : MonoBehaviour
                 isHungry = false;
 
                 // Reset the hunger level (you can set it to your desired starting value)
-                hungerLevel = 100f;
+                hungerLevel = baseHunger;
 
                 // Reset the eat timer
                 eatTimer = 0f;

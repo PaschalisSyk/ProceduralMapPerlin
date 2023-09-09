@@ -37,7 +37,7 @@ public class AnimalSpawner : MonoBehaviour
     {
         foreach (GameObject animal in animalPrefs)
         {
-            int animalsToSpawn = Random.Range(4 , 10);
+            int animalsToSpawn = Random.Range(10 , 20);
             if(animal != null)
             {
                 for (int i = 0; i < animalsToSpawn; i++)

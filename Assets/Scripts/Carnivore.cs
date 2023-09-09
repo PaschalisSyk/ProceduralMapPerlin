@@ -37,5 +37,6 @@ public class Carnivore : AnimalController
 
         // After 2 seconds, set the isAttacking flag back to false
         anim.SetBool("IsEating", false);
+        isEating = false;
     }
 }

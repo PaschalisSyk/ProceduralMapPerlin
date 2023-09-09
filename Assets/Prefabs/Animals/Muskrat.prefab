@@ -878,6 +878,6 @@ MonoBehaviour:
   anim: {fileID: 0}
   speed: 0
   food: MuskratFood
-  hungerLevel: 50
+  baseHunger: 50
   isHungry: 0
   getsAttacked: 0
