@@ -8,7 +8,7 @@ public class AnimalController : MonoBehaviour
     private Vector3 wanderTarget;
     private float zoneRadius = 20f;
     private float wanderTimer = 5f;
-    [HideInInspector]
+    //[HideInInspector]
     public Transform foodSource;
     [HideInInspector]
     public Animator anim;
@@ -23,16 +23,22 @@ public class AnimalController : MonoBehaviour
     private float eatingDuration = 2.5f;
     [SerializeField] private float timeSpentAtCurrentFoodSource = 0f;
     private float maxTimeAtFoodSource = 10f;
+    [SerializeField] private float starvationThreshold = -400f;
 
     [SerializeField] private bool isHungry = false;
     [HideInInspector]
     public bool isEating = false;
 
+    public bool isFleeing = false;
+    private float fleeDistance = 10.0f;
+    private Transform player;
+
     protected virtual void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         anim = this.GetComponent<Animator>();
-        hungerLevel = baseHunger;
+        hungerLevel = Random.Range(10, 150);
+        player = GameObject.FindGameObjectWithTag("Player").transform;
         SetRandomDestination();
     }
 
@@ -42,7 +48,12 @@ public class AnimalController : MonoBehaviour
         HandleAnimation();
         HungerController(food);
 
-        if (!agent.hasPath || agent.remainingDistance < 1f)
+        if(!isEating)
+        {
+            Flee(player);
+        }
+
+        if (!agent.hasPath || agent.remainingDistance < 1f && !isEating)
         {
             Wander();
         }
@@ -55,7 +66,7 @@ public class AnimalController : MonoBehaviour
         {
             case <= 0f:
                 SetRandomDestination(); // Set a new random destination
-                wanderTimer = 5f; // Reset the timer to its initial duration
+                wanderTimer = Random.Range(3f,8f); // Reset the timer to its initial duration
                 break;
             default:
                 wanderTimer -= Time.deltaTime; // Decrease the timer
@@ -82,6 +93,12 @@ public class AnimalController : MonoBehaviour
     {
         // Decrease hunger over time
         hungerLevel -= hungerDecreaseRate * Time.deltaTime;
+
+        if (hungerLevel <= starvationThreshold)
+        {
+            // The animal is starving, implement starving behavior here
+            StarveToDeath();
+        }
 
         if (hungerLevel <= 0 && !isHungry)
         {
@@ -116,6 +133,12 @@ public class AnimalController : MonoBehaviour
                 timeSpentAtCurrentFoodSource = 0;
             }
         }
+    }
+
+    private void StarveToDeath()
+    {
+        anim.SetBool("IsStarving", true);
+        Destroy(gameObject, 5f);
     }
 
     private void FindFoodSource(string food)
@@ -183,6 +206,38 @@ public class AnimalController : MonoBehaviour
         if(!isEating)
         {
             anim.SetBool("IsEating", false);
+        }
+    }
+
+    public void Flee(Transform trans)
+    {
+        if (isFleeing)
+        {
+            // Calculate a new destination point away from the player
+            Vector3 fleeDirection = transform.position - trans.position;
+            Vector3 newDestination = transform.position + fleeDirection.normalized * fleeDistance;
+
+            // Set the new destination for the animal
+            agent.SetDestination(newDestination);
+
+        }
+    }
+
+    protected virtual void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            // Player entered the trigger zone, initiate flee behavior
+            isFleeing = true;
+        }
+    }
+
+    protected virtual void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            // Player exited the trigger zone, stop fleeing behavior
+            isFleeing = false;
         }
     }
 }

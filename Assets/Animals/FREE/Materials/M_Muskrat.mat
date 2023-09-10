@@ -21,7 +21,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: M_Muskrat
-  m_Shader: {fileID: -6465566751694194690, guid: a44401f8b3d263c4e9c2ed62b3f5adff,
+  m_Shader: {fileID: -6465566751694194690, guid: 9f9841ba6573115419004c21484c48ea,
     type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
@@ -109,7 +109,7 @@ Material:
     - _Emission: 0.5
     - _EnvironmentReflections: 1
     - _GlossMapScale: 0
-    - _Glossiness: 32
+    - _Glossiness: 4
     - _GlossyReflections: 0
     - _Metallic: 0
     - _OcclusionStrength: 1
@@ -128,7 +128,7 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - _AmbientColor: {r: 0.8113208, g: 0.8113208, b: 0.8113208, a: 0}
+    - _AmbientColor: {r: 0.5283019, g: 0.400712, b: 0.400712, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}

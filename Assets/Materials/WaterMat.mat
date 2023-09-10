@@ -52,11 +52,11 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Depth: 0.6
+    - _Depth: 0.25
     - _EdgeFoamAmount: 5
     - _EdgeFoamCutoff: 4.8
     - _EdgeFoamScale: 200
-    - _FernelPower: 1.5
+    - _FernelPower: 1
     - _Offset: 4
     - _Opacity: 1
     - _QueueControl: 0

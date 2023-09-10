@@ -745,7 +745,8 @@ GameObject:
   - component: {fileID: 6279571641101721590}
   - component: {fileID: 8642058613321508771}
   - component: {fileID: 1209686062530855158}
-  m_Layer: 0
+  - component: {fileID: -895504689553152217}
+  m_Layer: 11
   m_Name: Muskrat
   m_TagString: SnakeFood
   m_Icon: {fileID: 0}
@@ -850,7 +851,7 @@ NavMeshAgent:
   m_AgentTypeID: 0
   m_Radius: 0.3
   m_Speed: 3.5
-  m_Acceleration: 8
+  m_Acceleration: 12
   avoidancePriority: 50
   m_AngularSpeed: 120
   m_StoppingDistance: 1
@@ -879,5 +880,23 @@ MonoBehaviour:
   speed: 0
   food: MuskratFood
   baseHunger: 50
+  hungerLevel: 0
+  timeSpentAtCurrentFoodSource: 0
+  starvationThreshold: -400
   isHungry: 0
+  isEating: 0
+  isFleeing: 0
   getsAttacked: 0
+--- !u!135 &-895504689553152217
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7426109905284484173}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 10
+  m_Center: {x: 0, y: 0.3, z: 0}

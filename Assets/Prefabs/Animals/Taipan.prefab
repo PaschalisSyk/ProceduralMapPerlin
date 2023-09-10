@@ -206,9 +206,11 @@ GameObject:
   - component: {fileID: 2257177478824095929}
   - component: {fileID: 4939026866269179453}
   - component: {fileID: 7388510927615078166}
-  m_Layer: 0
+  - component: {fileID: 7925338914083993901}
+  - component: {fileID: -5744530887816476170}
+  m_Layer: 12
   m_Name: Taipan
-  m_TagString: Untagged
+  m_TagString: Snake
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -309,16 +311,16 @@ NavMeshAgent:
   m_GameObject: {fileID: 2852144449094324064}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.2
-  m_Speed: 3.5
-  m_Acceleration: 8
+  m_Radius: 0.4
+  m_Speed: 2.5
+  m_Acceleration: 6
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 1
+  m_StoppingDistance: 1.5
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
-  m_Height: 0.3
+  m_Height: 0.6
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
@@ -339,8 +341,40 @@ MonoBehaviour:
   anim: {fileID: 0}
   speed: 0
   food: SnakeFood
+  baseHunger: 100
   hungerLevel: 100
+  timeSpentAtCurrentFoodSource: 0
+  starvationThreshold: -400
   isHungry: 0
+  isEating: 0
+  isFleeing: 0
+--- !u!135 &7925338914083993901
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2852144449094324064}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 8
+  m_Center: {x: 0, y: 0.4, z: 0}
+--- !u!136 &-5744530887816476170
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2852144449094324064}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 1.35
+  m_Direction: 2
+  m_Center: {x: 0, y: 0.35, z: 0.1006272}
 --- !u!1 &5263582342343697061
 GameObject:
   m_ObjectHideFlags: 0
