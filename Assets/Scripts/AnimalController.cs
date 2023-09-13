@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.AI;
+using System.Collections.Generic;
 
 public class AnimalController : MonoBehaviour
 {
@@ -19,22 +20,29 @@ public class AnimalController : MonoBehaviour
 
     [SerializeField] private float hungerLevel; // Starting hunger level
     private float hungerDecreaseRate = 2f; // Rate at which hunger decreases over time
-    private float eatTimer = 0f;
+    [SerializeField] private float eatTimer = 0f;
     private float eatingDuration = 2.5f;
     [SerializeField] private float timeSpentAtCurrentFoodSource = 0f;
     private float maxTimeAtFoodSource = 10f;
     [SerializeField] private float starvationThreshold = -400f;
+
+    [SerializeField] private float staminaConsumptionRate;
+    [SerializeField] private float staminaRegenerationRate = 5f;
+    [SerializeField] private float maxStamina = 100f;
+    public float currentStamina;
 
     [SerializeField] private bool isHungry = false;
     [HideInInspector]
     public bool isEating = false;
 
     public bool isFleeing = false;
-    private float fleeDistance = 10.0f;
+    public float fleeDistance = 4f;
     private Transform player;
 
     protected virtual void Start()
     {
+        wanderTimer = Random.Range(8f, 15f);
+        currentStamina = maxStamina;
         agent = GetComponent<NavMeshAgent>();
         anim = this.GetComponent<Animator>();
         hungerLevel = Random.Range(10, 150);
@@ -44,18 +52,31 @@ public class AnimalController : MonoBehaviour
 
     protected virtual void Update()
     {
+        HandleAnimalBehavior();
+    }
+
+    private void HandleAnimalBehavior()
+    {
         speed = agent.velocity.magnitude;
+        ConsumeStamina();
+        RegenerateStamina();
         HandleAnimation();
         HungerController(food);
 
-        if(!isEating)
+        if (!isEating)
         {
             Flee(player);
         }
 
-        if (!agent.hasPath || agent.remainingDistance < 1f && !isEating)
+        if (!agent.hasPath || agent.remainingDistance < 1f && !isEating && !isFleeing)
         {
             Wander();
+        }
+        if (currentStamina == 0)
+        {
+            Wander();
+            foodSource = null;
+            Invoke("ResetStamina", 3f);
         }
     }
 
@@ -100,37 +121,40 @@ public class AnimalController : MonoBehaviour
             StarveToDeath();
         }
 
-        if (hungerLevel <= 0 && !isHungry)
+        if(!isFleeing)
         {
-            // The animal is hungry, trigger food-seeking behavior
-            isHungry = true;
-            FindFoodSource(food);
-        }
-
-        if(isHungry)
-        {
-            timeSpentAtCurrentFoodSource += Time.deltaTime;
-
-            // Check if the time limit has been exceeded, and if so, find a new food source
-            if (timeSpentAtCurrentFoodSource >= maxTimeAtFoodSource && !isEating)
+            if (hungerLevel <= 0 && !isHungry)
             {
-                FindFoodSource(food); // Replace "Food" with the appropriate food tag
-                timeSpentAtCurrentFoodSource = 0;
+                // The animal is hungry, trigger food-seeking behavior
+                isHungry = true;
+                FindFoodSource(food);
             }
-        }
 
-        if (isHungry && foodSource != null)
-        {
-            // Move towards the food source
-            agent.SetDestination(foodSource.position);
-
-            // Check if the animal has reached the food source
-            if (Vector3.Distance(transform.position, foodSource.position) < 1f)
+            if (isHungry)
             {
-                // Interact with the food source (e.g., consume it)
-                isEating = true;
-                EatFood();
-                timeSpentAtCurrentFoodSource = 0;
+                timeSpentAtCurrentFoodSource += Time.deltaTime;
+
+                // Check if the time limit has been exceeded, and if so, find a new food source
+                if (timeSpentAtCurrentFoodSource >= maxTimeAtFoodSource && !isEating)
+                {
+                    FindFoodSource(food);
+                    timeSpentAtCurrentFoodSource = 0;
+                }
+            }
+
+            if (isHungry && foodSource != null)
+            {
+                // Move towards the food source
+                agent.SetDestination(foodSource.position);
+
+                // Check if the animal has reached the food source
+                if (Vector3.Distance(transform.position, foodSource.position) < 1f)
+                {
+                    // Interact with the food source (e.g., consume it)
+                    isEating = true;
+                    EatFood();
+                    timeSpentAtCurrentFoodSource = 0;
+                }
             }
         }
     }
@@ -138,6 +162,7 @@ public class AnimalController : MonoBehaviour
     private void StarveToDeath()
     {
         anim.SetBool("IsStarving", true);
+        agent.velocity = Vector3.zero;
         Destroy(gameObject, 5f);
     }
 
@@ -145,25 +170,34 @@ public class AnimalController : MonoBehaviour
     {
         GameObject[] foodSources = GameObject.FindGameObjectsWithTag(food); // Change "Food" to your food object tag
 
-        // Find the nearest food source within the search radius
-        Transform nearestSource = null;
-        float nearestDistance = zoneRadius; // Initialize to the search radius
+        // Create a list to store all nearby food sources
+        List<Transform> nearbySources = new List<Transform>();
 
+        // Find all food sources within the search radius
         foreach (GameObject foodObject in foodSources)
         {
             Transform sourceTransform = foodObject.transform;
             float distance = Vector3.Distance(transform.position, sourceTransform.position);
 
-            // Check if this source is within the search radius and closer than the previous closest
-            if (distance < zoneRadius && distance < nearestDistance)
+            // Check if this source is within the search radius
+            if (distance < zoneRadius)
             {
-                nearestSource = sourceTransform;
-                nearestDistance = distance;
+                nearbySources.Add(sourceTransform);
             }
         }
 
-        // Set the nearest food source as the target
-        foodSource = nearestSource;
+        // Check if there are any nearby food sources
+        if (nearbySources.Count > 0)
+        {
+            // Randomly select one of the nearby food sources
+            int randomIndex = Random.Range(0, nearbySources.Count);
+            foodSource = nearbySources[randomIndex];
+        }
+        else
+        {
+            // No nearby food sources found, reset the current food source
+            foodSource = null;
+        }
     }
 
     private void EatFood()
@@ -209,17 +243,33 @@ public class AnimalController : MonoBehaviour
         }
     }
 
-    public void Flee(Transform trans)
+    public void Flee(Transform predatorTransform)
     {
-        if (isFleeing)
+        if (isFleeing && agent.remainingDistance < 1f)
         {
-            // Calculate a new destination point away from the player
-            Vector3 fleeDirection = transform.position - trans.position;
-            Vector3 newDestination = transform.position + fleeDirection.normalized * fleeDistance;
+            // Calculate the flee direction away from the predator
+            Vector3 fleeDirection = transform.position - predatorTransform.position;
 
-            // Set the new destination for the animal
-            agent.SetDestination(newDestination);
+            // Add a random offset to the flee direction to make it less predictable
+            float fleeAngle = Random.Range(-90f, 90f); // Adjust the angle range as needed
+            Quaternion randomRotation = Quaternion.Euler(0, fleeAngle, 0);
+            Vector3 randomOffset = randomRotation * fleeDirection;
 
+            // Calculate the new destination point with the random offset
+            Vector3 newDestination = transform.position + randomOffset.normalized * fleeDistance;
+            //Vector3 newDestination = transform.position + fleeDirection * fleeDistance;
+            Debug.DrawRay(transform.position, newDestination, Color.red);
+
+            NavMeshHit hit;
+            if (NavMesh.SamplePosition(newDestination, out hit, fleeDistance, NavMesh.AllAreas))
+            {
+                // Set the new destination for the animal
+                agent.SetDestination(hit.position);
+            }
+            else
+            {
+                agent.SetDestination(newDestination);
+            }
         }
     }
 
@@ -239,5 +289,39 @@ public class AnimalController : MonoBehaviour
             // Player exited the trigger zone, stop fleeing behavior
             isFleeing = false;
         }
+    }
+
+    private void ConsumeStamina()
+    {
+        // Calculate the current speed of the agent
+        float currentSpeed = agent.velocity.magnitude;
+
+        // Calculate the stamina consumption based on speed
+        float staminaConsumption = currentSpeed * staminaConsumptionRate * Time.deltaTime;
+
+        // Decrease stamina
+        currentStamina -= staminaConsumption;
+        if(currentStamina < 0)
+        {
+            currentStamina = 0;
+        }
+
+    }
+    private void RegenerateStamina()
+    {
+        // Check if the agent's velocity is zero (not moving)
+        if (agent.velocity.magnitude < 0.01f)
+        {
+            // Add logic to regenerate stamina when not moving
+            currentStamina += staminaRegenerationRate * Time.deltaTime;
+
+            // Clamp stamina to the maximum value
+            currentStamina = Mathf.Clamp(currentStamina, 0f, maxStamina);
+        }
+    }
+
+    private void ResetStamina()
+    {
+        currentStamina = maxStamina;
     }
 }

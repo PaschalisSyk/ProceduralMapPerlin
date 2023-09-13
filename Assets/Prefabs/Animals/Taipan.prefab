@@ -316,7 +316,7 @@ NavMeshAgent:
   m_Acceleration: 6
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 1.5
+  m_StoppingDistance: 1
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -341,13 +341,18 @@ MonoBehaviour:
   anim: {fileID: 0}
   speed: 0
   food: SnakeFood
-  baseHunger: 100
+  baseHunger: 150
   hungerLevel: 100
   timeSpentAtCurrentFoodSource: 0
   starvationThreshold: -400
+  staminaConsumptionRate: 3
+  staminaRegenerationRate: 5
+  maxStamina: 100
+  currentStamina: 0
   isHungry: 0
   isEating: 0
   isFleeing: 0
+  fleeDistance: 5
 --- !u!135 &7925338914083993901
 SphereCollider:
   m_ObjectHideFlags: 0

@@ -58,6 +58,6 @@ MonoBehaviour:
     - {fileID: 921189880267396335, guid: de17ddd2ccfdad441b7d92534c064ff3, type: 3}
     - {fileID: 5884610559689345935, guid: e3338066e18ca634b9e8d2c3c3024731, type: 3}
     - {fileID: 455005269828449962, guid: cdf56ad78c255b447b321a0285329181, type: 3}
-    - {fileID: 3842063846486868246, guid: 7690ff20258984942861c88d704da322, type: 3}
+    - {fileID: 527305273924322559, guid: 8c429f65768015f4688caf49e9dec9fb, type: 3}
     hasRiver: 1
     animals: []

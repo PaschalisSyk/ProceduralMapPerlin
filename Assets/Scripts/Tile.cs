@@ -14,7 +14,8 @@ public class Tile : MonoBehaviour
         Sand,
         Grass,
         Forest,
-        Mountain
+        Mountain,
+        River
     }
 
     public void Init(int x , int y)

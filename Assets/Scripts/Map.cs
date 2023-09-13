@@ -192,10 +192,10 @@ public class Map : MonoBehaviour
             index = prefabs.Length -1;
         }
 
-        if (Random.Range(0f, 1f) <= 0.02f)
-        {
-            index = 1;
-        }
+        //if (Random.Range(0f, 1f) <= 0.02f)
+        //{
+        //    index = 1;
+        //}
         if (noiseValue > waterLevel)
         {
             index = 2;
@@ -222,7 +222,6 @@ public class Map : MonoBehaviour
         float xPos = x * tileSize + (y % 2 == 0 ? tileSize / 2 : 0);
         float yPos = y * tileSize * 0.75f + (y * 0.45f);
         float height = noiseValue * 0.01f;
-
         
         if (prefabs[index] != null)
         {
@@ -253,7 +252,7 @@ public class Map : MonoBehaviour
         // Calculate the boundaries of the river
         int leftBank = riverX - riverWidth / 2;
         int rightBank = riverX + riverWidth / 2;
-        int riverStart = 0; // Y-coordinate where the river begins
+        int riverStart = 10; // Y-coordinate where the river begins
 
         // Check if the current coordinates are inside the river area
         if (x >= leftBank && x <= rightBank && y >= riverStart && y <= riverStart + riverLength)

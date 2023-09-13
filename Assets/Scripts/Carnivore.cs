@@ -10,38 +10,13 @@ public class Carnivore : AnimalController
     protected override void Start()
     {
         base.Start();
+        //InvokeRepeating("CarnivoreMovement", 2f, 2f);
     }
 
     protected override void Update()
     {
         base.Update();
-        if(foodSource != null)
-        {
-            SetTargetPrey(foodSource);
-        }
-    }
-
-    protected override void HandleAnimation()
-    {
-        base.HandleAnimation();
-
-        if (isHunting && targetPrey != null)
-        {
-            float distanceToPrey = Vector3.Distance(transform.position, targetPrey.position);
-
-            if (distanceToPrey <= attackRange)
-            {
-                transform.LookAt(targetPrey);
-                anim.SetBool("AttackPrey", true);
-                // Carnivore is in attack range, trigger the bool on the prey
-                Prey prey = targetPrey.GetComponent<Prey>();
-                if (prey != null)
-                {
-                    prey.getsAttacked = true;
-                }
-                StartCoroutine(ResetAttackFlag());
-            }
-        }
+        CarnivoreMovement();
     }
 
     private IEnumerator ResetAttackFlag()
@@ -61,5 +36,42 @@ public class Carnivore : AnimalController
     {
         targetPrey = preyTransform;
         isHunting = true;
+    }
+    private void StopChasing()
+    {
+        isHunting = false;
+        targetPrey = null;
+    }
+
+    private void CarnivoreMovement()
+    {
+        // Check for available prey
+        if (foodSource != null && !isHunting)
+        {
+            // Start chasing the prey
+            SetTargetPrey(foodSource);
+        }
+
+        if (isHunting && targetPrey != null)
+        {
+            float distanceToPrey = Vector3.Distance(transform.position, targetPrey.position);
+
+            if (distanceToPrey <= attackRange)
+            {
+                if (Random.value < 0.4f)
+                {
+                    transform.LookAt(targetPrey);
+                    anim.SetBool("AttackPrey", true);
+
+                    // Carnivore is in attack range, trigger the bool on the prey
+                    Prey prey = targetPrey.GetComponent<Prey>();
+                    if (prey != null)
+                    {
+                        prey.getsAttacked = true;
+                    }
+                    StartCoroutine(ResetAttackFlag());
+                }
+            }
+        }
     }
 }

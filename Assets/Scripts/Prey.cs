@@ -9,6 +9,7 @@ public class Prey : AnimalController
     protected override void Start()
     {
         base.Start();
+        InvokeRepeating("DetectPredator", 2f, 1f);
     }
 
     protected override void Update()
@@ -23,7 +24,7 @@ public class Prey : AnimalController
 
     private void FixedUpdate()
     {
-        Test();
+        DetectPredator();
     }
 
     protected override void HandleAnimation()
@@ -34,7 +35,7 @@ public class Prey : AnimalController
             this.anim.SetBool("GotHit", true);
         }
     }
-    void Test()
+    void DetectPredator()
     {
         float number_of_rays = 8;
         float totalAngle = 360;
@@ -48,17 +49,17 @@ public class Prey : AnimalController
             var dir = Quaternion.Euler(0, i * delta, 0) * transform.right;
 
             RaycastHit hitInfo;
-            if (Physics.Raycast(pos, dir, out hitInfo, 5f))
+            if (Physics.Raycast(pos, dir, out hitInfo, 3f))
             {
                 // Check if the ray hit a collider with the "Predator" tag
                 if (hitInfo.collider.CompareTag("Snake"))
                 {
-                    if (Random.value < 0.5f)
+                    isFleeing = true;
+                    Flee(hitInfo.collider.transform);
+                    Debug.Log("Predator detected!");
+                    if (hitInfo.collider.transform != null)
                     {
-                        isFleeing = true;
-                        Flee(hitInfo.collider.transform);
-                        Debug.Log("Predator detected!");
-                        StartCoroutine(ResetFleeing());
+                        StartCoroutine(ResetFleeing(hitInfo.collider.transform));
                     }
                 }
             }
@@ -67,9 +68,10 @@ public class Prey : AnimalController
         }
     }
 
-    IEnumerator ResetFleeing()
+    IEnumerator ResetFleeing(Transform predator)
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(3f);
+
         isFleeing = false;
     }
 }

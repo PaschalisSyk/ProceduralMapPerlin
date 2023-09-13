@@ -5,10 +5,12 @@ using UnityEngine;
 public class ParticleManager : MonoBehaviour
 {
     [SerializeField] GameObject dustParticle;
+    [SerializeField] GameObject streamParticles;
     public float spawnInterval = 7.5f;
 
     Map map;
     Transform[] sandTiles;
+    Transform[] riverTiles;
 
     private void Awake()
     {
@@ -18,9 +20,12 @@ public class ParticleManager : MonoBehaviour
     void Start()
     {
         sandTiles = FindSandTiles();
+        riverTiles = FindRiverTiles();
 
         // Start the spawn timer
         InvokeRepeating("SpawnDustParticle", 2f, spawnInterval);
+        //InvokeRepeating("SpawnStreamParticle", 2f, 4f);
+        Invoke("SpawnStreamParticle", 2f);
     }
 
     // Update is called once per frame
@@ -47,6 +52,24 @@ public class ParticleManager : MonoBehaviour
         return sandTileTransforms.ToArray();
     }
 
+    Transform[] FindRiverTiles()
+    {
+        List<Transform> riverTilesTrans = new List<Transform>();
+
+        foreach (Tile tile in map.tiles)
+        {
+            if (tile != null)
+            {
+                if (tile.tileValue == Tile.TileValue.River)
+                {
+                    riverTilesTrans.Add(tile.transform);
+                }
+            }
+        }
+
+        return riverTilesTrans.ToArray();
+    }
+
     private void SpawnDustParticle()
     {
         // Randomly select a sand tile
@@ -61,6 +84,22 @@ public class ParticleManager : MonoBehaviour
         //dust.transform.localScale = new Vector3(1f, 1f, 1f);
 
         Destroy(dust, dust.GetComponent<ParticleSystem>().main.duration * 2.25f);
+    }
+
+    private void SpawnStreamParticle()
+    {
+        // Randomly select a sand tile
+        //Transform riverTile = riverTiles[Random.Range(0, riverTiles.Length)];
+        foreach(Transform riverTile in riverTiles)
+        {
+            if(Random.value < 0.3f)
+            {
+                // Instantiate the dust particle prefab
+                GameObject stream = Instantiate(streamParticles, new Vector3(riverTile.transform.position.x, riverTile.transform.position.y + 0.1f, riverTile.transform.position.z), Quaternion.Euler(-90, 180, 0)) as GameObject;
+                stream.transform.parent = transform;
+            }
+        }
+        //Destroy(stream, stream.GetComponent<ParticleSystem>().main.duration * 2.25f);
     }
 
     private Vector3 GetRandomPositionInTile(Transform tile)

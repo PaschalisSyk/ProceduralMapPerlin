@@ -673,6 +673,7 @@ GameObject:
   - component: {fileID: 7372006424673903348}
   - component: {fileID: 4671064810934174032}
   - component: {fileID: 8150053508185035833}
+  - component: {fileID: -1840787402533400531}
   m_Layer: 0
   m_Name: Turtle
   m_TagString: Untagged
@@ -801,7 +802,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc3ff1f60eccf1a4c82eb85d55953c82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  agent: {fileID: 0}
+  foodSource: {fileID: 0}
+  anim: {fileID: 0}
   speed: 0
   food: TurtleFood
+  baseHunger: 100
   hungerLevel: 100
+  timeSpentAtCurrentFoodSource: 0
+  starvationThreshold: -400
+  staminaConsumptionRate: 1
+  staminaRegenerationRate: 15
+  maxStamina: 200
+  currentStamina: 0
   isHungry: 0
+  isEating: 0
+  isFleeing: 0
+  fleeDistance: 2
+--- !u!135 &-1840787402533400531
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7837983530703912852}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 8
+  m_Center: {x: 0, y: 0, z: 0}
