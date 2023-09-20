@@ -1,13 +1,14 @@
 using UnityEngine;
 using UnityEngine.AI;
 using System.Collections.Generic;
+using System.Collections;
 
 public class AnimalController : MonoBehaviour
 {
     [HideInInspector]
     public NavMeshAgent agent;
     private Vector3 wanderTarget;
-    private float zoneRadius = 20f;
+    [SerializeField] private float zoneRadius = 20f;
     private float wanderTimer = 5f;
     //[HideInInspector]
     public Transform foodSource;
@@ -20,10 +21,10 @@ public class AnimalController : MonoBehaviour
 
     [SerializeField] private float hungerLevel; // Starting hunger level
     private float hungerDecreaseRate = 2f; // Rate at which hunger decreases over time
-    [SerializeField] private float eatTimer = 0f;
-    private float eatingDuration = 2.5f;
+    //[SerializeField] private float eatTimer = 0f;
+    //private float eatingDuration = 2.5f;
     [SerializeField] private float timeSpentAtCurrentFoodSource = 0f;
-    private float maxTimeAtFoodSource = 10f;
+    private float maxTimeAtFoodSource = 15f;
     [SerializeField] private float starvationThreshold = -400f;
 
     [SerializeField] private float staminaConsumptionRate;
@@ -68,14 +69,18 @@ public class AnimalController : MonoBehaviour
             Flee(player);
         }
 
-        if (!agent.hasPath || agent.remainingDistance < 1f && !isEating && !isFleeing)
+        if (!agent.hasPath || agent.remainingDistance < 1f)
         {
-            Wander();
+            if(!isEating)
+            {
+                Wander();
+            }
         }
         if (currentStamina == 0)
         {
-            Wander();
-            foodSource = null;
+            //Wander();
+            //foodSource = null;
+            agent.speed = agent.speed/2;
             Invoke("ResetStamina", 3f);
         }
     }
@@ -87,7 +92,7 @@ public class AnimalController : MonoBehaviour
         {
             case <= 0f:
                 SetRandomDestination(); // Set a new random destination
-                wanderTimer = Random.Range(3f,8f); // Reset the timer to its initial duration
+                wanderTimer = Random.Range(3f, 8f); // Reset the timer to its initial duration
                 break;
             default:
                 wanderTimer -= Time.deltaTime; // Decrease the timer
@@ -121,7 +126,7 @@ public class AnimalController : MonoBehaviour
             StarveToDeath();
         }
 
-        if(!isFleeing)
+        if (!isFleeing)
         {
             if (hungerLevel <= 0 && !isHungry)
             {
@@ -202,42 +207,43 @@ public class AnimalController : MonoBehaviour
 
     private void EatFood()
     {
-        if (isEating)
-        {
-            // Increment the eat timer
-            eatTimer += Time.deltaTime;
+        StartCoroutine(ResetEating());
+        //if (isEating)
+        //{
+        //    // Increment the eat timer
+        //    eatTimer += Time.deltaTime;
 
-            // Check if the eat timer has reached the desired eating duration
-            if (eatTimer >= eatingDuration)
-            {
-                // Finish eating
-                isEating = false;
-                isHungry = false;
+        //    // Check if the eat timer has reached the desired eating duration
+        //    if (eatTimer >= eatingDuration)
+        //    {
+        //        // Finish eating
+        //        isEating = false;
+        //        isHungry = false;
 
-                // Reset the hunger level (you can set it to your desired starting value)
-                hungerLevel = baseHunger;
+        //        // Reset the hunger level (you can set it to your desired starting value)
+        //        hungerLevel = baseHunger;
 
-                // Reset the eat timer
-                eatTimer = 0f;
-            }
-        }
+        //        // Reset the eat timer
+        //        eatTimer = 0f;
+        //    }
+        //}
     }
 
     protected virtual void HandleAnimation()
     {
-        if(agent.velocity.magnitude > 0.1f)
+        if (agent.velocity.magnitude > 0.1f)
         {
             anim.SetBool("HasArrived", false);
         }
-        if(agent.velocity.magnitude < 0.1f)
+        if (agent.velocity.magnitude < 0.1f)
         {
             anim.SetBool("HasArrived", true);
         }
-        if(isEating)
+        if (isEating)
         {
             anim.SetBool("IsEating", true);
         }
-        if(!isEating)
+        if (!isEating)
         {
             anim.SetBool("IsEating", false);
         }
@@ -245,30 +251,41 @@ public class AnimalController : MonoBehaviour
 
     public void Flee(Transform predatorTransform)
     {
-        if (isFleeing && agent.remainingDistance < 1f)
+        float distance = Vector3.Distance(transform.position, predatorTransform.position);
+
+        //if(distance < fleeDistance)
+        //{
+        //    Vector3 dirToPlayer = transform.position - predatorTransform.position;
+
+        //    Vector3 newPos = transform.position + dirToPlayer;
+
+        //    agent.SetDestination(newPos);
+        //}
+        if (distance < fleeDistance)
         {
-            // Calculate the flee direction away from the predator
-            Vector3 fleeDirection = transform.position - predatorTransform.position;
+            // calculate the flee direction away from the predator
+            Vector3 fleedirection = transform.position - predatorTransform.position;
 
-            // Add a random offset to the flee direction to make it less predictable
-            float fleeAngle = Random.Range(-90f, 90f); // Adjust the angle range as needed
-            Quaternion randomRotation = Quaternion.Euler(0, fleeAngle, 0);
-            Vector3 randomOffset = randomRotation * fleeDirection;
+            // add a random offset to the flee direction to make it less predictable
+            float fleeangle = Random.Range(-90f, 90f); // adjust the angle range as needed
+            Quaternion randomrotation = Quaternion.Euler(0, fleeangle, 0);
+            Vector3 randomoffset = randomrotation * fleedirection;
 
-            // Calculate the new destination point with the random offset
-            Vector3 newDestination = transform.position + randomOffset.normalized * fleeDistance;
-            //Vector3 newDestination = transform.position + fleeDirection * fleeDistance;
-            Debug.DrawRay(transform.position, newDestination, Color.red);
+            // calculate the new destination point with the random offset
+            Vector3 newdestination = transform.position + randomoffset.normalized * fleeDistance;
+            //vector3 newdestination = transform.position + fleedirection * fleedistance;
 
             NavMeshHit hit;
-            if (NavMesh.SamplePosition(newDestination, out hit, fleeDistance, NavMesh.AllAreas))
+            if (NavMesh.SamplePosition(newdestination, out hit, fleeDistance, NavMesh.AllAreas))
             {
-                // Set the new destination for the animal
-                agent.SetDestination(hit.position);
+                // set the new destination for the animal
+                agent.SetDestination(newdestination);
+                Debug.DrawLine(transform.position, newdestination, Color.red);
+
             }
             else
             {
-                agent.SetDestination(newDestination);
+                SetRandomDest();
             }
         }
     }
@@ -301,7 +318,7 @@ public class AnimalController : MonoBehaviour
 
         // Decrease stamina
         currentStamina -= staminaConsumption;
-        if(currentStamina < 0)
+        if (currentStamina < 0)
         {
             currentStamina = 0;
         }
@@ -323,5 +340,43 @@ public class AnimalController : MonoBehaviour
     private void ResetStamina()
     {
         currentStamina = maxStamina;
+        agent.speed = agent.speed * 2;
+    }
+
+    private IEnumerator ResetEating()
+    {
+        yield return new WaitForSeconds(2.5f);
+        // Finish eating
+        isEating = false;
+        isHungry = false;
+
+        // Reset the hunger level (you can set it to your desired starting value)
+        hungerLevel = baseHunger;
+    }
+
+    private void SetRandomDest()
+    {
+        // Get a random point on the NavMesh surface
+        Vector3 randomPoint = RandomNavMeshPoint();
+
+        // Set the agent's destination to the random point
+        agent.SetDestination(randomPoint);
+    }
+
+    private Vector3 RandomNavMeshPoint()
+    {
+        NavMeshTriangulation navMeshData = NavMesh.CalculateTriangulation();
+
+        // Pick a random triangle from the NavMesh triangles
+        int randomTriangleIndex = Random.Range(0, navMeshData.indices.Length / 3);
+        int index1 = navMeshData.indices[randomTriangleIndex * 3];
+        int index2 = navMeshData.indices[randomTriangleIndex * 3 + 1];
+        int index3 = navMeshData.indices[randomTriangleIndex * 3 + 2];
+
+        // Calculate a random point within the selected triangle
+        Vector3 randomPoint = Vector3.Lerp(navMeshData.vertices[index1], navMeshData.vertices[index2], Random.value);
+        randomPoint = Vector3.Lerp(randomPoint, navMeshData.vertices[index3], Random.value);
+
+        return randomPoint;
     }
 }

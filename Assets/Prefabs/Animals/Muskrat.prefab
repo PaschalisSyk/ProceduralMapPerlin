@@ -859,7 +859,7 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 0.5
-  m_BaseOffset: 0
+  m_BaseOffset: -0.1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!114 &1209686062530855158
@@ -875,6 +875,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agent: {fileID: 0}
+  zoneRadius: 20
   foodSource: {fileID: 0}
   anim: {fileID: 0}
   speed: 0
@@ -890,7 +891,7 @@ MonoBehaviour:
   isHungry: 0
   isEating: 0
   isFleeing: 0
-  fleeDistance: 5
+  fleeDistance: 15
   getsAttacked: 0
 --- !u!135 &-895504689553152217
 SphereCollider:

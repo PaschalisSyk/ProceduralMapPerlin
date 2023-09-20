@@ -321,7 +321,7 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 0.6
-  m_BaseOffset: 0
+  m_BaseOffset: -0.15
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!114 &7388510927615078166
@@ -337,6 +337,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agent: {fileID: 0}
+  zoneRadius: 40
   foodSource: {fileID: 0}
   anim: {fileID: 0}
   speed: 0
@@ -344,7 +345,7 @@ MonoBehaviour:
   baseHunger: 150
   hungerLevel: 100
   timeSpentAtCurrentFoodSource: 0
-  starvationThreshold: -400
+  starvationThreshold: -500
   staminaConsumptionRate: 3
   staminaRegenerationRate: 5
   maxStamina: 100

@@ -78,7 +78,7 @@ public class Map : MonoBehaviour
             {
                 prefabs = profile.tilePrefabs;
                 hasRiver = profile.hasRiver;
-                animalSpawner.animalPrefs = profile.animals;
+                animalSpawner._animalPrefs = profile.animalPref;
                 return profile;
             }
         }
@@ -229,6 +229,8 @@ public class Map : MonoBehaviour
             if (index == 0)
             {
                 return;
+                //GameObject boarderObject = Instantiate(prefabs[index], new Vector3(xPos + offset.x, height, yPos + offset.z), Quaternion.identity) as GameObject;
+                //boarderObject.transform.parent = transform;
             }
 
             GameObject tileObject = Instantiate(prefabs[index], new Vector3(xPos + offset.x, height, yPos + offset.z), Quaternion.identity) as GameObject;
@@ -250,9 +252,12 @@ public class Map : MonoBehaviour
         int riverX = size / 3; // X-coordinate of the river's center
 
         // Calculate the boundaries of the river
-        int leftBank = riverX - riverWidth / 2;
-        int rightBank = riverX + riverWidth / 2;
-        int riverStart = 10; // Y-coordinate where the river begins
+        //int leftBank = riverX - riverWidth / 2;
+        //int rightBank = riverX + riverWidth / 2;
+        int halfRiverWidth = riverWidth / 2;
+        int leftBank = riverX - halfRiverWidth + Random.Range(-1, 1); // Introduce randomness here
+        int rightBank = riverX + halfRiverWidth + Random.Range(-1, 1); // Introduce randomness here
+        int riverStart = 0; // Y-coordinate where the river begins
 
         // Check if the current coordinates are inside the river area
         if (x >= leftBank && x <= rightBank && y >= riverStart && y <= riverStart + riverLength)

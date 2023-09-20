@@ -24,13 +24,13 @@ public class Prey : AnimalController
 
     private void FixedUpdate()
     {
-        DetectPredator();
+        //DetectPredator();
     }
 
     protected override void HandleAnimation()
     {
         base.HandleAnimation();
-        if(getsAttacked)
+        if (getsAttacked)
         {
             this.anim.SetBool("GotHit", true);
         }
@@ -57,10 +57,7 @@ public class Prey : AnimalController
                     isFleeing = true;
                     Flee(hitInfo.collider.transform);
                     Debug.Log("Predator detected!");
-                    if (hitInfo.collider.transform != null)
-                    {
-                        StartCoroutine(ResetFleeing(hitInfo.collider.transform));
-                    }
+                    StartCoroutine(ResetFleeing(hitInfo.collider.transform));
                 }
             }
 
@@ -70,7 +67,7 @@ public class Prey : AnimalController
 
     IEnumerator ResetFleeing(Transform predator)
     {
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(5f);
 
         isFleeing = false;
     }

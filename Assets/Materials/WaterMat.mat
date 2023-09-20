@@ -61,7 +61,7 @@ Material:
     - _Opacity: 1
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _RippleDensity: 200
+    - _RippleDensity: 600
     - _RippleSlimness: 15
     - _RippleSpeed: 1.5
     - _ScrollSpeed: -0.05

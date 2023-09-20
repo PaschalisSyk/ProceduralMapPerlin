@@ -15,5 +15,13 @@ public class EnvironmentProfile
     public EnvironmentType enviromentType;
     public GameObject[] tilePrefabs;
     public bool hasRiver;
-    public List<GameObject> animals;
+    public List<SpawnRange> animalPref;
+}
+
+[System.Serializable]
+public class SpawnRange
+{
+    public GameObject animalPrefab;
+    public int minSpawnCount;
+    public int maxSpawnCount;
 }

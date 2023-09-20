@@ -7,7 +7,7 @@ using Unity.AI.Navigation;
 public class AnimalSpawner : MonoBehaviour
 {
     public NavMeshSurface meshSurface;
-    public List<GameObject> animalPrefs;
+    public List<SpawnRange> _animalPrefs;
     Map map;
 
     void Start()
@@ -35,18 +35,31 @@ public class AnimalSpawner : MonoBehaviour
 
     void Spawn()
     {
-        foreach (GameObject animal in animalPrefs)
+        //foreach (GameObject animal in animalPrefs)
+        //{
+        //    int animalsToSpawn = Random.Range(10, 20);
+        //    if (animal != null)
+        //    {
+        //        for (int i = 0; i < animalsToSpawn; i++)
+        //        {
+        //            SpawnAnimal(animal);
+        //        }
+        //    }
+        //}
+        foreach (var spawnRange in _animalPrefs)
         {
-            int animalsToSpawn = Random.Range(10 , 20);
-            if(animal != null)
+            if (spawnRange.animalPrefab != null)
             {
+                int animalsToSpawn = Random.Range(spawnRange.minSpawnCount, spawnRange.maxSpawnCount);
+
                 for (int i = 0; i < animalsToSpawn; i++)
                 {
-                    SpawnAnimal(animal);
+                    SpawnAnimal(spawnRange.animalPrefab);
                 }
             }
         }
 
         BakeSurface();
     }
+
 }

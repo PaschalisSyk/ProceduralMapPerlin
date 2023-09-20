@@ -42,7 +42,7 @@ public class PlantGenerator : MonoBehaviour
     {
         Vector3 randomPoint = new Vector3(
             Random.Range(tileBounds.min.x +0.5f, tileBounds.max.x - 0.5f),
-            tileBounds.max.y,
+            tileBounds.max.y + 0.1f,
             Random.Range(tileBounds.min.z + 0.5f, tileBounds.max.z - 0.5f));
 
         return randomPoint;
@@ -78,41 +78,48 @@ public class PlantGenerator : MonoBehaviour
             cumulativeProbability += prefabProbabilities[prefabIndexToSpawn];
         }
 
-        Quaternion rotation = Quaternion.Euler(0, Random.Range(-40, 40), 0);
+        Quaternion rotation = Quaternion.Euler(0, Random.Range(-60, 60), 0);
 
-        if(grassPref[prefabIndexToSpawn].tag == "Batch")
+        if (grassPref[prefabIndexToSpawn].tag == "Batch")
         {
-            // Instantiate the batch prefab
-            GameObject _grass = Instantiate(grassPref[prefabIndexToSpawn], transform.position, Quaternion.identity) as GameObject;
-
             //Set instantiation point
             point = new Vector3(GetComponent<Collider>().bounds.center.x, GetComponent<Collider>().bounds.max.y, GetComponent<Collider>().bounds.center.z);
-
+            // Instantiate the batch prefab
+            GameObject _grass = Instantiate(grassPref[prefabIndexToSpawn], transform.position, Quaternion.identity) as GameObject;
             // Get all the children of the batch prefab
             Transform[] children = _grass.GetComponentsInChildren<Transform>();
 
             // Loop through the children and modify them
             foreach (Transform child in children)
             {
-                if(Random.Range(0f , 1f) <= 0.3f)
+                if (child != _grass.transform) // Skip the root of the batch prefab
                 {
-                    child.gameObject.SetActive(false);
-                }
-                else
-                {
-                    child.gameObject.SetActive(true);
-                    child.rotation = Quaternion.Euler(0, Random.Range(-40, 40), 0);
+                    if (Random.Range(0f, 1f) <= 0.1f)
+                    {
+                        child.gameObject.SetActive(false);
+                    }
+                    else
+                    {
+                        child.gameObject.SetActive(true);
+                        child.rotation = Quaternion.Euler(0, Random.Range(-70, 70), 0);
 
-                    float value = Random.Range(child.localScale.x * 0.65f, child.localScale.x * 1.1f);
-                    child.localScale = new Vector3(value, value, value);
+                        float value = Random.Range(child.localScale.x * 0.65f, child.localScale.x * 1.1f);
+                        child.localScale = new Vector3(value, value, value);
+                        if (map.IsMonocromatic())
+                        {
+                            child.GetComponentInChildren<MeshRenderer>().material.SetColor("Color_FA85148A", GetComponent<MeshRenderer>().material.color);
+                            //child.GetComponentInChildren<MeshRenderer>().material.SetColor("Color_369F793F", GetComponent<MeshRenderer>().material.color);
+                        }
+                    }
                 }
+                
             }
 
             // Instantiate the selected prefab
             GameObject updatedGrass = Instantiate(_grass, point, Quaternion.identity) as GameObject;
             Destroy(_grass);
             updatedGrass.transform.parent = transform;
-            StaticBatchingUtility.Combine(updatedGrass);
+            //StaticBatchingUtility.Combine(updatedGrass);
         }
         else
         {
@@ -127,7 +134,7 @@ public class PlantGenerator : MonoBehaviour
                 AssignMaterial(grass);
             }
             grass.isStatic = true;
-            StaticBatchingUtility.Combine(grass);
+            //StaticBatchingUtility.Combine(grass);
         }
     }
 

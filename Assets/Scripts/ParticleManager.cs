@@ -23,7 +23,10 @@ public class ParticleManager : MonoBehaviour
         riverTiles = FindRiverTiles();
 
         // Start the spawn timer
-        InvokeRepeating("SpawnDustParticle", 2f, spawnInterval);
+        if(sandTiles.Length > 0)
+        {
+            InvokeRepeating("SpawnDustParticle", 2f, spawnInterval);
+        }
         //InvokeRepeating("SpawnStreamParticle", 2f, 4f);
         Invoke("SpawnStreamParticle", 2f);
     }
