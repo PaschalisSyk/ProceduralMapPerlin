@@ -15,6 +15,7 @@ TagManager:
   - SnakeFood
   - MuskratFood
   - Snake
+  - PuduFood
   layers:
   - Default
   - TransparentFX

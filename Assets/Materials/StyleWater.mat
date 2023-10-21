@@ -21,7 +21,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: StyleWater
-  m_Shader: {fileID: -6465566751694194690, guid: 02c51bbb44295274f87bc75642326b9f,
+  m_Shader: {fileID: -6465566751694194690, guid: 4d0931f96c1228748836485361e9836b,
     type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
@@ -56,7 +56,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - Vector1_989A1C37: 0.53
+    - Vector1_989A1C37: 0.9
     - _FoamAmount: 30
     - _FoamCutOff: 1
     - _FoamScale: 5000
@@ -70,8 +70,8 @@ Material:
     - _edgeFoamAmount: 5
     - _edgeFoamCutoff: 4.8
     - _fakeSpecular: 0.3
-    - _waterDepth: 9.91
-    - _waterSmoothness: 0
+    - _waterDepth: 20
+    - _waterSmoothness: 7.05
     m_Colors:
     - _DeepWaterColor: {r: 0, g: 0.39393276, b: 0.41509432, a: 0.9019608}
     - _FoamColor: {r: 0.57378066, g: 0.990566, b: 0.8614443, a: 1}

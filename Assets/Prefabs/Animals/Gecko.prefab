@@ -106,6 +106,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agent: {fileID: 0}
+  zoneRadius: 20
   foodSource: {fileID: 0}
   anim: {fileID: 0}
   speed: 0
@@ -121,7 +122,7 @@ MonoBehaviour:
   isHungry: 0
   isEating: 0
   isFleeing: 0
-  fleeDistance: 2
+  fleeDistance: 7
 --- !u!195 &5196017746414469059
 NavMeshAgent:
   m_ObjectHideFlags: 0

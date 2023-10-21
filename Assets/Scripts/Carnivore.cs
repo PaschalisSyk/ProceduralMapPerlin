@@ -63,11 +63,15 @@ public class Carnivore : AnimalController
 
                 // Carnivore is in attack range, trigger the bool on the prey
                 Prey prey = foodSource.GetComponent<Prey>();
-                if (prey != null)
+                if(Random.value < 0.35f)
                 {
-                    prey.getsAttacked = true;
+                    if (prey != null)
+                    {
+                        prey.getsAttacked = true;
+                    }
+                    StartCoroutine(ResetAttackFlag());
                 }
-                StartCoroutine(ResetAttackFlag());
+                
             }
         }
     }

@@ -49,6 +49,7 @@ public class AnimalController : MonoBehaviour
         hungerLevel = Random.Range(10, 150);
         player = GameObject.FindGameObjectWithTag("Player").transform;
         SetRandomDestination();
+        InvokeRepeating("Fleeing", 1f, 1f);
     }
 
     protected virtual void Update()
@@ -63,15 +64,11 @@ public class AnimalController : MonoBehaviour
         RegenerateStamina();
         HandleAnimation();
         HungerController(food);
-
-        if (!isEating)
-        {
-            Flee(player);
-        }
+        //Fleeing();
 
         if (!agent.hasPath || agent.remainingDistance < 1f)
         {
-            if(!isEating)
+            if (!isEating)
             {
                 Wander();
             }
@@ -80,8 +77,16 @@ public class AnimalController : MonoBehaviour
         {
             //Wander();
             //foodSource = null;
-            agent.speed = agent.speed/2;
+            agent.speed = agent.speed / 2;
             Invoke("ResetStamina", 3f);
+        }
+    }
+
+    private void Fleeing()
+    {
+        if (!isEating)
+        {
+            Flee(player);
         }
     }
 
@@ -132,17 +137,22 @@ public class AnimalController : MonoBehaviour
             {
                 // The animal is hungry, trigger food-seeking behavior
                 isHungry = true;
-                FindFoodSource(food);
+                //FindFoodSource(food);
             }
 
             if (isHungry)
             {
+                if(foodSource == null)
+                {
+                    FindFoodSource(food);
+                }
                 timeSpentAtCurrentFoodSource += Time.deltaTime;
 
                 // Check if the time limit has been exceeded, and if so, find a new food source
                 if (timeSpentAtCurrentFoodSource >= maxTimeAtFoodSource && !isEating)
                 {
-                    FindFoodSource(food);
+                    foodSource = null;
+                    //FindFoodSource(food);
                     timeSpentAtCurrentFoodSource = 0;
                 }
             }
@@ -253,8 +263,9 @@ public class AnimalController : MonoBehaviour
     {
         float distance = Vector3.Distance(transform.position, predatorTransform.position);
 
-        //if(distance < fleeDistance)
+        //if (distance < fleeDistance)
         //{
+        //    foodSource = null;
         //    Vector3 dirToPlayer = transform.position - predatorTransform.position;
 
         //    Vector3 newPos = transform.position + dirToPlayer;
@@ -263,11 +274,16 @@ public class AnimalController : MonoBehaviour
         //}
         if (distance < fleeDistance)
         {
+            foodSource = null;
+            //if (isFleeing)
+            //{
+            //    return;
+            //}
             // calculate the flee direction away from the predator
             Vector3 fleedirection = transform.position - predatorTransform.position;
 
             // add a random offset to the flee direction to make it less predictable
-            float fleeangle = Random.Range(-90f, 90f); // adjust the angle range as needed
+            float fleeangle = Random.Range(-100f, 100f); // adjust the angle range as needed
             Quaternion randomrotation = Quaternion.Euler(0, fleeangle, 0);
             Vector3 randomoffset = randomrotation * fleedirection;
 
@@ -285,7 +301,12 @@ public class AnimalController : MonoBehaviour
             }
             else
             {
-                SetRandomDest();
+                //SetRandomDest();
+                Vector3 dirToPlayer = transform.position - predatorTransform.position;
+
+                Vector3 newPos = transform.position + dirToPlayer;
+
+                agent.SetDestination(newPos);
             }
         }
     }
@@ -352,31 +373,32 @@ public class AnimalController : MonoBehaviour
 
         // Reset the hunger level (you can set it to your desired starting value)
         hungerLevel = baseHunger;
+        foodSource = null;
     }
 
-    private void SetRandomDest()
-    {
-        // Get a random point on the NavMesh surface
-        Vector3 randomPoint = RandomNavMeshPoint();
+    //private void SetRandomDest()
+    //{
+    //    // Get a random point on the NavMesh surface
+    //    Vector3 randomPoint = RandomNavMeshPoint();
 
-        // Set the agent's destination to the random point
-        agent.SetDestination(randomPoint);
-    }
+    //    // Set the agent's destination to the random point
+    //    agent.SetDestination(randomPoint);
+    //}
 
-    private Vector3 RandomNavMeshPoint()
-    {
-        NavMeshTriangulation navMeshData = NavMesh.CalculateTriangulation();
+    //private Vector3 RandomNavMeshPoint()
+    //{
+    //    NavMeshTriangulation navMeshData = NavMesh.CalculateTriangulation();
 
-        // Pick a random triangle from the NavMesh triangles
-        int randomTriangleIndex = Random.Range(0, navMeshData.indices.Length / 3);
-        int index1 = navMeshData.indices[randomTriangleIndex * 3];
-        int index2 = navMeshData.indices[randomTriangleIndex * 3 + 1];
-        int index3 = navMeshData.indices[randomTriangleIndex * 3 + 2];
+    //    // Pick a random triangle from the NavMesh triangles
+    //    int randomTriangleIndex = Random.Range(0, navMeshData.indices.Length / 3);
+    //    int index1 = navMeshData.indices[randomTriangleIndex * 3];
+    //    int index2 = navMeshData.indices[randomTriangleIndex * 3 + 1];
+    //    int index3 = navMeshData.indices[randomTriangleIndex * 3 + 2];
 
-        // Calculate a random point within the selected triangle
-        Vector3 randomPoint = Vector3.Lerp(navMeshData.vertices[index1], navMeshData.vertices[index2], Random.value);
-        randomPoint = Vector3.Lerp(randomPoint, navMeshData.vertices[index3], Random.value);
+    //    // Calculate a random point within the selected triangle
+    //    Vector3 randomPoint = Vector3.Lerp(navMeshData.vertices[index1], navMeshData.vertices[index2], Random.value);
+    //    randomPoint = Vector3.Lerp(randomPoint, navMeshData.vertices[index3], Random.value);
 
-        return randomPoint;
-    }
+    //    return randomPoint;
+    //}
 }

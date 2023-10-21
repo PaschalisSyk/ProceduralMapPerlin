@@ -27,7 +27,7 @@ public class FishSpawner : MonoBehaviour
         Bounds waterBounds = waterArea.GetComponent<Renderer>().bounds;
         Vector3 randomPosition = new Vector3(
             Random.Range(waterBounds.min.x, waterBounds.max.x),
-            Random.Range(waterBounds.min.y, waterBounds.max.y - 1f),
+            Random.Range(0f, -1f),
             Random.Range(waterBounds.min.z, waterBounds.max.z)
         );
 

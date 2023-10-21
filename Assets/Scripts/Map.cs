@@ -218,10 +218,11 @@ public class Map : MonoBehaviour
 
     void MakeTile( int x, int y , float noiseValue)
     {
+        float value = Random.Range(0.5f, 0.8f);
         int index = SetIndex(noiseValue);
         float xPos = x * tileSize + (y % 2 == 0 ? tileSize / 2 : 0);
         float yPos = y * tileSize * 0.75f + (y * 0.45f);
-        float height = noiseValue * 0.01f;
+        float height = noiseValue * value;
         
         if (prefabs[index] != null)
         {
@@ -231,6 +232,11 @@ public class Map : MonoBehaviour
                 return;
                 //GameObject boarderObject = Instantiate(prefabs[index], new Vector3(xPos + offset.x, height, yPos + offset.z), Quaternion.identity) as GameObject;
                 //boarderObject.transform.parent = transform;
+            }
+
+            if(index == prefabs.Length - 1)
+            {
+                height = -0.5f;
             }
 
             GameObject tileObject = Instantiate(prefabs[index], new Vector3(xPos + offset.x, height, yPos + offset.z), Quaternion.identity) as GameObject;
@@ -257,7 +263,7 @@ public class Map : MonoBehaviour
         int halfRiverWidth = riverWidth / 2;
         int leftBank = riverX - halfRiverWidth + Random.Range(-1, 1); // Introduce randomness here
         int rightBank = riverX + halfRiverWidth + Random.Range(-1, 1); // Introduce randomness here
-        int riverStart = 0; // Y-coordinate where the river begins
+        int riverStart = 5; // Y-coordinate where the river begins
 
         // Check if the current coordinates are inside the river area
         if (x >= leftBank && x <= rightBank && y >= riverStart && y <= riverStart + riverLength)

@@ -94,7 +94,7 @@ public class PlantGenerator : MonoBehaviour
             {
                 if (child != _grass.transform) // Skip the root of the batch prefab
                 {
-                    if (Random.Range(0f, 1f) <= 0.1f)
+                    if (Random.Range(0f, 1f) <= 0.25f)
                     {
                         child.gameObject.SetActive(false);
                     }
@@ -123,6 +123,10 @@ public class PlantGenerator : MonoBehaviour
         }
         else
         {
+            if (Random.Range(0f, 1f) <= 0.25f)
+            {
+                return;
+            }
             // Instantiate the selected prefab
             GameObject grass = Instantiate(grassPref[prefabIndexToSpawn], point, rotation) as GameObject;
             grass.transform.parent = transform;

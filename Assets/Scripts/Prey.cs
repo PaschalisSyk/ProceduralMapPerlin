@@ -49,7 +49,7 @@ public class Prey : AnimalController
             var dir = Quaternion.Euler(0, i * delta, 0) * transform.right;
 
             RaycastHit hitInfo;
-            if (Physics.Raycast(pos, dir, out hitInfo, 3f))
+            if (Physics.Raycast(pos, dir, out hitInfo, 9f))
             {
                 // Check if the ray hit a collider with the "Predator" tag
                 if (hitInfo.collider.CompareTag("Snake"))
@@ -69,6 +69,6 @@ public class Prey : AnimalController
     {
         yield return new WaitForSeconds(5f);
 
-        isFleeing = false;
+        this.isFleeing = false;
     }
 }

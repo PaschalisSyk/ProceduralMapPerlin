@@ -82,8 +82,8 @@ public class PlayerController : MonoBehaviour
             anim.SetBool("isSwimming", isSwimming);
             capsuleCollider.height = 1f;
             capsuleCollider.center = new Vector3(0, colliderHeight, 0);
-            //swimParticles.SetActive(true);
-            //swimParticles.GetComponentInChildren<ParticleSystem>().Play();
+            swimParticles.SetActive(true);
+            swimParticles.GetComponentInChildren<ParticleSystem>().Play();
         }
         // Check if the player has collided with a ground tile (you can use a tag or any other identifier for ground tiles)
         if (collision.gameObject.CompareTag("Ground") && isSwimming)
@@ -92,8 +92,8 @@ public class PlayerController : MonoBehaviour
             anim.SetBool("isSwimming", isSwimming);
             capsuleCollider.height = 3.5f;
             capsuleCollider.center = new Vector3(0, 1.75f, 0);
-            //swimParticles.SetActive(false);
-            //swimParticles.GetComponentInChildren<ParticleSystem>().Stop();
+            swimParticles.SetActive(false);
+            swimParticles.GetComponentInChildren<ParticleSystem>().Stop();
 
             // Adjust the player's position to move on top of the ground tile
             Vector3 newPosition = new Vector3(transform.position.x, collision.transform.position.y + 0.8f, transform.position.z);
