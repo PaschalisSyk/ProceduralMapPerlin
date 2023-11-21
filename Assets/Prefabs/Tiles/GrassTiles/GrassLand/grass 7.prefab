@@ -151,8 +151,8 @@ MonoBehaviour:
   obstructionLayer:
     serializedVersion: 2
     m_Bits: 256
-  placementRadius: 1
-  maxPlantsToSpawn: 1
+  placementRadius: 3
+  maxPlantsToSpawn: 2
   prefabProbabilities:
   - 50
   - 50

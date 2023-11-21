@@ -348,7 +348,7 @@ MonoBehaviour:
   starvationThreshold: -500
   staminaConsumptionRate: 3
   staminaRegenerationRate: 5
-  maxStamina: 100
+  maxStamina: 150
   currentStamina: 0
   isHungry: 0
   isEating: 0

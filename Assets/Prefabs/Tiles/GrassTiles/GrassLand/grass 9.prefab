@@ -149,13 +149,13 @@ MonoBehaviour:
   - {fileID: 1153903725125606, guid: 7f253e36a99c6454e9f631317cb450b9, type: 3}
   - {fileID: 1263270136472832, guid: b773b11ae13054e49bbf89081ae39722, type: 3}
   - {fileID: 1087120402720156, guid: 2535f726e7be4c44cbf8998490f36b8a, type: 3}
-  - {fileID: 1923026048575658, guid: f6a0cd899fb3b8c449a40e5fb69e258d, type: 3}
+  - {fileID: 1041271695553482, guid: 4d88971c9d891dc45a8dbd49a3ba6913, type: 3}
   - {fileID: 1262191819135750, guid: ef8827edf81d4f34aace1bd2d0c358ff, type: 3}
   obstructionLayer:
     serializedVersion: 2
     m_Bits: 256
-  placementRadius: 1
-  maxPlantsToSpawn: 10
+  placementRadius: 4
+  maxPlantsToSpawn: 5
   prefabProbabilities:
   - 20
   - 20

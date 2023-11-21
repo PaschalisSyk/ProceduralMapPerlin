@@ -40,6 +40,11 @@ public class AnimalController : MonoBehaviour
     public float fleeDistance = 4f;
     private Transform player;
 
+    public bool IsHungry()
+    {
+        return isHungry;
+    }
+
     protected virtual void Start()
     {
         wanderTimer = Random.Range(8f, 15f);
@@ -49,7 +54,7 @@ public class AnimalController : MonoBehaviour
         hungerLevel = Random.Range(10, 150);
         player = GameObject.FindGameObjectWithTag("Player").transform;
         SetRandomDestination();
-        InvokeRepeating("Fleeing", 1f, 1f);
+        //InvokeRepeating("Fleeing", 1f, 1f);
     }
 
     protected virtual void Update()
@@ -183,39 +188,42 @@ public class AnimalController : MonoBehaviour
 
     private void FindFoodSource(string food)
     {
-        GameObject[] foodSources = GameObject.FindGameObjectsWithTag(food); // Change "Food" to your food object tag
-
-        // Create a list to store all nearby food sources
-        List<Transform> nearbySources = new List<Transform>();
-
-        // Find all food sources within the search radius
-        foreach (GameObject foodObject in foodSources)
+        if(food != null)
         {
-            Transform sourceTransform = foodObject.transform;
-            float distance = Vector3.Distance(transform.position, sourceTransform.position);
+            GameObject[] foodSources = GameObject.FindGameObjectsWithTag(food); // Change "Food" to your food object tag
 
-            // Check if this source is within the search radius
-            if (distance < zoneRadius)
+            // Create a list to store all nearby food sources
+            List<Transform> nearbySources = new List<Transform>();
+
+            // Find all food sources within the search radius
+            foreach (GameObject foodObject in foodSources)
             {
-                nearbySources.Add(sourceTransform);
-            }
-        }
+                Transform sourceTransform = foodObject.transform;
+                float distance = Vector3.Distance(transform.position, sourceTransform.position);
 
-        // Check if there are any nearby food sources
-        if (nearbySources.Count > 0)
-        {
-            // Randomly select one of the nearby food sources
-            int randomIndex = Random.Range(0, nearbySources.Count);
-            foodSource = nearbySources[randomIndex];
-        }
-        else
-        {
-            // No nearby food sources found, reset the current food source
-            foodSource = null;
-        }
+                // Check if this source is within the search radius
+                if (distance < zoneRadius)
+                {
+                    nearbySources.Add(sourceTransform);
+                }
+            }
+
+            // Check if there are any nearby food sources
+            if (nearbySources.Count > 0)
+            {
+                // Randomly select one of the nearby food sources
+                int randomIndex = Random.Range(0, nearbySources.Count);
+                foodSource = nearbySources[randomIndex];
+            }
+            else
+            {
+                // No nearby food sources found, reset the current food source
+                foodSource = null;
+            }
+        }      
     }
 
-    private void EatFood()
+    protected virtual void EatFood()
     {
         StartCoroutine(ResetEating());
         //if (isEating)
@@ -316,7 +324,13 @@ public class AnimalController : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             // Player entered the trigger zone, initiate flee behavior
+            Flee(other.gameObject.transform);
             isFleeing = true;
+        }
+        else if(other.GetComponent<AnimalController>() != null)
+        {
+            //print(gameObject.name + " detected " + other.name);
+            //Flee(other.gameObject.transform);
         }
     }
 
@@ -364,7 +378,7 @@ public class AnimalController : MonoBehaviour
         agent.speed = agent.speed * 2;
     }
 
-    private IEnumerator ResetEating()
+    public IEnumerator ResetEating()
     {
         yield return new WaitForSeconds(2.5f);
         // Finish eating

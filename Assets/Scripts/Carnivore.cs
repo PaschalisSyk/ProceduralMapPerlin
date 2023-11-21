@@ -16,7 +16,10 @@ public class Carnivore : AnimalController
     protected override void Update()
     {
         base.Update();
-        CarnivoreMovement();
+        if (foodSource != null)
+        {
+            CarnivoreMovement();
+        }
     }
 
     private IEnumerator ResetAttackFlag()
@@ -55,24 +58,41 @@ public class Carnivore : AnimalController
         if (foodSource != null)
         {
             float distanceToPrey = Vector3.Distance(transform.position, foodSource.position);
+            Prey prey = foodSource.GetComponent<Prey>();
 
-            if (distanceToPrey < attackRange)
+            if (distanceToPrey < attackRange && !prey.getsAttacked)
             {
                 transform.LookAt(foodSource);
                 anim.SetBool("AttackPrey", true);
 
-                // Carnivore is in attack range, trigger the bool on the prey
-                Prey prey = foodSource.GetComponent<Prey>();
-                if(Random.value < 0.35f)
+                //// Check if the carnivore should attack based on the random decision
+                //if (SucceedAttack())
+                //{
+                    
+                //}
+                if (prey != null)
                 {
-                    if (prey != null)
-                    {
-                        prey.getsAttacked = true;
-                    }
-                    StartCoroutine(ResetAttackFlag());
+                    prey.getsAttacked = true;
                 }
-                
+                StartCoroutine(ResetAttackFlag());
             }
         }
     }
+
+    private bool SucceedAttack()
+    {
+        // Adjust the probability threshold as needed
+        float attackProbability = 0.35f;
+
+        // Check if the random value is below the attack probability
+        return Random.value < attackProbability;
+    }
+
+    //protected override void EatFood()
+    //{
+    //    if(SucceedAttack())
+    //    {
+    //        StartCoroutine(ResetEating());
+    //    }
+    //}
 }

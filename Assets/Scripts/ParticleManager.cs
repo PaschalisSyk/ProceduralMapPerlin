@@ -6,11 +6,15 @@ public class ParticleManager : MonoBehaviour
 {
     [SerializeField] GameObject dustParticle;
     [SerializeField] GameObject streamParticles;
+    [SerializeField] GameObject snowParticles;
     public float spawnInterval = 7.5f;
+
+    bool isSnowing = false;
 
     Map map;
     Transform[] sandTiles;
     Transform[] riverTiles;
+    Transform[] iceTiles;
 
     private void Awake()
     {
@@ -21,6 +25,7 @@ public class ParticleManager : MonoBehaviour
     {
         sandTiles = FindSandTiles();
         riverTiles = FindRiverTiles();
+        iceTiles = FindIceTiles();
 
         // Start the spawn timer
         if(sandTiles.Length > 0)
@@ -29,6 +34,14 @@ public class ParticleManager : MonoBehaviour
         }
         //InvokeRepeating("SpawnStreamParticle", 2f, 4f);
         Invoke("SpawnStreamParticle", 2f);
+
+        if(map.enviroment == Map.Enviroment.Iceland)
+        {
+            if(snowParticles != null)
+            {
+                InvokeRepeating("SpawnSnowParticles", 2f, 30f);
+            }
+        }
     }
 
     // Update is called once per frame
@@ -73,6 +86,42 @@ public class ParticleManager : MonoBehaviour
         return riverTilesTrans.ToArray();
     }
 
+    Transform[] FindIceTiles()
+    {
+        List<Transform> iceTilesTrans = new List<Transform>();
+
+        foreach (Tile tile in map.tiles)
+        {
+            if (tile != null)
+            {
+                if (tile.tileValue == Tile.TileValue.Ice)
+                {
+                    iceTilesTrans.Add(tile.transform);
+                }
+            }
+        }
+
+        return iceTilesTrans.ToArray();
+    }
+
+    //List<Transform> FindTilesOfValue(Tile.TileValue tileValue)
+    //{
+    //    List<Transform> riverTilesTrans = new List<Transform>();
+
+    //    foreach (Tile tile in map.tiles)
+    //    {
+    //        if (tile != null)
+    //        {
+    //            if (tile.tileValue == tileValue)
+    //            {
+    //                riverTilesTrans.Add(tile.transform);
+    //            }
+    //        }
+    //    }
+
+    //    return riverTilesTrans;
+    //}
+
     private void SpawnDustParticle()
     {
         // Randomly select a sand tile
@@ -113,5 +162,38 @@ public class ParticleManager : MonoBehaviour
         Vector3 maxBounds = tile.GetComponent<Collider>().bounds.max;
 
         return new Vector3(Random.Range(minBounds.x, maxBounds.x), maxBounds.y + 5f, Random.Range(minBounds.z, maxBounds.z));
+    }
+
+    private void SpawnSnowParticles()
+    {
+        if (isSnowing)
+        {
+            return;
+        }
+        StartCoroutine(SnowingRoutine());
+    }
+
+    IEnumerator SnowingRoutine()
+    {   
+        Transform selectIceTile = iceTiles[Random.Range(0, iceTiles.Length)];
+
+        GameObject snow = Instantiate(snowParticles, new Vector3(selectIceTile.position.x, selectIceTile.position.y + 10f, selectIceTile.position.z), Quaternion.identity) as GameObject;
+        snow.transform.parent = transform;
+        ParticleSystem ps = snow.GetComponent<ParticleSystem>();
+        ps.Stop();
+        var main = ps.main;
+        main.duration = Random.Range(30f, 120f);
+        main.maxParticles = Random.Range(10000, 40000);
+        var emission = ps.emission;
+        emission.rateOverTime = Random.Range(2000, 6000);
+        ps.Play();
+        isSnowing = true;
+        yield return new WaitForSeconds(main.duration);
+        isSnowing = false;
+        if(ps.isPlaying)
+        {
+            ps.Stop(true, ParticleSystemStopBehavior.StopEmitting);
+        }
+        Destroy(snow, main.duration);
     }
 }

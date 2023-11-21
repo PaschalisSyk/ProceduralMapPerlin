@@ -9,7 +9,7 @@ public class Prey : AnimalController
     protected override void Start()
     {
         base.Start();
-        InvokeRepeating("DetectPredator", 2f, 1f);
+        //InvokeRepeating("DetectPredator", 2f, 1f);
     }
 
     protected override void Update()
@@ -70,5 +70,17 @@ public class Prey : AnimalController
         yield return new WaitForSeconds(5f);
 
         this.isFleeing = false;
+    }
+
+    protected override void OnTriggerEnter(Collider other)
+    {
+        base.OnTriggerEnter(other);
+        if(other.CompareTag("Snake"))
+        {
+            isFleeing = true;
+            Flee(other.transform);
+            Debug.Log("Predator detected!");
+            StartCoroutine(ResetFleeing(other.transform));
+        }
     }
 }

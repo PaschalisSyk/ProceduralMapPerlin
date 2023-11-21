@@ -26,8 +26,8 @@ MonoBehaviour:
     animalPref:
     - animalPrefab: {fileID: 9159386910556006663, guid: 788fbd4eee136f040b8364e1e1787e0f,
         type: 3}
-      minSpawnCount: 2
-      maxSpawnCount: 5
+      minSpawnCount: 10
+      maxSpawnCount: 15
   - enviromentType: 1
     tilePrefabs:
     - {fileID: 498021837453684717, guid: 72f07d2e4fa32d347aa76420db203302, type: 3}
@@ -68,12 +68,24 @@ MonoBehaviour:
       maxSpawnCount: 8
   - enviromentType: 3
     tilePrefabs:
-    - {fileID: 498021837453684717, guid: 5a419d4b36474d14a836ccd82e41c30a, type: 3}
+    - {fileID: 1853360068124139964, guid: cca1d9c89daade5449f026c2280aa446, type: 3}
     - {fileID: 4392539617703824235, guid: 1127d0ebf0fe1c84baa6d3a67ffe78af, type: 3}
-    - {fileID: 498021837453684717, guid: c8257d93fdb68ce4a88cf6ff320c523e, type: 3}
+    - {fileID: 921189880267396335, guid: cccb732fc19ed9e43a00acbf31fac30a, type: 3}
     - {fileID: 921189880267396335, guid: de17ddd2ccfdad441b7d92534c064ff3, type: 3}
     - {fileID: 5884610559689345935, guid: e3338066e18ca634b9e8d2c3c3024731, type: 3}
     - {fileID: 455005269828449962, guid: cdf56ad78c255b447b321a0285329181, type: 3}
     - {fileID: 527305273924322559, guid: 8c429f65768015f4688caf49e9dec9fb, type: 3}
     hasRiver: 1
-    animalPref: []
+    animalPref:
+    - animalPrefab: {fileID: 2190826142794727089, guid: 099ef6887cda81741825e6817c951c39,
+        type: 3}
+      minSpawnCount: 5
+      maxSpawnCount: 10
+    - animalPrefab: {fileID: 7687198417828747185, guid: 9dcd99a988bbf654d839d0d17d2e7783,
+        type: 3}
+      minSpawnCount: 4
+      maxSpawnCount: 8
+    - animalPrefab: {fileID: 2658898632280533869, guid: 8b84b997631546f46997a81f15ce4621,
+        type: 3}
+      minSpawnCount: 4
+      maxSpawnCount: 8

@@ -227,14 +227,18 @@ public class Map : MonoBehaviour
         if (prefabs[index] != null)
         {
 
-            if (index == 0)
+            if (index == 0 && enviroment != Enviroment.Iceland)
             {
                 return;
                 //GameObject boarderObject = Instantiate(prefabs[index], new Vector3(xPos + offset.x, height, yPos + offset.z), Quaternion.identity) as GameObject;
                 //boarderObject.transform.parent = transform;
             }
+            else if (index == 0 && enviroment == Enviroment.Iceland)
+            {
+                height = 0.4f;
+            }
 
-            if(index == prefabs.Length - 1)
+            if (index == prefabs.Length - 1)
             {
                 height = -0.5f;
             }
