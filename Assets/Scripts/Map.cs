@@ -218,7 +218,7 @@ public class Map : MonoBehaviour
 
     void MakeTile( int x, int y , float noiseValue)
     {
-        float value = Random.Range(0.5f, 0.8f);
+        float value = Random.Range(0.1f, 0.25f);
         int index = SetIndex(noiseValue);
         float xPos = x * tileSize + (y % 2 == 0 ? tileSize / 2 : 0);
         float yPos = y * tileSize * 0.75f + (y * 0.45f);

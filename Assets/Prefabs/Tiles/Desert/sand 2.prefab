@@ -20,7 +20,7 @@ GameObject:
   m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 126
+  m_StaticEditorFlags: 122
   m_IsActive: 1
 --- !u!4 &982493441745237335
 Transform:
@@ -181,7 +181,7 @@ GameObject:
   m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 126
+  m_StaticEditorFlags: 122
   m_IsActive: 0
 --- !u!4 &4684925493943531744
 Transform:

@@ -113,7 +113,13 @@ public class AnimalController : MonoBehaviour
     private void SetRandomDestination()
     {
         wanderTarget = RandomNavSphere(transform.position, zoneRadius, -1);
-        agent.SetDestination(wanderTarget);
+        if(agent != null || agent.isActiveAndEnabled)
+        {
+            if(wanderTarget != null)
+            {
+                agent.SetDestination(wanderTarget);
+            }
+        }
     }
 
     private Vector3 RandomNavSphere(Vector3 origin, float distance, int layermask)
@@ -282,6 +288,7 @@ public class AnimalController : MonoBehaviour
         //}
         if (distance < fleeDistance)
         {
+            float value = Random.Range(0.8f, 2f);
             foodSource = null;
             //if (isFleeing)
             //{
@@ -296,7 +303,7 @@ public class AnimalController : MonoBehaviour
             Vector3 randomoffset = randomrotation * fleedirection;
 
             // calculate the new destination point with the random offset
-            Vector3 newdestination = transform.position + randomoffset.normalized * fleeDistance;
+            Vector3 newdestination = transform.position + randomoffset.normalized * (fleeDistance * value);
             //vector3 newdestination = transform.position + fleedirection * fleedistance;
 
             NavMeshHit hit;

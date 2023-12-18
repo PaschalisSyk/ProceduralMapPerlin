@@ -123,7 +123,7 @@ public class PlantGenerator : MonoBehaviour
         }
         else
         {
-            if (Random.value <= 0.4f)
+            if (Random.value <= 0.75f)
             {
                 return;
             }

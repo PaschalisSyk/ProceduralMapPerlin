@@ -177,7 +177,7 @@ public class ParticleManager : MonoBehaviour
     {   
         Transform selectIceTile = iceTiles[Random.Range(0, iceTiles.Length)];
 
-        GameObject snow = Instantiate(snowParticles, new Vector3(selectIceTile.position.x, selectIceTile.position.y + 10f, selectIceTile.position.z), Quaternion.identity) as GameObject;
+        GameObject snow = Instantiate(snowParticles, new Vector3(selectIceTile.position.x, selectIceTile.position.y + 8f, selectIceTile.position.z), Quaternion.identity) as GameObject;
         snow.transform.parent = transform;
         ParticleSystem ps = snow.GetComponent<ParticleSystem>();
         ps.Stop();
@@ -194,6 +194,6 @@ public class ParticleManager : MonoBehaviour
         {
             ps.Stop(true, ParticleSystemStopBehavior.StopEmitting);
         }
-        Destroy(snow, main.duration);
+        Destroy(snow, main.duration * 0.25f);
     }
 }
