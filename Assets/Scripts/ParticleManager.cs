@@ -183,7 +183,13 @@ public class ParticleManager : MonoBehaviour
         ps.Stop();
         var main = ps.main;
         main.duration = Random.Range(30f, 120f);
-        main.maxParticles = Random.Range(10000, 40000);
+        main.maxParticles = Random.Range(10000, 40000);       
+        if(Random.value <= 0.5f)
+        {
+            var fo = ps.forceOverLifetime;
+            fo.enabled = true;
+            fo.x = Random.Range(-0.15f, 0.15f);
+        }
         var emission = ps.emission;
         emission.rateOverTime = Random.Range(2000, 6000);
         ps.Play();

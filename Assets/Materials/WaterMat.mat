@@ -144,7 +144,7 @@ Material:
     - _foamscale: 1
     - _foamspeed: 1
     m_Colors:
-    - _BaseColor: {r: 0, g: 0.823599, b: 0.8679245, a: 1}
+    - _BaseColor: {r: 0, g: 0.5257752, b: 0.8666667, a: 1}
     - _Color: {r: 0, g: 0.8235989, b: 0.8679245, a: 1}
     - _DeepWaterColor: {r: 0, g: 0.050714925, b: 0.26415086, a: 1}
     - _EdgeFoamColor: {r: 0, g: 0, b: 0, a: 0}

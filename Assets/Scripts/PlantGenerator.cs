@@ -82,6 +82,10 @@ public class PlantGenerator : MonoBehaviour
 
         if (grassPref[prefabIndexToSpawn].tag == "Batch")
         {
+            if (Random.Range(0f, 1f) <= 0.4f)
+            {
+                return;
+            }
             //Set instantiation point
             point = new Vector3(GetComponent<Collider>().bounds.center.x, GetComponent<Collider>().bounds.max.y, GetComponent<Collider>().bounds.center.z);
             // Instantiate the batch prefab
@@ -94,7 +98,7 @@ public class PlantGenerator : MonoBehaviour
             {
                 if (child != _grass.transform) // Skip the root of the batch prefab
                 {
-                    if (Random.Range(0f, 1f) <= 0.5f)
+                    if (Random.Range(0f, 1f) <= 0.4f)
                     {
                         child.gameObject.SetActive(false);
                     }
