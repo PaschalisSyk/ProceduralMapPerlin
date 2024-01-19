@@ -72,8 +72,8 @@ MonoBehaviour:
     - {fileID: 4392539617703824235, guid: 1127d0ebf0fe1c84baa6d3a67ffe78af, type: 3}
     - {fileID: 921189880267396335, guid: cccb732fc19ed9e43a00acbf31fac30a, type: 3}
     - {fileID: 921189880267396335, guid: de17ddd2ccfdad441b7d92534c064ff3, type: 3}
-    - {fileID: 5884610559689345935, guid: e3338066e18ca634b9e8d2c3c3024731, type: 3}
-    - {fileID: 455005269828449962, guid: cdf56ad78c255b447b321a0285329181, type: 3}
+    - {fileID: 921189880267396335, guid: b89c74a72c03b8f4daa61dc3f47948f0, type: 3}
+    - {fileID: 455005269828449962, guid: 2a446ac4039858d45ba6390ccdc8aed9, type: 3}
     - {fileID: 527305273924322559, guid: 8c429f65768015f4688caf49e9dec9fb, type: 3}
     hasRiver: 1
     animalPref:

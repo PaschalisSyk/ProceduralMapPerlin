@@ -137,6 +137,7 @@ public class PlantGenerator : MonoBehaviour
             float value = Random.Range(grass.transform.localScale.x * 0.65f, grass.transform.localScale.x * 1.1f);
             grass.transform.localScale = new Vector3(value, value, value);
             grass.transform.position = point;
+            grass.transform.rotation = Quaternion.Euler(0, Random.Range(-90, 90), 0);
             if (map.IsMonocromatic())
             {
                 AssignMaterial(grass);

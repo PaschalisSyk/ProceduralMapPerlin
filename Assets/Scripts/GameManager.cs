@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 
 public class GameManager : MonoBehaviour
@@ -11,6 +12,16 @@ public class GameManager : MonoBehaviour
     [SerializeField] CameraFollow cameraFollow;
     [SerializeField] GameObject player;
     public List<Tile> tilesToSpawn = new List<Tile>();
+
+    private void OnEnable()
+    {
+        PlayerController.OnChangeEnviroment += ReloadScene;
+    }
+
+    private void OnDisable()
+    {
+        PlayerController.OnChangeEnviroment -= ReloadScene;
+    }
 
     private void Awake()
     {
@@ -63,5 +74,12 @@ public class GameManager : MonoBehaviour
 
         // Enable the camera follow script
         cameraFollow.enabled = true;
+    }
+
+    public void ReloadScene()
+    {
+        string currentSceneName = SceneManager.GetActiveScene().name;
+        map.enviroment = Map.Enviroment.Random;
+        SceneManager.LoadScene(currentSceneName);
     }
 }

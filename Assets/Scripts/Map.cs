@@ -29,12 +29,14 @@ public class Map : MonoBehaviour
     public Tile[,] tiles;
     public StartingTile[] startingTiles;
     public GameObject[] prefabs;
+    public GameObject portalPrefab;
 
     Vector3 offset;
 
     public EnvironmentDatabase environmentDatabase;
     public Enviroment enviroment;
     [SerializeField] string currentEnvironment;
+    public EnvironmentProfile _environmentProfile;
 
     AnimalSpawner animalSpawner;
 
@@ -54,12 +56,14 @@ public class Map : MonoBehaviour
         public int x;
         public int z;
         public float height;
+        public bool isPortal = false;
     }
 
     private void Awake()
     {
         animalSpawner = FindObjectOfType<AnimalSpawner>();
         GenerateEnvironment(GetRandomEnvironmentType());
+        _environmentProfile = GetEnvironmentProfile(GetRandomEnvironmentType());
         offset = transform.position;
         MapGen(size);
     }
@@ -155,7 +159,7 @@ public class Map : MonoBehaviour
         {
             if(sTile != null)
             {
-                MakeTile(sTile.x, sTile.z, sTile.height);
+                MakeTile(sTile.x, sTile.z, sTile.height , sTile.isPortal);
             }
         }
 
@@ -216,13 +220,14 @@ public class Map : MonoBehaviour
         return index;
     }
 
-    void MakeTile( int x, int y , float noiseValue)
+    void MakeTile( int x, int y , float noiseValue , bool isPortal = false)
     {
-        float value = Random.Range(0.1f, 0.25f);
+        float value = Random.Range(0.05f, 0.15f);
         int index = SetIndex(noiseValue);
         float xPos = x * tileSize + (y % 2 == 0 ? tileSize / 2 : 0);
         float yPos = y * tileSize * 0.75f + (y * 0.45f);
         float height = noiseValue * value;
+
         
         if (prefabs[index] != null)
         {
@@ -235,7 +240,7 @@ public class Map : MonoBehaviour
             }
             else if (index == 0 && enviroment == Enviroment.Iceland)
             {
-                height = 0.4f;
+                height = 0.5f;
             }
 
             if (index == prefabs.Length - 1)
@@ -243,7 +248,12 @@ public class Map : MonoBehaviour
                 height = -0.5f;
             }
 
-            GameObject tileObject = Instantiate(prefabs[index], new Vector3(xPos + offset.x, height, yPos + offset.z), Quaternion.identity) as GameObject;
+            GameObject prefabToInst = prefabs[index];
+            if (isPortal)
+            {
+                prefabToInst = portalPrefab;
+            }
+            GameObject tileObject = Instantiate(prefabToInst, new Vector3(xPos + offset.x, height, yPos + offset.z), Quaternion.identity) as GameObject;
             tiles[x, y] = tileObject.GetComponent<Tile>();
             tileObject.transform.parent = transform;
             tiles[x, y].Init(x, y);

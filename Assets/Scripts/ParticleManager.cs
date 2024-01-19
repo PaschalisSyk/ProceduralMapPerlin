@@ -7,6 +7,8 @@ public class ParticleManager : MonoBehaviour
     [SerializeField] GameObject dustParticle;
     [SerializeField] GameObject streamParticles;
     [SerializeField] GameObject snowParticles;
+    [SerializeField] GameObject flyingLeavesGO;
+
     public float spawnInterval = 7.5f;
 
     bool isSnowing = false;
@@ -23,24 +25,28 @@ public class ParticleManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        sandTiles = FindSandTiles();
-        riverTiles = FindRiverTiles();
-        iceTiles = FindIceTiles();
-
-        // Start the spawn timer
-        if(sandTiles.Length > 0)
+        if(map._environmentProfile.hasRiver)
         {
-            InvokeRepeating("SpawnDustParticle", 2f, spawnInterval);
+            riverTiles = FindRiverTiles();
+            Invoke("SpawnStreamParticle", 2f);
         }
-        //InvokeRepeating("SpawnStreamParticle", 2f, 4f);
-        Invoke("SpawnStreamParticle", 2f);
 
         if(map.enviroment == Map.Enviroment.Iceland)
         {
-            if(snowParticles != null)
+            iceTiles = FindIceTiles();
+            if (snowParticles != null)
             {
                 InvokeRepeating("SpawnSnowParticles", 2f, 30f);
             }
+        }
+        if(map.enviroment == Map.Enviroment.Desert)
+        {
+            sandTiles = FindSandTiles();
+            InvokeRepeating("SpawnDustParticle", 2f, spawnInterval);
+        }
+        if(map.enviroment == Map.Enviroment.Grassland)
+        {
+            InvokeRepeating("PinkLeavesParticles", 2f, 200f);
         }
     }
 
@@ -177,7 +183,7 @@ public class ParticleManager : MonoBehaviour
     {   
         Transform selectIceTile = iceTiles[Random.Range(0, iceTiles.Length)];
 
-        GameObject snow = Instantiate(snowParticles, new Vector3(selectIceTile.position.x, selectIceTile.position.y + 8f, selectIceTile.position.z), Quaternion.identity) as GameObject;
+        GameObject snow = Instantiate(snowParticles, new Vector3(selectIceTile.position.x, selectIceTile.position.y + 5f, selectIceTile.position.z), Quaternion.identity) as GameObject;
         snow.transform.parent = transform;
         ParticleSystem ps = snow.GetComponent<ParticleSystem>();
         ps.Stop();
@@ -201,5 +207,111 @@ public class ParticleManager : MonoBehaviour
             ps.Stop(true, ParticleSystemStopBehavior.StopEmitting);
         }
         Destroy(snow, main.duration * 0.25f);
+    }
+
+    void PinkLeavesParticles()
+    {
+
+        GameObject[] pinkTrees = GameObject.FindGameObjectsWithTag("PinkTree");
+
+        if(pinkTrees.Length > 0)
+        {
+            //Transform tree = pinkTrees[Random.Range(0, pinkTrees.Length)].transform;
+            if(flyingLeavesGO != null)
+            {
+                for (int i = 0; i < pinkTrees.Length; i++)
+                {
+                    if (Random.value < 0.25f)
+                    {
+                        return;
+                    }
+                    ParticleSystem ps = Instantiate(flyingLeavesGO.GetComponent<ParticleSystem>(),
+                    new Vector3(pinkTrees[i].transform.position.x + 5f, pinkTrees[i].transform.position.y + 3f, pinkTrees[i].transform.position.z), Quaternion.identity) as ParticleSystem;
+                    ps.transform.parent = transform;
+                    PlayParticles(ps);
+                    StartCoroutine(DelayStopParticles(ps));
+                }
+            }
+;        }
+
+    }
+
+    public void PlayParticles(ParticleSystem particleSystem)
+    {
+        StartCoroutine(FadeInParticles(particleSystem));
+    }
+
+    // Stop the particle system with a smooth fade out
+    public void StopParticles(ParticleSystem particleSystem)
+    {
+        StartCoroutine(FadeOutParticles(particleSystem));
+    }
+
+    IEnumerator FadeInParticles(ParticleSystem ps)
+    {
+        // Enable the particle system
+        ps.Play();
+
+        // Gradual fade in
+        float duration = 3.0f; // Adjust the duration as needed
+        float elapsedTime = 0f;
+
+        Color startColor = ps.main.startColor.color;
+        Color targetColor = new Color(startColor.r, startColor.g, startColor.b, 1f); // Full opacity
+
+        while (elapsedTime < duration)
+        {
+            // Calculate the color based on the elapsed time
+            Color newColor = Color.Lerp(startColor, targetColor, elapsedTime / duration);
+
+            // Set the start color to control the opacity
+            var mainModule = ps.main;
+            mainModule.startColor = new ParticleSystem.MinMaxGradient(newColor);
+
+
+            // Increment the elapsed time
+            elapsedTime += Time.deltaTime;
+
+            yield return null;
+        }
+    }
+
+    IEnumerator FadeOutParticles(ParticleSystem ps)
+    {
+        // Gradual fade out
+        float duration = 5.0f; // Adjust the duration as needed
+        float elapsedTime = 0f;
+
+        Color startColor = ps.main.startColor.color;
+        Color targetColor = new Color(startColor.r, startColor.g, startColor.b, 0f); // Full transparency
+
+        while (elapsedTime < duration)
+        {
+            // Calculate the alpha based on the elapsed time
+            float alpha = Mathf.Lerp(1f, 0f, elapsedTime / duration);
+
+            // Set the start lifetime multiplier to control the opacity
+            Color newColor = Color.Lerp(startColor, targetColor, elapsedTime / duration);
+
+            // Set the start color to control the opacity
+            if(ps != null)
+            {
+                var mainModule = ps.main;
+                mainModule.startColor = new ParticleSystem.MinMaxGradient(newColor);
+            }
+            
+            yield return null;
+        }
+
+        // Disable the particle system after fading out
+        ps.Stop();
+    }
+
+    IEnumerator DelayStopParticles(ParticleSystem particleSystem)
+    {
+        yield return new WaitForSeconds(Random.Range(30f, 240f));
+        StopParticles(particleSystem);
+        yield return new WaitForSeconds(30f);
+        Destroy(particleSystem.gameObject);
     }
 }

@@ -17,6 +17,8 @@ TagManager:
   - Snake
   - PuduFood
   - ArcticFood
+  - PinkTree
+  - Portal
   layers:
   - Default
   - TransparentFX

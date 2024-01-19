@@ -52,7 +52,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _DepthDistance: 0.7
-    - _FresnelPower: 3.85
+    - _FresnelPower: 1
     - _QueueControl: 0
     - _QueueOffset: 0
     m_Colors:

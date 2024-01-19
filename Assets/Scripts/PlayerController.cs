@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerController : MonoBehaviour
 {
@@ -10,7 +11,14 @@ public class PlayerController : MonoBehaviour
     CapsuleCollider capsuleCollider;
     [SerializeField] GameObject swimParticles;
     Animator anim;
+    bool isInPortal;
 
+    // Define a delegate for the event
+    public delegate void TabPressedAction();
+    public delegate void ChangeEnviromentAction();
+    // Define the event using the delegate
+    public static event TabPressedAction OnTabPressed;
+    public static event ChangeEnviromentAction OnChangeEnviroment;
 
     private void Awake()
     {
@@ -28,6 +36,15 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         GatherInput();
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            // Invoke the event when Tab is pressed
+            OnTabPressed?.Invoke();
+        }
+        if(isInPortal && Input.GetKeyDown(KeyCode.R))
+        {
+            OnChangeEnviroment?.Invoke();
+        }
     }
 
     private void FixedUpdate()
@@ -98,6 +115,14 @@ public class PlayerController : MonoBehaviour
             // Adjust the player's position to move on top of the ground tile
             Vector3 newPosition = new Vector3(transform.position.x, collision.transform.position.y + 0.8f, transform.position.z);
             transform.position = newPosition;
+        }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if(other.CompareTag("Portal"))
+        {
+            isInPortal = true;
         }
     }
 }
