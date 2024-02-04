@@ -16,6 +16,7 @@ public class EnvironmentProfile
     public GameObject[] tilePrefabs;
     public bool hasRiver;
     public List<SpawnRange> animalPref;
+    public Color fogColor;
 }
 
 [System.Serializable]

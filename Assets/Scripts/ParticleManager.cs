@@ -130,18 +130,21 @@ public class ParticleManager : MonoBehaviour
 
     private void SpawnDustParticle()
     {
-        // Randomly select a sand tile
-        Transform selectedSandTile = sandTiles[Random.Range(0, sandTiles.Length)];
+        if(sandTiles.Length > 0)
+        {
+            // Randomly select a sand tile
+            Transform selectedSandTile = sandTiles[Random.Range(0, sandTiles.Length)];
 
-        // Get a random position within the sand tile's bounds
-        Vector3 randomPosition = GetRandomPositionInTile(selectedSandTile);
+            // Get a random position within the sand tile's bounds
+            Vector3 randomPosition = GetRandomPositionInTile(selectedSandTile);
 
-        // Instantiate the dust particle prefab
-        GameObject dust = Instantiate(dustParticle, randomPosition, Quaternion.identity) as GameObject;
-        dust.transform.parent = transform;
-        //dust.transform.localScale = new Vector3(1f, 1f, 1f);
+            // Instantiate the dust particle prefab
+            GameObject dust = Instantiate(dustParticle, randomPosition, Quaternion.identity) as GameObject;
+            dust.transform.parent = transform;
+            //dust.transform.localScale = new Vector3(1f, 1f, 1f);
 
-        Destroy(dust, dust.GetComponent<ParticleSystem>().main.duration * 2.25f);
+            Destroy(dust, dust.GetComponent<ParticleSystem>().main.duration * 2.25f);
+        }       
     }
 
     private void SpawnStreamParticle()
@@ -181,32 +184,35 @@ public class ParticleManager : MonoBehaviour
 
     IEnumerator SnowingRoutine()
     {   
-        Transform selectIceTile = iceTiles[Random.Range(0, iceTiles.Length)];
+        if(iceTiles.Length > 0)
+        {
+            Transform selectIceTile = iceTiles[Random.Range(0, iceTiles.Length)];
 
-        GameObject snow = Instantiate(snowParticles, new Vector3(selectIceTile.position.x, selectIceTile.position.y + 5f, selectIceTile.position.z), Quaternion.identity) as GameObject;
-        snow.transform.parent = transform;
-        ParticleSystem ps = snow.GetComponent<ParticleSystem>();
-        ps.Stop();
-        var main = ps.main;
-        main.duration = Random.Range(30f, 120f);
-        main.maxParticles = Random.Range(10000, 40000);       
-        if(Random.value <= 0.5f)
-        {
-            var fo = ps.forceOverLifetime;
-            fo.enabled = true;
-            fo.x = Random.Range(-0.15f, 0.15f);
-        }
-        var emission = ps.emission;
-        emission.rateOverTime = Random.Range(2000, 6000);
-        ps.Play();
-        isSnowing = true;
-        yield return new WaitForSeconds(main.duration);
-        isSnowing = false;
-        if(ps.isPlaying)
-        {
-            ps.Stop(true, ParticleSystemStopBehavior.StopEmitting);
-        }
-        Destroy(snow, main.duration * 0.25f);
+            GameObject snow = Instantiate(snowParticles, new Vector3(selectIceTile.position.x, selectIceTile.position.y + 5f, selectIceTile.position.z), Quaternion.identity) as GameObject;
+            snow.transform.parent = transform;
+            ParticleSystem ps = snow.GetComponent<ParticleSystem>();
+            ps.Stop();
+            var main = ps.main;
+            main.duration = Random.Range(30f, 120f);
+            main.maxParticles = Random.Range(10000, 40000);
+            if (Random.value <= 0.5f)
+            {
+                var fo = ps.forceOverLifetime;
+                fo.enabled = true;
+                fo.x = Random.Range(-0.15f, 0.15f);
+            }
+            var emission = ps.emission;
+            emission.rateOverTime = Random.Range(2000, 6000);
+            ps.Play();
+            isSnowing = true;
+            yield return new WaitForSeconds(main.duration);
+            isSnowing = false;
+            if (ps.isPlaying)
+            {
+                ps.Stop(true, ParticleSystemStopBehavior.StopEmitting);
+            }
+            Destroy(snow, main.duration * 0.25f);
+        }       
     }
 
     void PinkLeavesParticles()

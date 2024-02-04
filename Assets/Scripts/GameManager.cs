@@ -33,6 +33,8 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject); // Ensure only one instance exists
         }
+
+        //DontDestroyOnLoad(this.gameObject);
     }
 
     void Start()
@@ -45,7 +47,7 @@ public class GameManager : MonoBehaviour
     {
         foreach (Tile tile in map.tiles)
         {
-            if(tile != null)
+            if (tile != null)
             {
                 if (tile.tag == "Ground")
                 {
@@ -53,14 +55,17 @@ public class GameManager : MonoBehaviour
                 }
             }
         }
-        if (tilesToSpawn.Count == 0)
-        {
-            Debug.LogError("No availiable tiles to spawn player");
-            return;
-        }
 
-        int index = Random.Range(0, tilesToSpawn.Count);
-        Vector3 spawnPos = tilesToSpawn[index].transform.position;
+        //if (tilesToSpawn.Count == 0)
+        //{
+        //    Debug.LogError("No availiable tiles to spawn player");
+        //    return;
+        //}
+
+        //int index = Random.Range(0, tilesToSpawn.Count);
+        //Vector3 spawnPos = tilesToSpawn[index].transform.position;
+
+        Vector3 spawnPos = GameObject.FindGameObjectWithTag("SpawnTile").GetComponent<Transform>().position;
         GameObject Player = Instantiate(player, new Vector3(spawnPos.x, spawnPos.y + 1f, spawnPos.z), Quaternion.identity) as GameObject;
 
         StartCoroutine(StartCameraFollow());
@@ -79,7 +84,7 @@ public class GameManager : MonoBehaviour
     public void ReloadScene()
     {
         string currentSceneName = SceneManager.GetActiveScene().name;
-        map.enviroment = Map.Enviroment.Random;
+        map.ChangeEnvironmentType(EnvironmentType.Desert);
         SceneManager.LoadScene(currentSceneName);
     }
 }

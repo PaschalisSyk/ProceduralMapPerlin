@@ -13,6 +13,10 @@ public class CameraFollow : MonoBehaviour
     LayerMask layerMask;
     List<GameObject> blockingObjects = new List<GameObject>();
 
+    [Header("AnimationTest")]
+    Transform tree;
+    public float speed = 1f;
+
     private Dictionary<GameObject, int> originalLayers = new Dictionary<GameObject, int>();
 
 
@@ -21,6 +25,7 @@ public class CameraFollow : MonoBehaviour
         //_player = GameManager.Instance.player.transform;
         _player = GameObject.FindGameObjectWithTag("Player").transform;
         mainCamera = GameObject.FindGameObjectWithTag("MainCamera").transform;
+        //tree = GameObject.FindGameObjectWithTag("PinkTree").transform;
 
         //StartCoroutine(CheckForObjects());
         
@@ -41,83 +46,88 @@ public class CameraFollow : MonoBehaviour
             // Smoothly move the camera's parent GameObject to follow the player
             transform.position = Vector3.Lerp(transform.position, targetPosition, followSpeed * Time.deltaTime);
         }
+        //if (tree != null)
+        //{
+        //    transform.position = new Vector3(tree.position.x , tree.position.y +4f , tree.position.z);
+        //    transform.Rotate(0, speed * Time.deltaTime, 0 ,Space.World);
+        //}
     }
 
-    IEnumerator CheckForObjects()
-    {
-        while (true)
-        {
-            int hits = Physics.RaycastNonAlloc(
-                mainCamera.position,
-                (_player.position + targetOffset - mainCamera.position).normalized,
-                _hits,
-                Vector3.Distance(mainCamera.position, _player.position + targetOffset)
-            );
+    //IEnumerator CheckForObjects()
+    //{
+    //    while (true)
+    //    {
+    //        int hits = Physics.RaycastNonAlloc(
+    //            mainCamera.position,
+    //            (_player.position + targetOffset - mainCamera.position).normalized,
+    //            _hits,
+    //            Vector3.Distance(mainCamera.position, _player.position + targetOffset)
+    //        );
 
-            List<GameObject> objectsToReset = new List<GameObject>(blockingObjects);
+    //        List<GameObject> objectsToReset = new List<GameObject>(blockingObjects);
 
-            // Iterate through the hits and update the objectsToReset list
-            for (int i = 0; i < hits; i++)
-            {
-                if (_hits[i].collider != null)
-                {
-                    GameObject hitObject = _hits[i].collider.gameObject;
-                    if (blockingObjects.Contains(hitObject))
-                    {
-                        objectsToReset.Remove(hitObject);
-                    }
-                }
-            }
+    //        // Iterate through the hits and update the objectsToReset list
+    //        for (int i = 0; i < hits; i++)
+    //        {
+    //            if (_hits[i].collider != null)
+    //            {
+    //                GameObject hitObject = _hits[i].collider.gameObject;
+    //                if (blockingObjects.Contains(hitObject))
+    //                {
+    //                    objectsToReset.Remove(hitObject);
+    //                }
+    //            }
+    //        }
 
-            // Reset the layer of objects that are no longer blocking the view
-            foreach (GameObject obj in objectsToReset)
-            {
-                obj.layer = LayerMask.NameToLayer("Default"); // Change "Default" to your desired layer
-                blockingObjects.Remove(obj);
-            }
+    //        // Reset the layer of objects that are no longer blocking the view
+    //        foreach (GameObject obj in objectsToReset)
+    //        {
+    //            obj.layer = LayerMask.NameToLayer("Default"); // Change "Default" to your desired layer
+    //            blockingObjects.Remove(obj);
+    //        }
 
-            if (hits > 0)
-            {
-                for (int i = 0; i < hits; i++)
-                {
-                    if (_hits[i].collider != null && _hits[i].collider.gameObject.layer != LayerMask.NameToLayer("BlockingObject"))
-                    {
-                        GameObject hitObject = _hits[i].collider.gameObject;
+    //        if (hits > 0)
+    //        {
+    //            for (int i = 0; i < hits; i++)
+    //            {
+    //                if (_hits[i].collider != null && _hits[i].collider.gameObject.layer != LayerMask.NameToLayer("BlockingObject"))
+    //                {
+    //                    GameObject hitObject = _hits[i].collider.gameObject;
 
-                        if (!blockingObjects.Contains(hitObject))
-                        {
-                            blockingObjects.Add(hitObject);
+    //                    if (!blockingObjects.Contains(hitObject))
+    //                    {
+    //                        blockingObjects.Add(hitObject);
 
-                            // Store the original layer if not already stored
-                            if (!originalLayers.ContainsKey(hitObject))
-                            {
-                                originalLayers.Add(hitObject, hitObject.layer);
-                            }
+    //                        // Store the original layer if not already stored
+    //                        if (!originalLayers.ContainsKey(hitObject))
+    //                        {
+    //                            originalLayers.Add(hitObject, hitObject.layer);
+    //                        }
 
-                            // Change the layer to BlockingObject
-                            hitObject.layer = LayerMask.NameToLayer("BlockingObject");
-                        }
-                    }
-                }
-            }
-            else
-            {
-                // Reset the layers of objects that were previously blocking
-                foreach (GameObject blockedObject in blockingObjects)
-                {
-                    if (originalLayers.TryGetValue(blockedObject, out int originalLayer))
-                    {
-                        blockedObject.layer = originalLayer;
-                    }
-                }
+    //                        // Change the layer to BlockingObject
+    //                        hitObject.layer = LayerMask.NameToLayer("BlockingObject");
+    //                    }
+    //                }
+    //            }
+    //        }
+    //        else
+    //        {
+    //            // Reset the layers of objects that were previously blocking
+    //            foreach (GameObject blockedObject in blockingObjects)
+    //            {
+    //                if (originalLayers.TryGetValue(blockedObject, out int originalLayer))
+    //                {
+    //                    blockedObject.layer = originalLayer;
+    //                }
+    //            }
 
-                blockingObjects.Clear();
-            }
+    //            blockingObjects.Clear();
+    //        }
 
-            System.Array.Clear(_hits, 0, _hits.Length);
+    //        System.Array.Clear(_hits, 0, _hits.Length);
 
-            yield return null;
-        }
-    }
+    //        yield return null;
+    //    }
+    //}
 
 }

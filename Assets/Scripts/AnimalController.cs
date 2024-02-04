@@ -53,7 +53,10 @@ public class AnimalController : MonoBehaviour
         anim = this.GetComponent<Animator>();
         hungerLevel = Random.Range(10, 150);
         player = GameObject.FindGameObjectWithTag("Player").transform;
-        SetRandomDestination();
+        if(agent.isActiveAndEnabled)
+        {
+            SetRandomDestination();
+        }
         //InvokeRepeating("Fleeing", 1f, 1f);
     }
 
@@ -113,7 +116,7 @@ public class AnimalController : MonoBehaviour
     private void SetRandomDestination()
     {
         wanderTarget = RandomNavSphere(transform.position, zoneRadius, -1);
-        if(agent != null || agent.isActiveAndEnabled)
+        if(agent != null && agent.isActiveAndEnabled)
         {
             if(wanderTarget != null)
             {

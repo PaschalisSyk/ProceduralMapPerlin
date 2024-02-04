@@ -28,6 +28,7 @@ MonoBehaviour:
         type: 3}
       minSpawnCount: 10
       maxSpawnCount: 15
+    fogColor: {r: 0.4498398, g: 0.764151, b: 0.58832234, a: 0.78431374}
   - enviromentType: 1
     tilePrefabs:
     - {fileID: 498021837453684717, guid: 72f07d2e4fa32d347aa76420db203302, type: 3}
@@ -47,6 +48,7 @@ MonoBehaviour:
         type: 3}
       minSpawnCount: 5
       maxSpawnCount: 8
+    fogColor: {r: 0.3430402, g: 0.6226415, b: 0.5678011, a: 0.78431374}
   - enviromentType: 2
     tilePrefabs:
     - {fileID: 1853360068124139964, guid: e5ef6d3e74e0271488297e26b04f1ddc, type: 3}
@@ -66,6 +68,7 @@ MonoBehaviour:
         type: 3}
       minSpawnCount: 5
       maxSpawnCount: 8
+    fogColor: {r: 0.7169812, g: 0.43738526, b: 0.2462086, a: 0.78431374}
   - enviromentType: 3
     tilePrefabs:
     - {fileID: 1853360068124139964, guid: cca1d9c89daade5449f026c2280aa446, type: 3}
@@ -89,3 +92,4 @@ MonoBehaviour:
         type: 3}
       minSpawnCount: 4
       maxSpawnCount: 8
+    fogColor: {r: 0.46302956, g: 0.6509434, b: 0.5543394, a: 0.78431374}

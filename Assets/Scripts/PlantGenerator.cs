@@ -131,19 +131,22 @@ public class PlantGenerator : MonoBehaviour
             {
                 return;
             }
-            // Instantiate the selected prefab
-            GameObject grass = Instantiate(grassPref[prefabIndexToSpawn], point, rotation) as GameObject;
-            grass.transform.parent = transform;
-            float value = Random.Range(grass.transform.localScale.x * 0.65f, grass.transform.localScale.x * 1.1f);
-            grass.transform.localScale = new Vector3(value, value, value);
-            grass.transform.position = point;
-            grass.transform.rotation = Quaternion.Euler(0, Random.Range(-90, 90), 0);
-            if (map.IsMonocromatic())
+            if(grassPref[prefabIndexToSpawn] != null)
             {
-                AssignMaterial(grass);
+                // Instantiate the selected prefab
+                GameObject grass = Instantiate(grassPref[prefabIndexToSpawn], point, rotation) as GameObject;
+                grass.transform.parent = transform;
+                float value = Random.Range(grass.transform.localScale.x * 0.65f, grass.transform.localScale.x * 1.1f);
+                grass.transform.localScale = new Vector3(value, value, value);
+                grass.transform.position = point;
+                grass.transform.rotation = Quaternion.Euler(0, Random.Range(-90, 90), 0);
+                if (map.IsMonocromatic())
+                {
+                    AssignMaterial(grass);
+                }
+                grass.isStatic = true;
+                //StaticBatchingUtility.Combine(grass);
             }
-            grass.isStatic = true;
-            //StaticBatchingUtility.Combine(grass);
         }
     }
 

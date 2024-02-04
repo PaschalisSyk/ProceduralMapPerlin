@@ -125,4 +125,12 @@ public class PlayerController : MonoBehaviour
             isInPortal = true;
         }
     }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Portal"))
+        {
+            isInPortal = false;
+        }
+    }
 }

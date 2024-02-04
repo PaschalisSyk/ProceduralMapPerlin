@@ -106,7 +106,7 @@ Material:
     - _ClearCoatSmoothness: 0
     - _Cull: 2
     - _Cutoff: 0.5
-    - _Depth: 0.3
+    - _Depth: 0.6
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
@@ -114,29 +114,30 @@ Material:
     - _EdgeFoamCutoff: 4.8
     - _EdgeFoamScale: 200
     - _EnvironmentReflections: 1
-    - _FernelPower: 1
+    - _FernelPower: 0.5
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
+    - _Metalic: 1
     - _Metallic: 0
     - _OcclusionStrength: 1
-    - _Offset: 0.1
-    - _Opacity: 0.6
+    - _Offset: 25
+    - _Opacity: 0.9
     - _Parallax: 0.005
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
-    - _RippleDensity: 1000
-    - _RippleSlimness: 15
+    - _RippleDensity: 500
+    - _RippleSlimness: 12
     - _RippleSpeed: 2
     - _ScrollSpeed: -0.05
-    - _Smoothness: 0.5
+    - _Smoothness: 0.25
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _Surface: 0
     - _WaterDepth: 10
-    - _WaveSpeed: 1
+    - _WaveSpeed: 0.01
     - _WorkflowMode: 1
     - _ZWrite: 1
     - _foamamount: 10
@@ -144,16 +145,16 @@ Material:
     - _foamscale: 1
     - _foamspeed: 1
     m_Colors:
-    - _BaseColor: {r: 0, g: 0.5257752, b: 0.8666667, a: 1}
+    - _BaseColor: {r: 0.027450977, g: 0.26224604, b: 0.36862746, a: 1}
     - _Color: {r: 0, g: 0.8235989, b: 0.8679245, a: 1}
     - _DeepWaterColor: {r: 0, g: 0.050714925, b: 0.26415086, a: 1}
     - _EdgeFoamColor: {r: 0, g: 0, b: 0, a: 0}
     - _Emission: {r: 0, g: 0, b: 0, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _FoamColor: {r: 0, g: 2.9490197, b: 7.247059, a: 0}
-    - _RippleColor: {r: 0.1227403, g: 0.6698113, b: 0.36471403, a: 1}
+    - _FoamColor: {r: 1.4403641, g: 2.570347, b: 2.0385904, a: 0}
+    - _RippleColor: {r: 0.06137015, g: 0.33490565, b: 0.18235701, a: 1}
     - _SecondRippleColor: {r: 0.047058824, g: 0.32941177, b: 1.0666667, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
-    - _SwallowWaterColor: {r: 0, g: 0.8264837, b: 0.8584906, a: 1}
+    - _SwallowWaterColor: {r: 0.66415095, g: 0.9999998, b: 1, a: 0.39215687}
     - _foamcolor_1: {r: 1, g: 1, b: 1, a: 0.5882353}
   m_BuildTextureStacks: []

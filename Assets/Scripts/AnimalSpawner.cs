@@ -24,10 +24,39 @@ public class AnimalSpawner : MonoBehaviour
         meshSurface.BuildNavMesh();
     }
 
+    Vector3 FindValidPosition(Vector3 initialPosition, float maxDistance, int maxAttempts = 5)
+    {
+        for (int attempt = 0; attempt < maxAttempts; attempt++)
+        {
+            Vector3 randomOffset = Random.onUnitSphere * Random.Range(1f, maxDistance);
+            Vector3 candidatePosition = initialPosition + randomOffset;
+
+            if (NavMesh.SamplePosition(candidatePosition, out NavMeshHit hit, maxDistance, NavMesh.AllAreas))
+            {
+                // Found a valid position
+                return hit.position;
+            }
+        }
+
+        Debug.LogError("Failed to find a valid position on the NavMesh after multiple attempts.");
+        return Vector3.zero; // You might want to handle this case differently based on your needs.
+    }
+
     void SpawnAnimal(GameObject go)
     {
         Vector3 spawnPoint = GameManager.Instance.tilesToSpawn[Random.Range(0, GameManager.Instance.tilesToSpawn.Count)].transform.position;
-        GameObject animalPref = Instantiate(go, new Vector3(spawnPoint.x, spawnPoint.y + 1f, spawnPoint.z), Quaternion.identity) as GameObject;
+        //Vector3 validPosition = Vector3.zero;
+        //if (NavMesh.SamplePosition(spawnPoint, out NavMeshHit hit, 10.0f, NavMesh.AllAreas))
+        //{
+        //    validPosition = hit.position;
+        //}
+        //else
+        //{
+        //    //Debug.LogError("Failed to find a valid position on the NavMesh.");
+        //    validPosition = FindValidPosition(validPosition, 10f);
+        //}
+
+        GameObject animalPref = Instantiate(go, new Vector3(spawnPoint.x, spawnPoint.y + 0.5f, spawnPoint.z), Quaternion.identity) as GameObject;
         float value = Random.Range(animalPref.transform.localScale.x * 0.3f, animalPref.transform.localScale.x * 0.8f);
         animalPref.transform.localScale = new Vector3(value, value, value);
         animalPref.transform.parent = transform;

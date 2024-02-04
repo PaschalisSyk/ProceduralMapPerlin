@@ -30,13 +30,15 @@ public class Map : MonoBehaviour
     public StartingTile[] startingTiles;
     public GameObject[] prefabs;
     public GameObject portalPrefab;
+    public GameObject spawnTile;
 
     Vector3 offset;
 
     public EnvironmentDatabase environmentDatabase;
     public Enviroment enviroment;
-    [SerializeField] string currentEnvironment;
+    [SerializeField] public string currentEnvironment;
     public EnvironmentProfile _environmentProfile;
+    public FogManager fogManager;
 
     AnimalSpawner animalSpawner;
 
@@ -57,17 +59,28 @@ public class Map : MonoBehaviour
         public int z;
         public float height;
         public bool isPortal = false;
+        public bool isSpawnTile = false;
     }
 
     private void Awake()
     {
         animalSpawner = FindObjectOfType<AnimalSpawner>();
-        GenerateEnvironment(GetRandomEnvironmentType());
-        _environmentProfile = GetEnvironmentProfile(GetRandomEnvironmentType());
+        currentEnvironment = PlayerPrefs.GetString("SelectedEnvironment", "Grassland"); // Default to Grassland if not set
+        SetEnvironmentType(GetEnvironmentTypeFromString(currentEnvironment));
+        //GenerateEnvironment(GetRandomEnvironmentType());
+        GenerateEnvironment(GetEnvironmentTypeFromString(currentEnvironment));
+        //_environmentProfile = GetEnvironmentProfile(GetRandomEnvironmentType());
+        _environmentProfile = GetEnvironmentProfile(GetEnvironmentTypeFromString(currentEnvironment));
         offset = transform.position;
+        //offset = Vector3.zero;
         MapGen(size);
     }
 
+    private void Start()
+    {
+        fogManager.onEnvironmentChange.Invoke(_environmentProfile);
+        SetEnvironmentType(GetRandomEnvironmentType());
+    }
 
     void GenerateEnvironment(EnvironmentType environmentType)
     {
@@ -124,21 +137,53 @@ public class Map : MonoBehaviour
         
     }
 
+    EnvironmentType GetEnvironmentTypeFromString(string environmentString)
+    {
+        if (System.Enum.TryParse<EnvironmentType>(environmentString, out EnvironmentType environmentType))
+        {
+            return environmentType;
+        }
+
+        return EnvironmentType.Grassland; // Default to Grassland if parsing fails
+    }
+
+    void SetEnvironmentType(EnvironmentType type)
+    {
+        currentEnvironment = type.ToString();
+        PlayerPrefs.SetString("SelectedEnvironment", currentEnvironment);
+    }
+
+    public void ChangeEnvironmentType(EnvironmentType newEnvironment)
+    {
+        SetEnvironmentType(newEnvironment);
+        //GenerateEnvironment(newEnvironment);
+        _environmentProfile = GetEnvironmentProfile(newEnvironment);
+    }
+
     public bool IsMonocromatic()
     {
         return isMonocromatic;
     }
 
-    public void MapGen(int size)
+
+    void MapGen(int size)
     {
         float[,] noiseMap = new float[size, size];
         (float xOffset, float yOffset) = (Random.Range(-10000f, 10000f), Random.Range(-10000f, 10000f));
+        float radius = size * 0.45f;  // Set the radius of the circle
+
         for (int x = 0; x < size; x++)
         {
             for (int y = 0; y < size; y++)
             {
-                float noiseValue = Mathf.PerlinNoise(x * scale + xOffset, y * scale + yOffset);
-                noiseMap[x, y] = noiseValue;
+                float distanceToCenter = Mathf.Sqrt((x - size / 2) * (x - size / 2) + (y - size / 2) * (y - size / 2));
+
+                // Check if the current position is within the circular radius
+                if (distanceToCenter <= radius)
+                {
+                    float noiseValue = Mathf.PerlinNoise(x * scale + xOffset, y * scale + yOffset);
+                    noiseMap[x, y] = noiseValue;
+                }
             }
         }
 
@@ -157,9 +202,9 @@ public class Map : MonoBehaviour
         tiles = new Tile[size, size];
         foreach (StartingTile sTile in startingTiles)
         {
-            if(sTile != null)
+            if (sTile != null)
             {
-                MakeTile(sTile.x, sTile.z, sTile.height , sTile.isPortal);
+                MakeTile(sTile.x, sTile.z, sTile.height, sTile.isPortal, sTile.isSpawnTile);
             }
         }
 
@@ -170,7 +215,7 @@ public class Map : MonoBehaviour
                 float noiseValue = noiseMap[x, y];
                 noiseValue -= falloffMap[x, y] * fallOffScale;
 
-                if(hasRiver)
+                if (hasRiver)
                 {
                     if (IsInsideRiver(x, y))
                     {
@@ -179,13 +224,71 @@ public class Map : MonoBehaviour
                     }
                 }
 
-                if (tiles[x,y] == null)
+                if (tiles[x, y] == null)
                 {
                     MakeTile(x, y, noiseValue);
                 }
             }
         }
     }
+
+    //void MapGen(int size)
+    //{
+    //    float[,] noiseMap = new float[size, size];
+    //    (float xOffset, float yOffset) = (Random.Range(-10000f, 10000f), Random.Range(-10000f, 10000f));
+    //    for (int x = 0; x < size; x++)
+    //    {
+    //        for (int y = 0; y < size; y++)
+    //        {
+    //            float noiseValue = Mathf.PerlinNoise(x * scale + xOffset, y * scale + yOffset);
+    //            noiseMap[x, y] = noiseValue;
+    //        }
+    //    }
+
+    //    float[,] falloffMap = new float[size, size];
+    //    for (int y = 0; y < size; y++)
+    //    {
+    //        for (int x = 0; x < size; x++)
+    //        {
+    //            float xv = x / (float)size * 2 - 1;
+    //            float yv = y / (float)size * 2 - 1;
+    //            float v = Mathf.Max(Mathf.Abs(xv), Mathf.Abs(yv));
+    //            falloffMap[x, y] = Mathf.Pow(v, 3f) / (Mathf.Pow(v, 3f) + Mathf.Pow(2.2f - 2.2f * v, 3f));
+    //        }
+    //    }
+
+    //    tiles = new Tile[size, size];
+    //    foreach (StartingTile sTile in startingTiles)
+    //    {
+    //        if(sTile != null)
+    //        {
+    //            MakeTile(sTile.x, sTile.z, sTile.height , sTile.isPortal , sTile.isSpawnTile);
+    //        }
+    //    }
+
+    //    for (int x = 0; x < size; x++)
+    //    {
+    //        for (int y = 0; y < size; y++)
+    //        {
+    //            float noiseValue = noiseMap[x, y];
+    //            noiseValue -= falloffMap[x, y] * fallOffScale;
+
+    //            if(hasRiver)
+    //            {
+    //                if (IsInsideRiver(x, y))
+    //                {
+    //                    // Set river tiles
+    //                    MakeTile(x, y, -1);
+    //                }
+    //            }
+
+    //            if (tiles[x,y] == null)
+    //            {
+    //                MakeTile(x, y, noiseValue);
+    //            }
+    //        }
+    //    }
+    //}
 
     private int SetIndex(float noiseValue)
     {
@@ -220,7 +323,7 @@ public class Map : MonoBehaviour
         return index;
     }
 
-    void MakeTile( int x, int y , float noiseValue , bool isPortal = false)
+    void MakeTile(int x, int y, float noiseValue, bool isPortal = false, bool isSpawnPoint = false)
     {
         float value = Random.Range(0.05f, 0.15f);
         int index = SetIndex(noiseValue);
@@ -252,6 +355,10 @@ public class Map : MonoBehaviour
             if (isPortal)
             {
                 prefabToInst = portalPrefab;
+            }
+            if(isSpawnPoint)
+            {
+                prefabToInst = spawnTile;
             }
             GameObject tileObject = Instantiate(prefabToInst, new Vector3(xPos + offset.x, height, yPos + offset.z), Quaternion.identity) as GameObject;
             tiles[x, y] = tileObject.GetComponent<Tile>();

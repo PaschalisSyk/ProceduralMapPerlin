@@ -175,7 +175,7 @@ MonoBehaviour:
   - {fileID: 1976401696516608, guid: 7aec7d7b6b4e5f24f832c33028ee90d9, type: 3}
   obstructionLayer:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 0
   placementRadius: 3
   maxPlantsToSpawn: 10
   prefabProbabilities:
