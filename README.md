@@ -1,6 +1,6 @@
 # Project Name
 
-This project is a [brief description of the project].
+Wildscape Adventures
 
 ## Description
 
