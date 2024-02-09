@@ -20,6 +20,10 @@ public class PlayerController : MonoBehaviour
     public static event TabPressedAction OnTabPressed;
     public static event ChangeEnviromentAction OnChangeEnviroment;
 
+    public static int PosID = Shader.PropertyToID("_PlayerPos");
+    Material waterMat;
+    Camera mainCam;
+
     private void Awake()
     {
         anim = GetComponent<Animator>();
@@ -31,11 +35,14 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         capsuleCollider = GetComponent<CapsuleCollider>();
+        waterMat = GameObject.FindGameObjectWithTag("Water").GetComponent<MeshRenderer>().material;
+        mainCam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
     }
 
     private void Update()
     {
         GatherInput();
+        EllipseFollow();
         if (Input.GetKeyDown(KeyCode.Tab))
         {
             // Invoke the event when Tab is pressed
@@ -132,5 +139,11 @@ public class PlayerController : MonoBehaviour
         {
             isInPortal = false;
         }
+    }
+
+    void EllipseFollow()
+    {
+        var view = mainCam.WorldToViewportPoint(transform.position);
+        waterMat.SetVector(PosID, view);
     }
 }

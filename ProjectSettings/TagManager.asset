@@ -20,6 +20,7 @@ TagManager:
   - PinkTree
   - Portal
   - SpawnTile
+  - MinimapCamera
   layers:
   - Default
   - TransparentFX

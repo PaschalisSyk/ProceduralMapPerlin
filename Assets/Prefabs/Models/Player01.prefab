@@ -301,6 +301,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 2
   swimParticles: {fileID: 1999847855857277812}
+  waterMat: {fileID: 2100000, guid: fdb54312d4fd63e47a2fa1d6b66a7327, type: 2}
+  mainCam: {fileID: 0}
 --- !u!136 &8552301632460497556
 CapsuleCollider:
   m_ObjectHideFlags: 0

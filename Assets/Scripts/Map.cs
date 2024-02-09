@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System.Collections;
 
 //[ExecuteInEditMode]
 public class Map : MonoBehaviour
@@ -79,7 +80,7 @@ public class Map : MonoBehaviour
     private void Start()
     {
         fogManager.onEnvironmentChange.Invoke(_environmentProfile);
-        SetEnvironmentType(GetRandomEnvironmentType());
+        StartCoroutine(EnviromentRoutine());
     }
 
     void GenerateEnvironment(EnvironmentType environmentType)
@@ -335,15 +336,15 @@ public class Map : MonoBehaviour
         if (prefabs[index] != null)
         {
 
-            if (index == 0 && enviroment != Enviroment.Iceland)
+            if (index == 0 && GetEnvironmentTypeFromString(currentEnvironment) != EnvironmentType.Iceland)
             {
                 return;
                 //GameObject boarderObject = Instantiate(prefabs[index], new Vector3(xPos + offset.x, height, yPos + offset.z), Quaternion.identity) as GameObject;
                 //boarderObject.transform.parent = transform;
             }
-            else if (index == 0 && enviroment == Enviroment.Iceland)
+            else if (index == 0 && GetEnvironmentTypeFromString(currentEnvironment) == EnvironmentType.Iceland)
             {
-                height = 0.5f;
+                height = 0.35f;
             }
 
             if (index == prefabs.Length - 1)
@@ -397,4 +398,9 @@ public class Map : MonoBehaviour
         }
     }
 
+    IEnumerator EnviromentRoutine()
+    {
+        yield return new WaitForSeconds(10f);
+        SetEnvironmentType(GetRandomEnvironmentType());
+    }
 }

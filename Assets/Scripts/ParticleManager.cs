@@ -153,7 +153,7 @@ public class ParticleManager : MonoBehaviour
         //Transform riverTile = riverTiles[Random.Range(0, riverTiles.Length)];
         foreach(Transform riverTile in riverTiles)
         {
-            if(Random.value < 0.3f)
+            if(Random.value < 0.1f)
             {
                 // Instantiate the dust particle prefab
                 GameObject stream = Instantiate(streamParticles, new Vector3(riverTile.transform.position.x, riverTile.transform.position.y + 0.1f, riverTile.transform.position.z), Quaternion.Euler(-90, 180, 0)) as GameObject;

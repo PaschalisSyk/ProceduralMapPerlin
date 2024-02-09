@@ -73,3 +73,4 @@ crashlytics-build.properties
 *.fbx
 *.mat
 *.shadergraph
+Assets/Prefabs/Models/Character01.prefab

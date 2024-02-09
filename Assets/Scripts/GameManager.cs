@@ -49,7 +49,7 @@ public class GameManager : MonoBehaviour
         {
             if (tile != null)
             {
-                if (tile.tag == "Ground")
+                if (tile.tag == "Ground" && tile.tileValue != Tile.TileValue.Ice)
                 {
                     tilesToSpawn.Add(tile);
                 }

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -10,20 +8,35 @@ public class FogManager : MonoBehaviour
 
     public EnvironmentEvent onEnvironmentChange;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        onEnvironmentChange.AddListener(OnEnvironmentChange);
-    }
+    private MeshRenderer meshRenderer;
 
-    // Update is called once per frame
-    void Update()
+    private Color currentFogColor;
+
+    private void Awake()
     {
-        
+        meshRenderer = GetComponent<MeshRenderer>();
+        if (meshRenderer == null)
+        {
+            Debug.LogWarning("MeshRenderer component not found. Fog color will not be updated.");
+        }
+        else
+        {
+            currentFogColor = meshRenderer.material.GetColor("_FogColor");
+            onEnvironmentChange.AddListener(OnEnvironmentChange);
+        }
     }
 
     void OnEnvironmentChange(EnvironmentProfile newEnvironment)
     {
-        GetComponent<MeshRenderer>().material.SetColor("_FogColor", newEnvironment.fogColor);
+        if (meshRenderer != null)
+        {
+            Color newFogColor = newEnvironment.fogColor;
+            if (newFogColor != currentFogColor)
+            {
+                meshRenderer.material.SetColor("_FogColor", newFogColor);
+                currentFogColor = newFogColor;
+            }
+        }
     }
 }
+
