@@ -732,7 +732,7 @@ MonoBehaviour:
   mountainLevel: 0.8
   scale: 0.3
   fallOffScale: 0.5
-  size: 25
+  size: 40
   tileSize: 4
   isMonocromatic: 0
   hasRiver: 0
@@ -762,7 +762,7 @@ MonoBehaviour:
     type: 3}
   environmentDatabase: {fileID: 11400000, guid: 742361e410a1f4a45b3e363db62d46d5,
     type: 2}
-  enviroment: 4
+  enviroment: 1
   currentEnvironment: 
   _environmentProfile:
     enviromentType: 0
@@ -2917,7 +2917,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_AgentTypeID: 0
+  m_AgentTypeID: 658490984
   m_CollectObjects: 0
   m_Size: {x: 10, y: 10, z: 10}
   m_Center: {x: 0, y: 2, z: 0}

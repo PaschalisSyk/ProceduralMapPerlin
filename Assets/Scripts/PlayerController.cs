@@ -12,13 +12,16 @@ public class PlayerController : MonoBehaviour
     [SerializeField] GameObject swimParticles;
     Animator anim;
     bool isInPortal;
+    public bool canPickUp = false;
 
     // Define a delegate for the event
     public delegate void TabPressedAction();
     public delegate void ChangeEnviromentAction();
+    public delegate void PickUpItemAction();
     // Define the event using the delegate
     public static event TabPressedAction OnTabPressed;
     public static event ChangeEnviromentAction OnChangeEnviroment;
+    public static event PickUpItemAction OnItemPickUp;
 
     public static int PosID = Shader.PropertyToID("_PlayerPos");
     Material waterMat;
@@ -51,6 +54,12 @@ public class PlayerController : MonoBehaviour
         if(isInPortal && Input.GetKeyDown(KeyCode.R))
         {
             OnChangeEnviroment?.Invoke();
+        }
+        if(canPickUp && Input.GetKeyDown(KeyCode.E))
+        {
+            OnItemPickUp?.Invoke();
+            anim.SetTrigger("isPickingUp");
+            canPickUp = false;
         }
     }
 

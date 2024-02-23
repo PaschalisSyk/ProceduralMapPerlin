@@ -167,24 +167,82 @@ public class Map : MonoBehaviour
     }
 
 
+    //void MapGen(int size)
+    //{
+    //    float[,] noiseMap = new float[size, size];
+    //    (float xOffset, float yOffset) = (Random.Range(-10000f, 10000f), Random.Range(-10000f, 10000f));
+    //    float radius = size * 0.45f;  // Set the radius of the circle
+
+    //    for (int x = 0; x < size; x++)
+    //    {
+    //        for (int y = 0; y < size; y++)
+    //        {
+    //            float distanceToCenter = Mathf.Sqrt((x - size / 2) * (x - size / 2) + (y - size / 2) * (y - size / 2));
+
+    //            // Check if the current position is within the circular radius
+    //            if (distanceToCenter <= radius)
+    //            {
+    //                float noiseValue = Mathf.PerlinNoise(x * scale + xOffset, y * scale + yOffset);
+    //                noiseMap[x, y] = noiseValue;
+    //            }
+    //        }
+    //    }
+
+    //    float[,] falloffMap = new float[size, size];
+    //    for (int y = 0; y < size; y++)
+    //    {
+    //        for (int x = 0; x < size; x++)
+    //        {
+    //            float xv = x / (float)size * 2 - 1;
+    //            float yv = y / (float)size * 2 - 1;
+    //            float v = Mathf.Max(Mathf.Abs(xv), Mathf.Abs(yv));
+    //            falloffMap[x, y] = Mathf.Pow(v, 3f) / (Mathf.Pow(v, 3f) + Mathf.Pow(2.2f - 2.2f * v, 3f));
+    //        }
+    //    }
+
+    //    tiles = new Tile[size, size];
+    //    foreach (StartingTile sTile in startingTiles)
+    //    {
+    //        if (sTile != null)
+    //        {
+    //            MakeTile(sTile.x, sTile.z, sTile.height, sTile.isPortal, sTile.isSpawnTile);
+    //        }
+    //    }
+
+    //    for (int x = 0; x < size; x++)
+    //    {
+    //        for (int y = 0; y < size; y++)
+    //        {
+    //            float noiseValue = noiseMap[x, y];
+    //            noiseValue -= falloffMap[x, y] * fallOffScale;
+
+    //            if (hasRiver)
+    //            {
+    //                if (IsInsideRiver(x, y))
+    //                {
+    //                    // Set river tiles
+    //                    MakeTile(x, y, -1);
+    //                }
+    //            }
+
+    //            if (tiles[x, y] == null)
+    //            {
+    //                MakeTile(x, y, noiseValue);
+    //            }
+    //        }
+    //    }
+    //}
+
     void MapGen(int size)
     {
         float[,] noiseMap = new float[size, size];
         (float xOffset, float yOffset) = (Random.Range(-10000f, 10000f), Random.Range(-10000f, 10000f));
-        float radius = size * 0.45f;  // Set the radius of the circle
-
         for (int x = 0; x < size; x++)
         {
             for (int y = 0; y < size; y++)
             {
-                float distanceToCenter = Mathf.Sqrt((x - size / 2) * (x - size / 2) + (y - size / 2) * (y - size / 2));
-
-                // Check if the current position is within the circular radius
-                if (distanceToCenter <= radius)
-                {
-                    float noiseValue = Mathf.PerlinNoise(x * scale + xOffset, y * scale + yOffset);
-                    noiseMap[x, y] = noiseValue;
-                }
+                float noiseValue = Mathf.PerlinNoise(x * scale + xOffset, y * scale + yOffset);
+                noiseMap[x, y] = noiseValue;
             }
         }
 
@@ -232,64 +290,6 @@ public class Map : MonoBehaviour
             }
         }
     }
-
-    //void MapGen(int size)
-    //{
-    //    float[,] noiseMap = new float[size, size];
-    //    (float xOffset, float yOffset) = (Random.Range(-10000f, 10000f), Random.Range(-10000f, 10000f));
-    //    for (int x = 0; x < size; x++)
-    //    {
-    //        for (int y = 0; y < size; y++)
-    //        {
-    //            float noiseValue = Mathf.PerlinNoise(x * scale + xOffset, y * scale + yOffset);
-    //            noiseMap[x, y] = noiseValue;
-    //        }
-    //    }
-
-    //    float[,] falloffMap = new float[size, size];
-    //    for (int y = 0; y < size; y++)
-    //    {
-    //        for (int x = 0; x < size; x++)
-    //        {
-    //            float xv = x / (float)size * 2 - 1;
-    //            float yv = y / (float)size * 2 - 1;
-    //            float v = Mathf.Max(Mathf.Abs(xv), Mathf.Abs(yv));
-    //            falloffMap[x, y] = Mathf.Pow(v, 3f) / (Mathf.Pow(v, 3f) + Mathf.Pow(2.2f - 2.2f * v, 3f));
-    //        }
-    //    }
-
-    //    tiles = new Tile[size, size];
-    //    foreach (StartingTile sTile in startingTiles)
-    //    {
-    //        if(sTile != null)
-    //        {
-    //            MakeTile(sTile.x, sTile.z, sTile.height , sTile.isPortal , sTile.isSpawnTile);
-    //        }
-    //    }
-
-    //    for (int x = 0; x < size; x++)
-    //    {
-    //        for (int y = 0; y < size; y++)
-    //        {
-    //            float noiseValue = noiseMap[x, y];
-    //            noiseValue -= falloffMap[x, y] * fallOffScale;
-
-    //            if(hasRiver)
-    //            {
-    //                if (IsInsideRiver(x, y))
-    //                {
-    //                    // Set river tiles
-    //                    MakeTile(x, y, -1);
-    //                }
-    //            }
-
-    //            if (tiles[x,y] == null)
-    //            {
-    //                MakeTile(x, y, noiseValue);
-    //            }
-    //        }
-    //    }
-    //}
 
     private int SetIndex(float noiseValue)
     {
