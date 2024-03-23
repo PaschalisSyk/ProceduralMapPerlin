@@ -5,6 +5,7 @@ public class InventorySlot : MonoBehaviour
 {
     public Image icon;
     public Text quantityText; // Reference to the UI text field
+    public Inventory.InventorySlotType slotType;
 
     Item item;
     InventoryItem inventoryItem;
@@ -15,6 +16,11 @@ public class InventorySlot : MonoBehaviour
     {
         inventoryItem = GetComponentInChildren<InventoryItem>();
         Deselect();
+    }
+
+    public Item GetItem()
+    {
+        return item;
     }
 
     public void AddItem(Item newItem, int quantity)
@@ -49,6 +55,7 @@ public class InventorySlot : MonoBehaviour
     public void Select()
     {
         inventoryItem.image.color = selectedColor;
+        GetComponent<Image>().color = selectedColor;
     }
 
     public void Deselect()
@@ -56,6 +63,12 @@ public class InventorySlot : MonoBehaviour
         if (inventoryItem.image != null)
         {
             inventoryItem.image.color = notSelectedColor;
+            GetComponent<Image>().color = notSelectedColor;
         }
+    }
+
+    public bool IsEmpty()
+    {
+        return item == null; // The slot is empty if there is no item assigned to it
     }
 }

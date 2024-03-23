@@ -249,6 +249,7 @@ GameObject:
   - component: {fileID: 8409661621109600132}
   - component: {fileID: 6003837037363977038}
   - component: {fileID: 4245199636732855056}
+  - component: {fileID: 451867637840779127}
   m_Layer: 0
   m_Name: portal
   m_TagString: Portal
@@ -342,3 +343,26 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 1
   m_Center: {x: 0.0000024735928, y: 0.25, z: 0}
+--- !u!114 &451867637840779127
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5210969926223166107}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52f2266b4d6f2914388a5b9954837df0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  possibleCombinations:
+  - environmentType: 0
+    requiredItems:
+    - {fileID: 11400000, guid: 99fbc742c7a1f10498f26f83a41ad05f, type: 2}
+  - environmentType: 2
+    requiredItems:
+    - {fileID: 11400000, guid: 59aefeaeebe3e1243bebcb6a8a133782, type: 2}
+  selectionUIPrefab: {fileID: 8124776116467477989, guid: 1d9cbc48460781f4d9b8a3bc82f71534,
+    type: 3}
+  combinationSlotPrefab: {fileID: 3128157740763794957, guid: c02380c26b3ad8b4e89662c1310f7f13,
+    type: 3}

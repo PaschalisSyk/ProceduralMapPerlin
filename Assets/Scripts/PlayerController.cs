@@ -16,20 +16,27 @@ public class PlayerController : MonoBehaviour
 
     // Define a delegate for the event
     public delegate void TabPressedAction();
-    public delegate void ChangeEnviromentAction();
+    //public delegate void ChangeEnviromentAction(EnvironmentType newEnvironment);
     public delegate void PickUpItemAction();
+    public delegate void OnInteractWithPortalAction();
+
     // Define the event using the delegate
     public static event TabPressedAction OnTabPressed;
-    public static event ChangeEnviromentAction OnChangeEnviroment;
+    //public static event ChangeEnviromentAction OnChangeEnviroment;
     public static event PickUpItemAction OnItemPickUp;
+    public static event OnInteractWithPortalAction OnInteractWithPortal;
+
+    //EnvironmentType nextEnviroment;
 
     public static int PosID = Shader.PropertyToID("_PlayerPos");
     Material waterMat;
     Camera mainCam;
+    InventoryUI inventoryUI;
 
     private void Awake()
     {
         anim = GetComponent<Animator>();
+        inventoryUI = FindObjectOfType<InventoryUI>();
         //map = FindObjectOfType<Map>();
         //transform.position = new Vector3((map.size * map.tileSize) / 2, 2, (map.size * map.tileSize) / 3);
     }
@@ -44,6 +51,10 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        if(inventoryUI.IsInventoryOn())
+        {
+            return;
+        }
         GatherInput();
         EllipseFollow();
         if (Input.GetKeyDown(KeyCode.Tab))
@@ -53,9 +64,14 @@ public class PlayerController : MonoBehaviour
         }
         if(isInPortal && Input.GetKeyDown(KeyCode.R))
         {
-            OnChangeEnviroment?.Invoke();
+            //nextEnviroment = (EnvironmentType)Random.Range(0, System.Enum.GetValues(typeof(EnvironmentType)).Length);
+            //OnChangeEnviroment?.Invoke(nextEnviroment);
+
+            // Invoke the event when the player interacts with the portal
+            OnInteractWithPortal?.Invoke();
+
         }
-        if(canPickUp && Input.GetKeyDown(KeyCode.E))
+        if (canPickUp && Input.GetKeyDown(KeyCode.E))
         {
             OnItemPickUp?.Invoke();
             anim.SetTrigger("isPickingUp");

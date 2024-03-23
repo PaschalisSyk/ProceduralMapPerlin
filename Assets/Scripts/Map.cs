@@ -79,6 +79,10 @@ public class Map : MonoBehaviour
 
     private void Start()
     {
+        if (!GameManager.Instance.NewGame())
+        {
+            GameManager.Instance.Initialize();
+        }
         fogManager.onEnvironmentChange.Invoke(_environmentProfile);
         StartCoroutine(EnviromentRoutine());
     }
@@ -400,7 +404,7 @@ public class Map : MonoBehaviour
 
     IEnumerator EnviromentRoutine()
     {
-        yield return new WaitForSeconds(10f);
+        yield return new WaitForSeconds(2f);
         SetEnvironmentType(GetRandomEnvironmentType());
     }
 }

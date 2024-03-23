@@ -143,8 +143,8 @@ Material:
     - _SrcBlend: 1
     - _Surface: 0
     - _WaterDepth: 10
-    - _WaveAmplitude: 0.08
-    - _WaveSpeed: 0.03
+    - _WaveAmplitude: 0.2
+    - _WaveSpeed: 0.5
     - _WorkflowMode: 1
     - _ZWrite: 1
     - _foamamount: 10

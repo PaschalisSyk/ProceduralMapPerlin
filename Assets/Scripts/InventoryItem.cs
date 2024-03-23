@@ -8,7 +8,7 @@ public class InventoryItem : MonoBehaviour
     [Header("UI")]
     public Image image;
 
-    private void Start()
+    private void Awake()
     {
         image = GetComponent<Image>();
         image.enabled = false;

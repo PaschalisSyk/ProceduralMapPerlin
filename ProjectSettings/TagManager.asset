@@ -21,6 +21,9 @@ TagManager:
   - Portal
   - SpawnTile
   - MinimapCamera
+  - PlayerPalm
+  - SlotParent
+  - CameraPivot
   layers:
   - Default
   - TransparentFX

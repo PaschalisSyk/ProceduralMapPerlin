@@ -10,19 +10,34 @@ public class Item : ScriptableObject
     public Sprite icon = null;
     public Color iconColor;
     public bool stackable = false;
-    //    public ItemType type;
-    //    public ActionType actionType;
+    public ItemType type;
 
-    //}
+    public GameObject itemGO;
 
-    //public enum ItemType
-    //{
-    //    Tool,
-    //    Collectible,
-    //    Artifact
-    //}
+    public Inventory.InventorySlotType slotType
+    {
+        get
+        {
+            // Determine the appropriate slot type based on the item type
+            switch (type)
+            {
+                case ItemType.Tool:
+                    return Inventory.InventorySlotType.Tool;
+                case ItemType.Collectible:
+                    return Inventory.InventorySlotType.Item;
+                case ItemType.Artifact:
+                    return Inventory.InventorySlotType.Artifact;
+                default:
+                    return Inventory.InventorySlotType.Item; // Default to Item slot type
+            }
+        }
+    }
 
-    //public enum ActionType
-    //{
+    public enum ItemType
+    {
+        Tool,
+        Collectible,
+        Artifact
+    }
 
 }

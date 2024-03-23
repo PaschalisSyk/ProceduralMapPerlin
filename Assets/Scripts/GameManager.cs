@@ -9,18 +9,21 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
 
     public Map map;
-    [SerializeField] CameraFollow cameraFollow;
+    //[SerializeField] CameraFollow cameraFollow;
     [SerializeField] GameObject player;
     public List<Tile> tilesToSpawn = new List<Tile>();
+    private bool newGame = true;
 
     private void OnEnable()
     {
-        PlayerController.OnChangeEnviroment += ReloadScene;
+        //PlayerController.OnChangeEnviroment += ReloadScene;
+        Portal.OnChangeEnvironment += ReloadScene;
     }
 
     private void OnDisable()
     {
-        PlayerController.OnChangeEnviroment -= ReloadScene;
+        //PlayerController.OnChangeEnviroment -= ReloadScene;
+        Portal.OnChangeEnvironment -= ReloadScene;
     }
 
     private void Awake()
@@ -34,13 +37,18 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject); // Ensure only one instance exists
         }
 
-        //DontDestroyOnLoad(this.gameObject);
+        DontDestroyOnLoad(this.gameObject);
     }
 
     void Start()
     {
-        map = FindObjectOfType<Map>();
-        SpawnPlayer();
+        Initialize();
+        NewGame();
+    }
+
+    public bool NewGame()
+    {
+        return newGame;
     }
 
     void SpawnPlayer()
@@ -56,15 +64,6 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        //if (tilesToSpawn.Count == 0)
-        //{
-        //    Debug.LogError("No availiable tiles to spawn player");
-        //    return;
-        //}
-
-        //int index = Random.Range(0, tilesToSpawn.Count);
-        //Vector3 spawnPos = tilesToSpawn[index].transform.position;
-
         Vector3 spawnPos = GameObject.FindGameObjectWithTag("SpawnTile").GetComponent<Transform>().position;
         GameObject Player = Instantiate(player, new Vector3(spawnPos.x, spawnPos.y + 1f, spawnPos.z), Quaternion.identity) as GameObject;
 
@@ -78,13 +77,26 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(2f); // Adjust the delay time as needed
 
         // Enable the camera follow script
-        cameraFollow.enabled = true;
+        FindObjectOfType<CameraFollow>().enabled = true;
     }
 
-    public void ReloadScene()
+    public void ReloadScene(EnvironmentType newEnvironment)
     {
+        newGame = false;
+        tilesToSpawn.Clear();
+        Inventory.instance.SaveInventory();
         string currentSceneName = SceneManager.GetActiveScene().name;
-        map.ChangeEnvironmentType(EnvironmentType.Desert);
+        map.ChangeEnvironmentType(newEnvironment);
         SceneManager.LoadScene(currentSceneName);
+    }
+
+    public void Initialize()
+    {
+        map = FindObjectOfType<Map>();
+        SpawnPlayer();
+        if (!newGame)
+        {
+            Inventory.instance.LoadInventory();
+        }
     }
 }

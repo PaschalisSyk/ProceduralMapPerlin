@@ -8,11 +8,14 @@ public class Inventory : MonoBehaviour
 
     private void Awake()
     {
-        if (instance != null)
+        if (instance == null)
         {
-            return;
+            instance = this;
         }
-        instance = this;
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
     [System.Serializable]
@@ -20,6 +23,15 @@ public class Inventory : MonoBehaviour
     {
         public Item item;
         public int quantity;
+        public InventorySlotType slotType;
+    }
+
+    [System.Serializable]
+    public enum InventorySlotType
+    {
+        Item,
+        Tool,
+        Artifact
     }
 
     public List<InventoryItem> items = new List<InventoryItem>();
@@ -27,7 +39,15 @@ public class Inventory : MonoBehaviour
     public int inventorySlots = 4;
 
     public delegate void OnItemChanged();
-    public OnItemChanged onItemChangedCallBack;
+    public static event OnItemChanged OnItemChangedCallBack;
+
+    //private void Start()
+    //{
+    //    if (!GameManager.Instance.NewGame())
+    //    {
+    //        LoadInventory();
+    //    }
+    //}
 
     public bool Add(Item item)
     {
@@ -38,14 +58,19 @@ public class Inventory : MonoBehaviour
                 if (inventoryItem.item == item)
                 {
                     inventoryItem.quantity++;
-                    if (onItemChangedCallBack != null)
+                    if (OnItemChangedCallBack != null)
                     {
-                        onItemChangedCallBack.Invoke();
+                        OnItemChangedCallBack.Invoke();
                     }
                     return true;
                 }
             }
         }
+
+        //if(item.type == Item.ItemType.Tool)
+        //{
+        //    slotType = InventorySlotType.Tool;
+        //}
 
         if (items.Count >= inventorySlots)
         {
@@ -53,9 +78,9 @@ public class Inventory : MonoBehaviour
         }
 
         items.Add(new InventoryItem { item = item, quantity = 1 });
-        if (onItemChangedCallBack != null)
+        if (OnItemChangedCallBack != null)
         {
-            onItemChangedCallBack.Invoke();
+            OnItemChangedCallBack.Invoke();
         }
 
         return true;
@@ -75,9 +100,52 @@ public class Inventory : MonoBehaviour
                 break;
             }
         }
-        if (onItemChangedCallBack != null)
+        if (OnItemChangedCallBack != null)
         {
-            onItemChangedCallBack.Invoke();
+            OnItemChangedCallBack.Invoke();
+        }
+    }
+
+    public bool HasItem(Item item)
+    {
+        foreach (InventoryItem inventoryItem in items)
+        {
+            if (inventoryItem.item == item)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void SaveInventory()
+    {
+        // Serialize inventory data to JSON
+        string inventoryData = JsonUtility.ToJson(instance);
+
+        // Save serialized inventory data to PlayerPrefs
+        PlayerPrefs.SetString("InventoryData", inventoryData);
+        PlayerPrefs.Save();
+    }
+
+    public void LoadInventory()
+    {
+        if (PlayerPrefs.HasKey("InventoryData"))
+        {
+            // Retrieve serialized inventory data from PlayerPrefs
+            string inventoryData = PlayerPrefs.GetString("InventoryData");
+
+            // Deserialize inventory data from JSON
+            JsonUtility.FromJsonOverwrite(inventoryData, this);
+
+            // Update current inventory with saved inventory data
+            instance.items = this.items;
+
+            //Update UI
+            if(OnItemChangedCallBack != null)
+            {
+                OnItemChangedCallBack?.Invoke();
+            }
         }
     }
 }

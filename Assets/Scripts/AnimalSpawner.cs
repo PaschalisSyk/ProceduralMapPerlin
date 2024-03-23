@@ -55,11 +55,13 @@ public class AnimalSpawner : MonoBehaviour
         //    //Debug.LogError("Failed to find a valid position on the NavMesh.");
         //    validPosition = FindValidPosition(validPosition, 10f);
         //}
-
-        GameObject animalPref = Instantiate(go, new Vector3(spawnPoint.x, spawnPoint.y + 0.5f, spawnPoint.z), Quaternion.identity) as GameObject;
-        float value = Random.Range(animalPref.transform.localScale.x * 0.3f, animalPref.transform.localScale.x * 0.8f);
-        animalPref.transform.localScale = new Vector3(value, value, value);
-        animalPref.transform.parent = transform;
+        if(go != null)
+        {
+            GameObject animalPref = Instantiate(go, new Vector3(spawnPoint.x, spawnPoint.y + 0.5f, spawnPoint.z), Quaternion.identity) as GameObject;
+            float value = Random.Range(animalPref.transform.localScale.x * 0.3f, animalPref.transform.localScale.x * 0.8f);
+            animalPref.transform.localScale = new Vector3(value, value, value);
+            animalPref.transform.parent = transform;
+        }
     }
 
     void Spawn()
